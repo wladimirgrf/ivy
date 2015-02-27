@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="Ivy" path="/" reloadable="true" source="" aliases="">
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource 
+	    auth="Container" 
+	    driverClassName="org.gjt.mm.mysql.Driver" 
+	    initialSize="10" 
+	    maxActive="50" 
+	    maxIdle="10" 
+	    maxWait="5000" 
+	    name="jdbc/ivy" 
+	    password="ivy" 
+	    poolPreparedStatements="true" 
+	    type="javax.sql.DataSource" 
+	    url="jdbc:mysql://localhost:3306/ivy?useUnicode=yes&amp;characterEncoding=UTF-8" 
+	    username="ivy" validationQuery="select 1"
+	/>
+</Context>

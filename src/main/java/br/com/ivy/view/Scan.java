@@ -1,0 +1,60 @@
+package br.com.ivy.view;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import br.com.ivy.gathering.ICMP;
+import br.com.ivy.gathering.Whois;
+
+
+
+@WebServlet("/scan")
+public class Scan extends HttpServlet {
+
+	
+	private static final long serialVersionUID = -2937378935464874585L;
+
+	public Scan() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		String domain = null;
+		
+//		if (request.getParameter("domain") != null) {
+//			domain = request.getParameter("domain");
+//			
+//			ICMP icmp = new ICMP();
+//			if(!icmp.ping(domain)) return;
+//			
+//			String[] teste = new Whois().get(icmp.getDomain(), icmp.getIp()).split("\n");
+//			
+//			java.util.Arrays.sort(teste);
+//			
+//			int idx = Arrays.binarySearch(teste, "refer");
+//			
+//			String teste3 = teste[-1 * idx - 1];
+//			
+//			
+//			System.out.println(new Whois().get(icmp.getDomain(), icmp.getIp()));
+//		}
+		
+		
+		request.getRequestDispatcher("/").forward(request, response);
+	}
+}
+
