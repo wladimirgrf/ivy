@@ -1,7 +1,6 @@
 package br.com.ivy.view;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,23 +34,15 @@ public class Scan extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		String domain = null;
 		
-//		if (request.getParameter("domain") != null) {
-//			domain = request.getParameter("domain");
-//			
-//			ICMP icmp = new ICMP();
-//			if(!icmp.ping(domain)) return;
-//			
-//			String[] teste = new Whois().get(icmp.getDomain(), icmp.getIp()).split("\n");
-//			
-//			java.util.Arrays.sort(teste);
-//			
-//			int idx = Arrays.binarySearch(teste, "refer");
-//			
-//			String teste3 = teste[-1 * idx - 1];
-//			
-//			
-//			System.out.println(new Whois().get(icmp.getDomain(), icmp.getIp()));
-//		}
+		if (request.getParameter("domain") != null) {
+			domain = request.getParameter("domain");
+			
+			ICMP icmp = new ICMP();
+			if(!icmp.ping(domain)) return;
+			
+			
+			System.out.println(new Whois().get(icmp.getDomain(), icmp.getIp()));
+		}
 		
 		
 		request.getRequestDispatcher("/").forward(request, response);
