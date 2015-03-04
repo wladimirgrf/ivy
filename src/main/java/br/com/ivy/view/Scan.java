@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.ivy.gathering.ICMP;
 import br.com.ivy.gathering.Whois;
 
-
-
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
-
 	
 	private static final long serialVersionUID = -2937378935464874585L;
 
@@ -41,7 +38,8 @@ public class Scan extends HttpServlet {
 			if(!icmp.ping(domain)) return;
 			
 			
-			System.out.println(new Whois().get(icmp.getDomain(), icmp.getIp()));
+			System.out.println(new Whois().get(icmp.getDomain()));
+			System.out.println(new Whois().get(icmp.getIp()));
 		}
 		
 		

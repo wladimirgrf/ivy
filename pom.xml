@@ -5,7 +5,7 @@
   <artifactId>Ivy</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Ivy Maven Webapp</name>
+  <name>Ivy</name>
   <url>http://maven.apache.org</url>
    <build>
     <finalName>Ivy</finalName>

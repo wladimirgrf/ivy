@@ -6,41 +6,39 @@ import java.util.Arrays;
 
 import org.apache.commons.net.whois.WhoisClient;
 
+
 public class Whois {
-
 	
-	public String get(String domain, String ip) throws SocketException, IOException{
+	private static final String defaultWhoisServer = "whois.iana.org";
 
-		String server = "whois.iana.org";
-
-		WhoisClient whois = new WhoisClient();
+	public String get(String address) throws SocketException, IOException{
 		
-		StringBuilder result = new StringBuilder();
+		String whoisServer, document;
 		
-		whois.connect(server);
-		//result.append(whois.query(ip));
+		whoisServer = getWhoisElement("refer", getWhoisDocument(address, defaultWhoisServer));
 		
-		result.append(whois.query(domain));
+		document = getWhoisDocument(address, whoisServer);
 		
-		whois.disconnect();
-		
-		server = getWhoisElement("refer", result.toString());
-		
-		whois.connect(server);
-		
-		result.append(whois.query(domain));
-		
-		whois.disconnect();
-		
-		return result.toString();
+		return document;
 	}
 	
+	private String getWhoisDocument(String address, String whoisServer) throws SocketException, IOException{
+		
+		WhoisClient whoisClient = new WhoisClient();
+		whoisClient.connect(whoisServer);
+		
+		String document = whoisClient.query(address);
+		
+		whoisClient.disconnect();
+		
+		return document;
+	}
 	
 	private String getWhoisElement(String element, String document){
 		
 		String[] list = document.split("\n");
 		
-		java.util.Arrays.sort(list);
+		Arrays.sort(list);
 		
 		int index = Arrays.binarySearch(list, element);
 		

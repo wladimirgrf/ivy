@@ -16,7 +16,7 @@
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache"        value="true" />
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
-			<property name="hibernate.search.default.indexBase"     value="/Users/Wlad/Documents/ivy/index"/>
+			<property name="hibernate.search.default.indexBase"     value="/Users/Anonymous/Documents/ivy/index"/>
 		</properties>
 	</persistence-unit>
 </persistence>
