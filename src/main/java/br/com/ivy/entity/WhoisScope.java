@@ -1,7 +1,6 @@
 package br.com.ivy.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,14 +13,14 @@ import org.hibernate.search.annotations.Indexed;
 
 @Entity
 @Indexed
-@Table(name="Preferences")
+@Table(name="WhoisScope")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Preferences implements Serializable{
+public class WhoisScope implements Serializable{
 
 	private static final long serialVersionUID = -6747492666295018344L;
 	
 	@Id
-	private String country;
+	private String id;
 	
 	@Field
 	private String domain;
@@ -38,14 +37,15 @@ public class Preferences implements Serializable{
 	@Field
 	private String region;
 	
-	private Date changed;
+	private String changed;
+	
 
-	public String getCountry() {
-		return country;
+	public String getId() {
+		return id;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getDomain() {
@@ -88,11 +88,11 @@ public class Preferences implements Serializable{
 		this.region = region;
 	}
 
-	public Date getChanged() {
+	public String getChanged() {
 		return changed;
 	}
 
-	public void setChanged(Date changed) {
+	public void setChanged(String changed) {
 		this.changed = changed;
 	}
 }

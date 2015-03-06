@@ -28,7 +28,7 @@ public class Target implements Serializable {
 	private Long id;
 	
 	@Field
-	private String domain;
+	private String host;
 	
 	@Field
 	private String owner;
@@ -42,7 +42,7 @@ public class Target implements Serializable {
 	@Field
 	private String region;
 	
-	private Date changed;
+	private String changed;
 	
 	private Date lastScan;
 	
@@ -55,12 +55,12 @@ public class Target implements Serializable {
 		this.id = id;
 	}
 
-	public String getDomain() {
-		return domain;
+	public String getHost() {
+		return host;
 	}
 
-	public void setDomain(String domain) {
-		this.domain = domain;
+	public void setHost(String host) {
+		this.host = host;
 	}
 
 	public String getOwner() {
@@ -95,11 +95,11 @@ public class Target implements Serializable {
 		this.region = region;
 	}
 
-	public Date getChanged() {
+	public String getChanged() {
 		return changed;
 	}
 
-	public void setChanged(Date changed) {
+	public void setChanged(String changed) {
 		this.changed = changed;
 	}
 

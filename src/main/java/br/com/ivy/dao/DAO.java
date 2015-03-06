@@ -16,7 +16,7 @@ public abstract class DAO<T> {
 		return getSuperClass().getSimpleName().replace(getSuperClass().getPackage().getName() + ".", "");
 	}
 	
-	public T get(Long id) {
+	public T get(Object id) {
 		return EntityManagerFactoryUtil.getCurrentEntityManager().find(getSuperClass(), id);		
 	}
 	

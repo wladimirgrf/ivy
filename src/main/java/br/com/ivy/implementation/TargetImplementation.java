@@ -34,7 +34,7 @@ public class TargetImplementation {
     	dao.delete(target);
     }
     
-	public Target get(String domain) {
-		return dao.find(String.format("from Target where domain=%s",domain)).get(0);
+	public Target get(String host) {
+		return dao.find(String.format("from Target where domain=%s",host)).get(0);
     }
 }

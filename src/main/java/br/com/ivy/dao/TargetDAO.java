@@ -19,8 +19,7 @@ public class TargetDAO extends DAO<Target>{
 		if (instance == null) {
 			synchronized (TargetDAO.class) {
 				if (instance == null) {
-					TargetDAO advertiserDAO = new TargetDAO();
-					instance = advertiserDAO;	
+					instance = new TargetDAO();	
 				}
 			}
 		}

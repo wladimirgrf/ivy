@@ -7,7 +7,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.com.ivy.entity.Target</class>
 		<class>br.com.ivy.entity.Url</class>
-		<class>br.com.ivy.entity.Preferences</class>
+		<class>br.com.ivy.entity.WhoisScope</class>
 	
 		<properties>
 			<property name="hibernate.connection.datasource"        value="java:comp/env/jdbc/ivy" />

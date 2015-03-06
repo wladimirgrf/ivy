@@ -6,26 +6,39 @@ import java.util.Arrays;
 
 import org.apache.commons.net.whois.WhoisClient;
 
+import br.com.ivy.entity.Target;
+import br.com.ivy.entity.WhoisScope;
+import br.com.ivy.implementation.WhoisScopeImplementation;
+
 
 public class Whois {
 	
-	private static final String defaultWhoisServer = "whois.iana.org";
+	private String extension;
+	private String whoisServer;
+	
+	private WhoisScopeImplementation scopeImplementation;
+	
+	public Whois(){
+		whoisServer = "whois.iana.org";
+		scopeImplementation = new WhoisScopeImplementation();
+	}
 
 	public String get(String address) throws SocketException, IOException{
 		
-		String whoisServer, document;
+		String document = getWhoisDocument(address);
 		
-		whoisServer = getWhoisElement("refer", getWhoisDocument(address, defaultWhoisServer));
+		this.extension 	 = getWhoisElement("domain", document);
+		this.whoisServer = getWhoisElement("refer", document);
 		
-		document = getWhoisDocument(address, whoisServer);
+		document = getWhoisDocument(address);
 		
 		return document;
 	}
 	
-	private String getWhoisDocument(String address, String whoisServer) throws SocketException, IOException{
+	private String getWhoisDocument(String address) throws SocketException, IOException{
 		
 		WhoisClient whoisClient = new WhoisClient();
-		whoisClient.connect(whoisServer);
+		whoisClient.connect(this.whoisServer);
 		
 		String document = whoisClient.query(address);
 		
@@ -43,5 +56,23 @@ public class Whois {
 		int index = Arrays.binarySearch(list, element);
 		
 		return (list[-1 * index - 1].split(":")[1].trim());
+	}
+	
+	private void mappingWhois(String document){
+		
+		WhoisScope scope = scopeImplementation.get(extension);
+		
+	
+		
+		if(scope == null) return;
+		
+		Target target = new Target();
+		
+		target.setOwner(getWhoisElement(scope.getOwner(), document));
+		target.setPerson(getWhoisElement(scope.getPerson(), document));
+		target.setEmail(getWhoisElement(scope.getEmail(), document));
+		target.setRegion(getWhoisElement(scope.getRegion(), document));
+		target.setChanged(getWhoisElement(scope.getChanged(), document));
+		
 	}
 }
