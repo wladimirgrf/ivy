@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,16 +14,14 @@ import org.hibernate.search.annotations.Indexed;
 
 @Entity
 @Indexed
-@Table(name="Target")
+@Table(name="Preferences")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Target implements Serializable {
+public class Preferences implements Serializable{
 
+	private static final long serialVersionUID = -6747492666295018344L;
 	
-	private static final long serialVersionUID = 2963284138834087179L;
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String country;
 	
 	@Field
 	private String domain;
@@ -43,16 +39,13 @@ public class Target implements Serializable {
 	private String region;
 	
 	private Date changed;
-	
-	private Date lastScan;
-	
 
-	public Long getId() {
-		return id;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getDomain() {
@@ -101,13 +94,5 @@ public class Target implements Serializable {
 
 	public void setChanged(Date changed) {
 		this.changed = changed;
-	}
-
-	public Date getLastScan() {
-		return lastScan;
-	}
-
-	public void setLastScan(Date lastScan) {
-		this.lastScan = lastScan;
 	}
 }

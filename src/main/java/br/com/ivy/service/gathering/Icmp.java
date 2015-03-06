@@ -1,12 +1,12 @@
-package br.com.ivy.gathering;
+package br.com.ivy.service.gathering;
 
 import java.io.IOException;
 import java.net.*; 
 
-public class ICMP {
+public class Icmp {
 	
-	private String domain;
 	private String ip;
+	private String host;
 	
 	public boolean ping(String domain) throws IOException{
 		boolean reachable = false;
@@ -29,16 +29,16 @@ public class ICMP {
 			}
 						
 			if(reachable){	
-				this.domain = url.getHost();
-				ip = InetAddress.getByName(this.domain).getHostAddress(); 
+				this.host = url.getHost();
+				ip = InetAddress.getByName(this.host).getHostAddress(); 
 			}
 		}
 		
 		return reachable;
 	}
 	
-	public String getDomain() {
-		return domain;
+	public String getHost() {
+		return host;
 	}
 
 	public String getIp() {

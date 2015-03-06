@@ -6,8 +6,8 @@
 	<persistence-unit name="Ivy" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.com.ivy.entity.Target</class>
-		<class>br.com.ivy.entity.Contact</class>
 		<class>br.com.ivy.entity.Url</class>
+		<class>br.com.ivy.entity.Preferences</class>
 	
 		<properties>
 			<property name="hibernate.connection.datasource"        value="java:comp/env/jdbc/ivy" />

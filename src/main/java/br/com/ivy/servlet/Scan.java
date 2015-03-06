@@ -1,4 +1,4 @@
-package br.com.ivy.view;
+package br.com.ivy.servlet;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.ivy.gathering.ICMP;
-import br.com.ivy.gathering.Whois;
+import br.com.ivy.service.gathering.Icmp;
+import br.com.ivy.service.gathering.Whois;
 
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
@@ -34,11 +34,11 @@ public class Scan extends HttpServlet {
 		if (request.getParameter("domain") != null) {
 			domain = request.getParameter("domain");
 			
-			ICMP icmp = new ICMP();
+			Icmp icmp = new Icmp();
 			if(!icmp.ping(domain)) return;
 			
 			
-			System.out.println(new Whois().get(icmp.getDomain()));
+			System.out.println(new Whois().get(icmp.getHost()));
 			System.out.println(new Whois().get(icmp.getIp()));
 		}
 		

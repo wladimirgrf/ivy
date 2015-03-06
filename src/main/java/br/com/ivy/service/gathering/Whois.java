@@ -1,4 +1,4 @@
-package br.com.ivy.gathering;
+package br.com.ivy.service.gathering;
 
 import java.io.IOException;
 import java.net.SocketException;
