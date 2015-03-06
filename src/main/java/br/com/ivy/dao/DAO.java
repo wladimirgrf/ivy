@@ -37,9 +37,17 @@ public abstract class DAO<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<T> find(String select) {
+		EntityManager entityManager = EntityManagerFactoryUtil.getCurrentEntityManager();
+		Query query = entityManager.createQuery(select);
+        List<T> result = query.getResultList();
+        return result;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<T> list(int page, int pageSize) {
 		EntityManager entityManager = EntityManagerFactoryUtil.getCurrentEntityManager();
-		Query query = entityManager.createQuery("from " + getClassName());
+		Query query = entityManager.createQuery(String.format("from %s", getClassName()));
         if (page > 0 && pageSize > 0) {
             query.setMaxResults(pageSize);
             query.setFirstResult((page - 1) * pageSize);			
@@ -47,5 +55,4 @@ public abstract class DAO<T> {
         List<T> result = query.getResultList();
         return result;
 	}
-
 }
