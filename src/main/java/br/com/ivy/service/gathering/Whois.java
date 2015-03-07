@@ -3,10 +3,11 @@ package br.com.ivy.service.gathering;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.net.whois.WhoisClient;
 
-import br.com.ivy.entity.Target;
 import br.com.ivy.entity.WhoisScope;
 import br.com.ivy.implementation.WhoisScopeImplementation;
 
@@ -23,7 +24,7 @@ public class Whois {
 		scopeImplementation = new WhoisScopeImplementation();
 	}
 
-	public String get(String address) throws SocketException, IOException{
+	public Map<String,String> get(String address) throws SocketException, IOException{
 		
 		String document = getWhoisDocument(address);
 		
@@ -32,7 +33,7 @@ public class Whois {
 		
 		document = getWhoisDocument(address);
 		
-		return document;
+		return mappingWhois(document);
 	}
 	
 	private String getWhoisDocument(String address) throws SocketException, IOException{
@@ -47,6 +48,25 @@ public class Whois {
 		return document;
 	}
 	
+	private Map<String,String> mappingWhois(String document){
+		
+		Map<String,String> map = null;
+		
+		WhoisScope scope = scopeImplementation.get(extension);
+		
+		if(scope != null) {
+			map = new HashMap<String,String>();
+			
+			map.put("owner",   getWhoisElement(scope.getOwner(),   document));
+			map.put("country", getWhoisElement(scope.getCountry(),  document));
+			map.put("changed", getWhoisElement(scope.getChanged(), document));
+			map.put("person",  getWhoisElement(scope.getPerson(),  document));
+			map.put("email",   getWhoisElement(scope.getEmail(),   document));
+		}
+		
+		return map;
+	}
+	
 	private String getWhoisElement(String element, String document){
 		
 		String[] list = document.split("\n");
@@ -56,23 +76,5 @@ public class Whois {
 		int index = Arrays.binarySearch(list, element);
 		
 		return (list[-1 * index - 1].split(":")[1].trim());
-	}
-	
-	private void mappingWhois(String document){
-		
-		WhoisScope scope = scopeImplementation.get(extension);
-		
-	
-		
-		if(scope == null) return;
-		
-		Target target = new Target();
-		
-		target.setOwner(getWhoisElement(scope.getOwner(), document));
-		target.setPerson(getWhoisElement(scope.getPerson(), document));
-		target.setEmail(getWhoisElement(scope.getEmail(), document));
-		target.setRegion(getWhoisElement(scope.getRegion(), document));
-		target.setChanged(getWhoisElement(scope.getChanged(), document));
-		
 	}
 }

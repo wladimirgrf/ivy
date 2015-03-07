@@ -39,7 +39,6 @@ public class Scan extends HttpServlet {
 			
 			
 			System.out.println(new Whois().get(icmp.getHost()));
-			System.out.println(new Whois().get(icmp.getIp()));
 		}
 		
 		

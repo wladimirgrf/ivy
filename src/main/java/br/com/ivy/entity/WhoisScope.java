@@ -23,9 +23,6 @@ public class WhoisScope implements Serializable{
 	private String id;
 	
 	@Field
-	private String domain;
-	
-	@Field
 	private String owner;
 	
 	@Field
@@ -35,7 +32,7 @@ public class WhoisScope implements Serializable{
 	private String email;
 	
 	@Field
-	private String region;
+	private String country;
 	
 	private String changed;
 	
@@ -46,14 +43,6 @@ public class WhoisScope implements Serializable{
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getDomain() {
-		return domain;
-	}
-
-	public void setDomain(String domain) {
-		this.domain = domain;
 	}
 
 	public String getOwner() {
@@ -80,12 +69,12 @@ public class WhoisScope implements Serializable{
 		this.email = email;
 	}
 
-	public String getRegion() {
-		return region;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getChanged() {
