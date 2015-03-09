@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.ivy.implementation.TargetImplementation;
 import br.com.ivy.service.gathering.Icmp;
 import br.com.ivy.service.gathering.Whois;
 
@@ -24,7 +25,7 @@ public class Scan extends HttpServlet {
 		processRequest(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,  IOException {
 		processRequest(request, response);
 	}
 
@@ -37,8 +38,14 @@ public class Scan extends HttpServlet {
 			Icmp icmp = new Icmp();
 			if(!icmp.ping(domain)) return;
 			
+			TargetImplementation targetImplementation = new TargetImplementation();
+			try {
+				targetImplementation.persist(new Whois().get(icmp.getHost()));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
-			System.out.println(new Whois().get(icmp.getHost()));
+			System.out.println("OK");
 		}
 		
 		

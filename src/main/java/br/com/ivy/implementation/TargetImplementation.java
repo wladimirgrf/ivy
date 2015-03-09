@@ -1,6 +1,8 @@
 package br.com.ivy.implementation;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
 
 import br.com.ivy.dao.TargetDAO;
 import br.com.ivy.entity.Target;
@@ -10,8 +12,8 @@ public class TargetImplementation {
 	
 	private TargetDAO dao;
 	
-	TargetImplementation(){ 
-		dao = TargetDAO.getInstance(); 
+	public TargetImplementation(){ 
+		dao = TargetDAO.getInstance();
 	}
 	
 	public Target get(Long id) {
@@ -22,7 +24,18 @@ public class TargetImplementation {
 		return dao.list();
     }
 
-	public void persist(Target target) {
+	public void persist(Map<String,String> map) {
+		Target target = new Target();
+		
+		target.setHost(map.get("host"));
+		target.setOwner(map.get("owner"));
+		target.setCountry(map.get("country"));
+		target.setChanged(map.get("changed"));
+		target.setPerson(map.get("person"));
+		target.setEmail(map.get("email"));
+		
+		target.setLastScan(new Date());
+		
 		dao.insert(target);
     }
 

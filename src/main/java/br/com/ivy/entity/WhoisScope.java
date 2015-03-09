@@ -23,18 +23,7 @@ public class WhoisScope implements Serializable{
 	private String id;
 	
 	@Field
-	private String owner;
-	
-	@Field
-	private String person;
-	
-	@Field
-	private String email;
-	
-	@Field
-	private String country;
-	
-	private String changed;
+	private String owner, person, email, country, changed;
 	
 
 	public String getId() {

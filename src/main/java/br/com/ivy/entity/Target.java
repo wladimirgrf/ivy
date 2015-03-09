@@ -28,22 +28,9 @@ public class Target implements Serializable {
 	private Long id;
 	
 	@Field
-	private String host;
+	private String host, owner, person, email, country, changed;
 	
 	@Field
-	private String owner;
-	
-	@Field
-	private String person;
-	
-	@Field
-	private String email;
-	
-	@Field
-	private String region;
-	
-	private String changed;
-	
 	private Date lastScan;
 	
 
@@ -87,12 +74,12 @@ public class Target implements Serializable {
 		this.email = email;
 	}
 
-	public String getRegion() {
-		return region;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getChanged() {

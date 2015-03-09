@@ -1,12 +1,11 @@
 package br.com.ivy.service.gathering;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.SocketException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.net.whois.WhoisClient;
 
 import br.com.ivy.entity.WhoisScope;
 import br.com.ivy.implementation.WhoisScopeImplementation;
@@ -15,53 +14,69 @@ import br.com.ivy.implementation.WhoisScopeImplementation;
 public class Whois {
 	
 	private String extension;
-	private String whoisServer;
 	
 	private WhoisScopeImplementation scopeImplementation;
 	
+	private static final String defaultWhoisServer = "whois.iana.org";
+	
 	public Whois(){
-		whoisServer = "whois.iana.org";
 		scopeImplementation = new WhoisScopeImplementation();
 	}
 
-	public Map<String,String> get(String address) throws SocketException, IOException{
+	public Map<String,String> get(String host) throws IOException, InterruptedException{
 		
-		String document = getWhoisDocument(address);
+		String document = getWhoisDocument(host, defaultWhoisServer);
 		
 		this.extension 	 = getWhoisElement("domain", document);
-		this.whoisServer = getWhoisElement("refer", document);
 		
-		document = getWhoisDocument(address);
+		document = getWhoisDocument(host, null);
 		
-		return mappingWhois(document);
+		return mappingWhois(document, host);
 	}
 	
-	private String getWhoisDocument(String address) throws SocketException, IOException{
+	private String getWhoisDocument(String host, String whoisServer) throws InterruptedException, IOException{
 		
-		WhoisClient whoisClient = new WhoisClient();
-		whoisClient.connect(this.whoisServer);
+		StringBuilder command = new StringBuilder();
 		
-		String document = whoisClient.query(address);
+		command.append("whois");
 		
-		whoisClient.disconnect();
+		if (whoisServer != null) command.append(String.format(" -h %s", whoisServer));
+				
+		command.append(host);
 		
-		return document;
+		Process process = Runtime.getRuntime().exec(command.toString());
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+		StringBuilder document = new StringBuilder();
+		
+		String line = "";
+
+        while((line = reader.readLine()) != null) {
+        	document.append(line + "\n");
+        }
+
+		process.waitFor();  
+		      
+		return document.toString();
 	}
 	
-	private Map<String,String> mappingWhois(String document){
+	private Map<String,String> mappingWhois(String document, String host){
 		
 		Map<String,String> map = null;
 		
-		WhoisScope scope = scopeImplementation.get(extension);
+		WhoisScope scope = scopeImplementation.get(this.extension);
 		
 		if(scope != null) {
 			map = new HashMap<String,String>();
 			
 			map.put("owner",   getWhoisElement(scope.getOwner(),   document));
-			map.put("country", getWhoisElement(scope.getCountry(),  document));
+			map.put("country", getWhoisElement(scope.getCountry(), document));
 			map.put("changed", getWhoisElement(scope.getChanged(), document));
 			map.put("person",  getWhoisElement(scope.getPerson(),  document));
 			map.put("email",   getWhoisElement(scope.getEmail(),   document));
+			
+			map.put("host",  host);
 		}
 		
 		return map;
