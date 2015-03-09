@@ -1,6 +1,7 @@
 package br.com.ivy.servlet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,11 +40,16 @@ public class Scan extends HttpServlet {
 			if(!icmp.ping(domain)) return;
 			
 			TargetImplementation targetImplementation = new TargetImplementation();
+			
+			Map<String, String> whoisMap = null;
+			
 			try {
-				targetImplementation.persist(new Whois().get(icmp.getHost()));
+				whoisMap = new Whois().get(icmp.getHost());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
+			if(whoisMap != null) targetImplementation.persist(whoisMap);
 			
 			System.out.println("OK");
 		}

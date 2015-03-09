@@ -38,9 +38,9 @@ public class Whois {
 		
 		StringBuilder command = new StringBuilder();
 		
-		command.append("whois");
+		command.append("whois ");
 		
-		if (whoisServer != null) command.append(String.format(" -h %s", whoisServer));
+		if (whoisServer != null) command.append(String.format("-h %s ", whoisServer));
 				
 		command.append(host);
 		
@@ -56,7 +56,7 @@ public class Whois {
         	document.append(line + "\n");
         }
 
-		process.waitFor();  
+		process.destroy();  
 		      
 		return document.toString();
 	}
@@ -68,21 +68,25 @@ public class Whois {
 		WhoisScope scope = scopeImplementation.get(this.extension);
 		
 		if(scope != null) {
-			map = new HashMap<String,String>();
 			
-			map.put("owner",   getWhoisElement(scope.getOwner(),   document));
-			map.put("country", getWhoisElement(scope.getCountry(), document));
-			map.put("changed", getWhoisElement(scope.getChanged(), document));
-			map.put("person",  getWhoisElement(scope.getPerson(),  document));
-			map.put("email",   getWhoisElement(scope.getEmail(),   document));
-			
-			map.put("host",  host);
+			if(getWhoisElement(scope.getOwner(), document) != null){
+				map = new HashMap<String,String>();
+				
+				map.put("owner",   getWhoisElement(scope.getOwner(),   document));
+				map.put("country", getWhoisElement(scope.getCountry(), document));
+				map.put("changed", getWhoisElement(scope.getChanged(), document));
+				map.put("person",  getWhoisElement(scope.getPerson(),  document));
+				map.put("email",   getWhoisElement(scope.getEmail(),   document));
+				
+				map.put("host",  host);
+			}
 		}
-		
 		return map;
 	}
 	
 	private String getWhoisElement(String element, String document){
+		
+		String result = null;
 		
 		String[] list = document.split("\n");
 		
@@ -90,6 +94,10 @@ public class Whois {
 		
 		int index = Arrays.binarySearch(list, element);
 		
-		return (list[-1 * index - 1].split(":")[1].trim());
+		String[] value = list[-1 * index - 1].split(":");
+		
+		if(value.length > 1) result = value[1].trim();
+			
+		return result;
 	}
 }
