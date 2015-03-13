@@ -8,6 +8,7 @@
 		<class>br.com.ivy.entity.Target</class>
 		<class>br.com.ivy.entity.Url</class>
 		<class>br.com.ivy.entity.WhoisScope</class>
+		<class>br.com.ivy.entity.User</class>
 	
 		<properties>
 			<property name="hibernate.connection.datasource"        value="java:comp/env/jdbc/ivy" />
@@ -16,7 +17,7 @@
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache"        value="true" />
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
-			<property name="hibernate.search.default.indexBase"     value="/Users/Anonymous/Documents/ivy/index"/>
+			<property name="hibernate.search.default.indexBase"     value="/Users/Wlad/Documents/git/ivy/index"/>
 		</properties>
 	</persistence-unit>
 </persistence>
