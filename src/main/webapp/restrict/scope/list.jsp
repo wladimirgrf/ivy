@@ -39,3 +39,4 @@
 		</c:forEach>
 	</tbody>
 </table>
+<a href="/restrict/preferences.jsp">Voltar</a>

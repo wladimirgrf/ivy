@@ -1,6 +1,8 @@
 package br.com.ivy.util;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +43,7 @@ public class Login extends HttpServlet {
 			password = request.getParameter("password");			
 		}
 		if (email != null && !email.isEmpty() && password != null && !password.isEmpty()) {
-			User user = UserDAO.getInstance().get(email, password);
+			User user = UserDAO.getInstance().get(email, parseHash(password));
 			if (user != null) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
@@ -51,4 +53,17 @@ public class Login extends HttpServlet {
 		}
 		request.getRequestDispatcher("/").forward(request, response);
 	}
+	
+	private String parseHash(String password) {
+        String salt = password + "pentest";
+        String hash = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(salt.getBytes(), 0, salt.length());
+            hash = new BigInteger(1, md.digest()).toString(16);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hash;
+    }
 }

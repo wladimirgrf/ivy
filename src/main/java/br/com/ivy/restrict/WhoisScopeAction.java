@@ -1,4 +1,4 @@
-package br.com.ivy.view;
+package br.com.ivy.restrict;
 
 import java.util.List;
 
