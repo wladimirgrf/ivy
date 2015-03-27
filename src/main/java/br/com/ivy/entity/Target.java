@@ -1,7 +1,6 @@
 package br.com.ivy.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +12,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+
 
 @Entity
 @Indexed
@@ -31,7 +31,7 @@ public class Target implements Serializable {
 	private String host, owner, person, email, country, changed;
 	
 	@Field
-	private Date lastScan;
+	private long lastScan;
 	
 
 	public Long getId() {
@@ -90,11 +90,11 @@ public class Target implements Serializable {
 		this.changed = changed;
 	}
 
-	public Date getLastScan() {
+	public long getLastScan() {
 		return lastScan;
 	}
 
-	public void setLastScan(Date lastScan) {
+	public void setLastScan(long lastScan) {
 		this.lastScan = lastScan;
 	}
 }

@@ -1,7 +1,7 @@
 package br.com.ivy.implementation;
 
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 
 import br.com.ivy.dao.TargetDAO;
@@ -34,7 +34,8 @@ public class TargetImplementation {
 		target.setPerson(map.get("person"));
 		target.setEmail(map.get("email"));
 		
-		target.setLastScan(new Date());
+		Calendar date =  Calendar.getInstance();
+		target.setLastScan(date.getTimeInMillis());
 		
 		dao.insert(target);
     }
