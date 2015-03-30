@@ -1,7 +1,9 @@
 package br.com.ivy.implementation;
 
+
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import br.com.ivy.dao.TargetDAO;
@@ -49,6 +51,7 @@ public class TargetImplementation {
     }
     
 	public Target get(String host) {
-		return dao.find(String.format("from Target where domain=%s",host)).get(0);
+		List<Target> targets = dao.find(String.format("from Target where host='%s'",host));
+		try{  return targets.get(0);  }	catch(Exception e){  return null;  }
     }
 }

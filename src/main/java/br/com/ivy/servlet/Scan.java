@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
 import br.com.ivy.service.gathering.Icmp;
 import br.com.ivy.service.gathering.Whois;
@@ -41,19 +42,26 @@ public class Scan extends HttpServlet {
 			
 			TargetImplementation targetImplementation = new TargetImplementation();
 			
-			Map<String, String> whoisMap = null;
+			Target tg = targetImplementation.get(icmp.getHost());
 			
-			try {
-				whoisMap = new Whois().get(icmp.getHost());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if(tg == null){
+				
+				Map<String, String> whoisMap = null;
+				
+				try {
+					whoisMap = new Whois().get(icmp.getHost());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				if(whoisMap != null) {
+					
+					targetImplementation.persist(whoisMap);
+				}
+				
+				System.out.println("OK");
 			}
-			
-			if(whoisMap != null) targetImplementation.persist(whoisMap);
-			
-			System.out.println("OK");
 		}
-		
 		
 		request.getRequestDispatcher("/").forward(request, response);
 	}

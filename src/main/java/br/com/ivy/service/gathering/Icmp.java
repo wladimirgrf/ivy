@@ -14,6 +14,8 @@ public class Icmp {
 		if (!domain.matches("^(http|https)://.*")) 
 			domain = String.format("http://%s", domain);
 		
+		domain = domain.replace("www.", "");
+		
 		URL url = new URL(domain);
 		
 		if (url != null){
