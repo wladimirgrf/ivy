@@ -14,6 +14,8 @@ import java.util.regex.Matcher;
 
 public class HtmlAnalyser {
 	
+	private int listPosition;
+	
 	private Matcher matcher;
 	
 	private List<String> links;
@@ -22,13 +24,27 @@ public class HtmlAnalyser {
 	
 	private static final int tryNumber = 5;
 	
-	private int listPosition;
-	
 	private final Pattern linkRegex = Pattern.compile("href=\"(.*?)\"");
 	
 	public HtmlAnalyser(){
 		links 	 = new ArrayList<String>();
 		sampling = new HashSet<String>();
+	}
+
+	public Set<String> getSampling(){
+		return this.sampling;
+	}
+
+	public String linkFormat(String link, String host){
+		
+		if(link.startsWith("#") || link.startsWith("\\")){
+			link = null;
+		}else if(link.startsWith("/")){
+			link = String.format("http://%s%s", host, link);
+		}else if(!link.contains(host)){
+			link = null;
+		}
+		return link;
 	}
 
 	public void linkChecker(URL host) throws IOException{
@@ -48,7 +64,6 @@ public class HtmlAnalyser {
 			
 			if(matcher.find()) {
 				link = linkFormat(matcher.group(1), host.getHost());
-				
 				if(link != null){
 					this.links.add(link);
 					if(link.contains("?")) this.sampling.add(link);
@@ -56,25 +71,11 @@ public class HtmlAnalyser {
 			}
 		}
 		
-		
-		if(sampling.size() < tryNumber){
+		if(sampling.size() < tryNumber && this.links.size() >= this.listPosition){
 			linkChecker(new URL(this.links.get(this.listPosition++)));
 		}
-		
-		
-		System.out.println(sampling);
 	}
-
-	public String linkFormat(String link, String host){
-		
-		if(link.startsWith("#") || link.startsWith("\\")) return null;
-		
-		if(link.startsWith("/")) link = String.format("http://%s%s", host, link);
-		
-		return link;
-	}
-
-
+	
 	public String getContent(URL host){
 		try{
 			HttpURLConnection connection = (HttpURLConnection) host.openConnection();

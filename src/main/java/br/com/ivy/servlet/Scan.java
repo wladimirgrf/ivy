@@ -46,7 +46,11 @@ public class Scan extends HttpServlet {
 			Icmp icmp = new Icmp();
 			if(!icmp.ping(domain)) return;
 			
-			new HtmlAnalyser().linkChecker(icmp.getHost());
+			HtmlAnalyser analyser = new HtmlAnalyser();
+			
+			analyser.linkChecker(icmp.getHost());
+			
+			System.out.println(analyser.getSampling());
 //			
 //			TargetImplementation targetImplementation = new TargetImplementation();
 //			
