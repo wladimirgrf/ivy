@@ -1,6 +1,11 @@
 package br.com.ivy.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,6 +18,7 @@ import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
 import br.com.ivy.service.gathering.Icmp;
 import br.com.ivy.service.gathering.Whois;
+import br.com.ivy.service.scan.HtmlAnalyser;
 
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
@@ -40,28 +46,32 @@ public class Scan extends HttpServlet {
 			Icmp icmp = new Icmp();
 			if(!icmp.ping(domain)) return;
 			
-			TargetImplementation targetImplementation = new TargetImplementation();
-			
-			Target tg = targetImplementation.get(icmp.getHost());
-			
-			if(tg == null){
-				
-				Map<String, String> whoisMap = null;
-				
-				try {
-					whoisMap = new Whois().get(icmp.getHost());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				if(whoisMap != null) {
-					
-					targetImplementation.persist(whoisMap);
-				}
-				
-				System.out.println("OK");
-			}
+			new HtmlAnalyser().linkChecker(icmp.getHost());
+//			
+//			TargetImplementation targetImplementation = new TargetImplementation();
+//			
+//			Target tg = targetImplementation.get(icmp.getHost());
+//			
+//			if(tg == null){
+//				
+//				Map<String, String> whoisMap = null;
+//				
+//				try {
+//					whoisMap = new Whois().get(icmp.getHost());
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				
+//				if(whoisMap != null) {
+//					
+//					targetImplementation.persist(whoisMap);
+//				}
+//				
+//				System.out.println("OK");
+//			}
 		}
+		
+
 		
 		request.getRequestDispatcher("/").forward(request, response);
 	}

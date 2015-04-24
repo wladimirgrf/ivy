@@ -6,15 +6,14 @@ import java.net.*;
 public class Icmp {
 	
 	private String ip;
-	private String host;
+	private URL host;
 	
 	public boolean ping(String domain) throws IOException{
 		boolean reachable = false;
 		
-		if (!domain.matches("^(http|https)://.*")) 
-			domain = String.format("http://%s", domain);
+		if (!domain.matches("^(http|https)://.*")) domain = String.format("http://%s", domain);
 		
-		domain = domain.replace("www.", "");
+		if(domain.contains("www")) domain = domain.replace("www.", "");
 		
 		URL url = new URL(domain);
 		
@@ -31,15 +30,15 @@ public class Icmp {
 			}
 						
 			if(reachable){	
-				this.host = url.getHost();
-				ip = InetAddress.getByName(this.host).getHostAddress(); 
+				this.host = url;
+				ip = InetAddress.getByName(this.host.getHost()).getHostAddress(); 
 			}
 		}
 		
 		return reachable;
 	}
 	
-	public String getHost() {
+	public URL getHost() {
 		return host;
 	}
 
