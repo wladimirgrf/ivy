@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,8 +14,6 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class HtmlAnalyser {
-	
-	private int listPosition;
 	
 	private Matcher matcher;
 	
@@ -35,25 +34,11 @@ public class HtmlAnalyser {
 		return this.sampling;
 	}
 
-	public String linkFormat(String link, String host){
-		
-		if(link.startsWith("#") || link.startsWith("\\")){
-			link = null;
-		}else if(link.startsWith("/")){
-			link = String.format("http://%s%s", host, link);
-		}else if(!link.contains(host)){
-			link = null;
-		}
-		return link;
-	}
-
 	public void linkChecker(URL host) throws IOException{
 
 		String content = getContent(host);
 
 		String[] lines = content.split("\n");
-		
-		String link = null;
 
 		for (int i=0; i < lines.length; i++) {
 			if(sampling.size() >= tryNumber) break;
@@ -63,7 +48,7 @@ public class HtmlAnalyser {
 			this.matcher = this.linkRegex.matcher(lines[i]);
 			
 			if(matcher.find()) {
-				link = linkFormat(matcher.group(1), host.getHost());
+				String link = linkFormat(matcher.group(1), host.getHost());
 				if(link != null){
 					this.links.add(link);
 					if(link.contains("?")) this.sampling.add(link);
@@ -71,8 +56,11 @@ public class HtmlAnalyser {
 			}
 		}
 		
-		if(sampling.size() < tryNumber && this.links.size() >= this.listPosition){
-			linkChecker(new URL(this.links.get(this.listPosition++)));
+		if(sampling.size() < tryNumber && this.links.size() > 0){
+			Collections.shuffle(links);
+			String link = this.links.get(0);
+			this.links.remove(0);
+			linkChecker(new URL(link));
 		}
 	}
 	
@@ -95,5 +83,17 @@ public class HtmlAnalyser {
 	
 			return content.toString();
 		}catch(Exception e){ return null; }
+	}
+	
+	public String linkFormat(String link, String host){
+		
+		if(link.startsWith("#") || link.startsWith("\\")){
+			link = null;
+		}else if(link.startsWith("/")){
+			link = String.format("http://%s%s", host, link);
+		}else if(!link.contains(host)){
+			link = null;
+		}
+		return link;
 	}
 }
