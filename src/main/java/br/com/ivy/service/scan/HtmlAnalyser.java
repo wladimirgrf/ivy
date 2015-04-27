@@ -23,8 +23,6 @@ public class HtmlAnalyser {
 	
 	private static final int tryNumber = 5;
 	
-	private final Pattern linkRegex = Pattern.compile("href=\"(.*?)\"");
-	
 	public HtmlAnalyser(){
 		links 	 = new ArrayList<String>();
 		sampling = new HashSet<String>();
@@ -45,7 +43,7 @@ public class HtmlAnalyser {
 			
 			if(!lines[i].contains("<a")) continue;
 			
-			this.matcher = this.linkRegex.matcher(lines[i]);
+			this.matcher = Pattern.compile("href=\"(.*?)\"").matcher(lines[i]);
 			
 			if(matcher.find()) {
 				String link = linkFormat(matcher.group(1), host.getHost());
@@ -89,8 +87,8 @@ public class HtmlAnalyser {
 		
 		if(link.startsWith("#") || link.startsWith("\\")){
 			link = null;
-		}else if(link.startsWith("/")){
-			link = String.format("http://%s%s", host, link);
+		}else if(Pattern.matches("^[a-zA-Z/].*", link)){
+			link = String.format("http://%s%s", host, (link.startsWith("/") ? link : String.format("/%s",link)));
 		}else if(!link.contains(host)){
 			link = null;
 		}
