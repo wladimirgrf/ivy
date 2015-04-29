@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
 import br.com.ivy.service.gathering.Icmp;
-import br.com.ivy.service.gathering.Whois;
-import br.com.ivy.service.scan.HtmlAnalyser;
+import br.com.ivy.service.scan.TargetScan;
+import br.com.ivy.service.scan.WhoisScan;
 
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
@@ -43,14 +43,12 @@ public class Scan extends HttpServlet {
 		if (request.getParameter("domain") != null) {
 			domain = request.getParameter("domain");
 			
-			Icmp icmp = new Icmp();
-			if(!icmp.ping(domain)) return;
+
 			
-			HtmlAnalyser analyser = new HtmlAnalyser();
+			TargetScan target = new TargetScan();
+			if(target.isReachable(domain)) target.linkChecker(target.getHost());
 			
-			analyser.linkChecker(icmp.getHost());
-			
-			System.out.println(analyser.getSampling());
+			System.out.println(target.getSampling());
 //			
 //			TargetImplementation targetImplementation = new TargetImplementation();
 //			

@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,7 +15,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class HtmlAnalyser {
+public class TargetScan {
+	
+	private String ip;
+	
+	private URL host;
 	
 	private Matcher matcher;
 	
@@ -23,13 +29,37 @@ public class HtmlAnalyser {
 	
 	private static final int tryNumber = 5;
 	
-	public HtmlAnalyser(){
+	public TargetScan(){
 		links 	 = new ArrayList<String>();
 		sampling = new HashSet<String>();
 	}
 
 	public Set<String> getSampling(){
 		return this.sampling;
+	}
+	
+	public boolean isReachable(String domain) throws IOException{
+		boolean reachable = false;
+		
+		if (!domain.matches("^(http|https)://.*")) domain = String.format("http://%s", domain);
+		
+		if(domain.contains("www")) domain = domain.replace("www.", "");
+		
+		URL url = new URL(domain);
+		
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	    connection.setRequestMethod("HEAD");
+
+	    try{
+	        reachable = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+	    } catch (UnknownHostException noInternetConnection){}
+	    
+	    if(reachable){
+        	this.host = url;
+			this.ip = InetAddress.getByName(this.host.getHost()).getHostAddress();
+        }
+		
+		return reachable;
 	}
 
 	public void linkChecker(URL host) throws IOException{
@@ -93,5 +123,13 @@ public class HtmlAnalyser {
 			link = null;
 		}
 		return link;
+	}
+	
+	public URL getHost() {
+		return host;
+	}
+
+	public String getIp() {
+		return ip;
 	}
 }

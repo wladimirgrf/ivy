@@ -1,4 +1,4 @@
-package br.com.ivy.service.gathering;
+package br.com.ivy.service.scan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import br.com.ivy.entity.WhoisScope;
 import br.com.ivy.implementation.WhoisScopeImplementation;
 
 
-public class Whois {
+public class WhoisScan {
 	
 	private String extension;
 	
@@ -19,7 +19,7 @@ public class Whois {
 	
 	private static final String defaultWhoisServer = "whois.iana.org";
 	
-	public Whois(){
+	public WhoisScan(){
 		scopeImplementation = new WhoisScopeImplementation();
 	}
 
