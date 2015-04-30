@@ -1,12 +1,6 @@
 package br.com.ivy.servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
-import br.com.ivy.service.gathering.Icmp;
 import br.com.ivy.service.scan.TargetScan;
 import br.com.ivy.service.scan.WhoisScan;
 
