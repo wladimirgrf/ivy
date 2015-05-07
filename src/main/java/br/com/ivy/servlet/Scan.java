@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
+import br.com.ivy.service.injection.SqlInjection;
 import br.com.ivy.service.scan.TargetScan;
 import br.com.ivy.service.scan.WhoisScan;
+import br.com.ivy.util.WebPage;
 
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
@@ -39,9 +41,13 @@ public class Scan extends HttpServlet {
 
 			
 			TargetScan target = new TargetScan();
-			if(target.isReachable(domain)) target.linkChecker(target.getHost());
+			if(WebPage.isReachable(domain)){
 			
-			System.out.println(target.getSampling());
+			new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain)));
+			
+			}
+			
+			
 //			
 //			TargetImplementation targetImplementation = new TargetImplementation();
 //			

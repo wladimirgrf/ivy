@@ -1,0 +1,98 @@
+package br.com.ivy.util;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public final class WebPage {
+	
+	private WebPage() {}
+	
+	public static boolean isReachable(String domain) throws IOException{
+		boolean reachable = false;
+		
+		URL url = getHost(domain);
+		
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	    connection.setRequestMethod("HEAD");
+
+	    try{
+	        reachable = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+	    } catch (UnknownHostException noInternetConnection){}
+		
+		return reachable;
+	}
+	
+	public static URL getHost(String domain) throws MalformedURLException{
+		
+		if (!domain.matches("^(http|https)://.*")) domain = String.format("http://%s", domain);
+		
+		if(domain.contains("www")) domain = domain.replace("www.", "");
+		
+		return new URL(domain);
+	}
+	
+	public static String getContent(URL host){
+		try{
+			HttpURLConnection connection = (HttpURLConnection) host.openConnection();
+	
+			HttpURLConnection.setFollowRedirects(false);
+			connection.setRequestMethod("GET");
+	
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+	
+			String line;
+			StringBuilder content = new StringBuilder();
+	
+			while ((line = reader.readLine()) != null) content.append(String.format("%s\n",line));
+	
+			reader.close();
+			connection.disconnect();
+	
+			return content.toString();
+		}catch(Exception e){ return null; }
+	}
+	
+	
+	public static List<String> linkChecker(URL host) throws IOException{
+		
+		List<String> links = new ArrayList<String>();
+
+		String content = getContent(host);
+
+		String[] lines = content.split("\n");
+
+		for (int i=0; i < lines.length; i++) {
+			
+			if(!lines[i].contains("<a")) continue;
+			
+			Matcher matcher = Pattern.compile("href=\"(.*?)\"").matcher(lines[i]);
+			
+			if(matcher.find()) {
+				String link = linkFormat(matcher.group(1), host.getHost());
+				if(link != null) links.add(link);
+			}
+		}
+		return links;
+	}
+	
+	private static String linkFormat(String link, String host){
+		
+		if(link.startsWith("#") || link.startsWith("\\")){
+			link = null;
+		}else if(Pattern.matches("^[a-zA-Z/].*", link)){
+			link = String.format("http://%s%s", host, (link.startsWith("/") ? link : String.format("/%s",link)));
+		}else if(!link.contains(host)){
+			link = null;
+		}
+		return link;
+	}
+}
