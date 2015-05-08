@@ -86,13 +86,12 @@ public final class WebPage {
 	
 	private static String linkFormat(String link, String host){
 		
-		if(link.startsWith("#") || link.startsWith("\\")){
-			link = null;
-		}else if(Pattern.matches("^[a-zA-Z/].*", link)){
+		if(Pattern.matches("^[a-zA-Z/].*", link) && !link.startsWith("http://")){
 			link = String.format("http://%s%s", host, (link.startsWith("/") ? link : String.format("/%s",link)));
-		}else if(!link.contains(host)){
-			link = null;
 		}
+		
+		if(!link.contains(host)) link = null;
+		
 		return link;
 	}
 }

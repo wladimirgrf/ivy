@@ -43,7 +43,7 @@ public class Scan extends HttpServlet {
 			TargetScan target = new TargetScan();
 			if(WebPage.isReachable(domain)){
 			
-			new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain)));
+			System.out.println(new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain))));
 			
 			}
 			
