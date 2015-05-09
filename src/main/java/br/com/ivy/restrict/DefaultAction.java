@@ -37,7 +37,7 @@ public abstract class DefaultAction<C,T> extends HttpServlet{
 				delete();
 			}
 		}
-		request.getRequestDispatcher(contentPath).forward(request, response);
+		request.getRequestDispatcher(layoutPath).forward(request, response);
 	}
 	
 	private void clear() {
@@ -62,14 +62,14 @@ public abstract class DefaultAction<C,T> extends HttpServlet{
 	
 	protected void list() {
 		request.setAttribute("list", getList());
-		request.setAttribute("jsp", getListJspPath());
+		request.setAttribute("content", getListJspPath());
 	}
 	
 	protected void edit() {
 		if (!id.equals(0) && !id.equals("")) {
 			request.setAttribute("object", getObject());					
 		}
-		request.setAttribute("jsp", getInputJspPath());
+		request.setAttribute("content", getInputJspPath());
 	}
 	
 	protected void save() {
@@ -82,7 +82,7 @@ public abstract class DefaultAction<C,T> extends HttpServlet{
 		list();	
 	}
 	
-	protected String contentPath = "/restrict/layout.jsp";
+	protected String layoutPath = "/restrict/default/layout.jsp";
 	
 	protected HttpServletRequest request;
 	

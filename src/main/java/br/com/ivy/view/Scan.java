@@ -1,6 +1,7 @@
-package br.com.ivy.servlet;
+package br.com.ivy.view;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,33 +44,33 @@ public class Scan extends HttpServlet {
 			TargetScan target = new TargetScan();
 			if(WebPage.isReachable(domain)){
 			
-			System.out.println(new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain))));
+			//System.out.println(new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain))));
 			
 			}
 			
 			
-//			
-//			TargetImplementation targetImplementation = new TargetImplementation();
-//			
-//			Target tg = targetImplementation.get(icmp.getHost());
-//			
-//			if(tg == null){
-//				
-//				Map<String, String> whoisMap = null;
-//				
-//				try {
-//					whoisMap = new Whois().get(icmp.getHost());
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//				
-//				if(whoisMap != null) {
-//					
-//					targetImplementation.persist(whoisMap);
-//				}
-//				
-//				System.out.println("OK");
-//			}
+			
+			TargetImplementation targetImplementation = new TargetImplementation();
+			
+			Target tg = targetImplementation.get(WebPage.getHost(domain).getHost());
+			
+			if(tg == null){
+				
+				Map<String, String> whoisMap = null;
+				
+				try {
+					whoisMap = new WhoisScan().get(WebPage.getHost(domain).getHost());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				if(whoisMap != null) {
+					
+					targetImplementation.persist(whoisMap);
+				}
+				
+				System.out.println("OK");
+			}
 		}
 		
 

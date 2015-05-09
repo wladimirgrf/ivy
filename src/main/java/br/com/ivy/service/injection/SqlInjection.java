@@ -5,6 +5,6 @@ public class SqlInjection extends Injection{
 	
 	public SqlInjection(){
 		this.code = "'";
-		this.exceptions = new String[]{"erro","sql","exception"};
+		this.exceptions = new String[]{"erro","sql","select"};
 	}
 }

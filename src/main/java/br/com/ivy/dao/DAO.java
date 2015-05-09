@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.ivy.util.EntityManagerFactoryUtil;
+import br.com.ivy.util.ManagerFactory;
 
 
 public abstract class DAO<T> {
@@ -17,19 +17,19 @@ public abstract class DAO<T> {
 	}
 	
 	public T get(Object id) {
-		return EntityManagerFactoryUtil.getCurrentEntityManager().find(getSuperClass(), id);		
+		return ManagerFactory.getCurrentEntityManager().find(getSuperClass(), id);		
 	}
 	
 	public void insert(T model) {
-		EntityManagerFactoryUtil.getCurrentEntityManager().persist(model);
+		ManagerFactory.getCurrentEntityManager().persist(model);
 	}
 	
 	public void update(T model) {
-		EntityManagerFactoryUtil.getCurrentEntityManager().merge(model);
+		ManagerFactory.getCurrentEntityManager().merge(model);
 	}
 	
 	public void delete(T model) {
-		EntityManagerFactoryUtil.getCurrentEntityManager().remove(EntityManagerFactoryUtil.getCurrentEntityManager().merge(model));
+		ManagerFactory.getCurrentEntityManager().remove(ManagerFactory.getCurrentEntityManager().merge(model));
 	}
 	
 	public List<T> list() {
@@ -38,7 +38,7 @@ public abstract class DAO<T> {
 	
 	@SuppressWarnings("unchecked")
 	public List<T> find(String select) {
-		EntityManager entityManager = EntityManagerFactoryUtil.getCurrentEntityManager();
+		EntityManager entityManager = ManagerFactory.getCurrentEntityManager();
 		Query query = entityManager.createQuery(select);
         List<T> result = query.getResultList();
         return result;
@@ -46,7 +46,7 @@ public abstract class DAO<T> {
 	
 	@SuppressWarnings("unchecked")
 	public List<T> list(int page, int pageSize) {
-		EntityManager entityManager = EntityManagerFactoryUtil.getCurrentEntityManager();
+		EntityManager entityManager = ManagerFactory.getCurrentEntityManager();
 		Query query = entityManager.createQuery(String.format("from %s", getClassName()));
         if (page > 0 && pageSize > 0) {
             query.setMaxResults(pageSize);

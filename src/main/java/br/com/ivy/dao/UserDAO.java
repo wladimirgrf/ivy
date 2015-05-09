@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import br.com.ivy.entity.User;
-import br.com.ivy.util.EntityManagerFactoryUtil;
+import br.com.ivy.util.ManagerFactory;
 
 
 public class UserDAO extends DAO<User> {
@@ -34,7 +34,7 @@ public class UserDAO extends DAO<User> {
 	}
 	
 	public User get(String user, String password){
-		Query query = EntityManagerFactoryUtil.getCurrentEntityManager().createQuery("from User u where u.user=:user and u.password=:password");
+		Query query = ManagerFactory.getCurrentEntityManager().createQuery("from User u where u.user=:user and u.password=:password");
 		query.setParameter("user", user);
 		query.setParameter("password", password);
 		List<?> result = query.getResultList();

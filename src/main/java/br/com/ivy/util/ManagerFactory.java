@@ -4,9 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class EntityManagerFactoryUtil {
+public class ManagerFactory {
 
-	private EntityManagerFactoryUtil() {}
+	private ManagerFactory() {}
 	
 	private static final ThreadLocal<EntityManager> threadLocal;
 	
@@ -18,7 +18,7 @@ public class EntityManagerFactoryUtil {
 	
 	public static void start() {
 		if (instance == null) {
-			synchronized (EntityManagerFactoryUtil.class) {
+			synchronized (ManagerFactory.class) {
 				if (instance == null) {
 					EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Ivy");
 					instance = entityManagerFactory; 
@@ -40,7 +40,7 @@ public class EntityManagerFactoryUtil {
 			if (instance == null) {
 				start();
 			}
-			synchronized (EntityManagerFactoryUtil.class) {
+			synchronized (ManagerFactory.class) {
 				entityManager = instance.createEntityManager();
 				threadLocal.set(entityManager);	
 			}

@@ -4,36 +4,37 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-
-import br.com.ivy.dao.WhoisScopeDAO;
 import br.com.ivy.entity.WhoisScope;
+import br.com.ivy.implementation.WhoisScopeImplementation;
+
 
 
 @WebServlet("/restrict/scope")
-public class WhoisScopeAction extends DefaultAction<WhoisScope,String>{
+public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 
 	private static final long serialVersionUID = 6584217161651670606L;
-
-	private WhoisScopeDAO dao;
+	
+	private WhoisScopeImplementation implementation;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		dao = WhoisScopeDAO.getInstance();
+		implementation = new WhoisScopeImplementation();
 	}
 	
 	@Override
 	protected WhoisScope getObject() {
-		return dao.get(id);
+		return implementation.get(id);
 	}
 
 	@Override
 	protected List<WhoisScope> getList() {
-		return dao.list();
+		return implementation.list();
 	}
 
 	@Override
 	protected void actionSave() {
+		
 		WhoisScope scope = getObject() != null ? getObject() : new WhoisScope();
 		
 		if (request.getParameter("id") != null){
@@ -56,17 +57,17 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope,String>{
 		}
 		
 		if (getObject() != null) {
-			dao.update(scope);
+			implementation.update(scope);
 		} else {
-			dao.insert(scope);
+			implementation.persist(scope);
 		}
 	}
 
 	@Override
 	protected void actionDelete() {
-		if (!id.equals("")) dao.delete(getObject());	
+		if (!id.equals("")) implementation.remove(getObject());	
 	}
-
+	
 	@Override
 	protected String getListJspPath() {
 		return "/restrict/scope/list.jsp";
@@ -76,7 +77,7 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope,String>{
 	protected String getInputJspPath() {
 		return "/restrict/scope/input.jsp";
 	}
-
+	
 	@Override
 	protected String parse(String id) {
 		return id;

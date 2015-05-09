@@ -1,6 +1,6 @@
 package br.com.ivy.implementation;
 
-import java.util.Collection;
+import java.util.List;
 
 import br.com.ivy.dao.WhoisScopeDAO;
 import br.com.ivy.entity.WhoisScope;
@@ -17,7 +17,7 @@ public class WhoisScopeImplementation {
 		return dao.get(id);
     }
 	
-	public Collection<WhoisScope> list() {
+	public List<WhoisScope> list() {
 		return dao.list();
     }
 

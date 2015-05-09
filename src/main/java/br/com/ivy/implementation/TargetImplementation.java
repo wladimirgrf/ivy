@@ -2,7 +2,6 @@ package br.com.ivy.implementation;
 
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +21,7 @@ public class TargetImplementation {
 		return dao.get(id);
     }
 	
-	public Collection<Target> list() {
+	public List<Target> list() {
 		return dao.list();
     }
 

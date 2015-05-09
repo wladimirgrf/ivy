@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import br.com.ivy.util.EntityManagerFactoryUtil;
+import br.com.ivy.util.ManagerFactory;
 
 @WebFilter("/*")
 public class RequestFilter implements Filter {
@@ -18,7 +18,7 @@ public class RequestFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException { }
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		EntityManager entityManager = EntityManagerFactoryUtil.getCurrentEntityManager();
+		EntityManager entityManager = ManagerFactory.getCurrentEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			chain.doFilter(request, response);

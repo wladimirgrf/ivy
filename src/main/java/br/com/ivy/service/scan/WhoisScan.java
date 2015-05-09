@@ -15,12 +15,12 @@ public class WhoisScan {
 	
 	private String extension;
 	
-	private WhoisScopeImplementation scopeImplementation;
+	private WhoisScopeImplementation implementation;
 	
 	private static final String defaultWhoisServer = "whois.iana.org";
 	
 	public WhoisScan(){
-		scopeImplementation = new WhoisScopeImplementation();
+		implementation = new WhoisScopeImplementation();
 	}
 
 	public Map<String,String> get(String host) throws IOException, InterruptedException{
@@ -65,7 +65,7 @@ public class WhoisScan {
 		
 		Map<String,String> map = null;
 		
-		WhoisScope scope = scopeImplementation.get(this.extension);
+		WhoisScope scope = implementation.get(this.extension);
 		
 		if(scope != null) {
 			
