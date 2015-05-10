@@ -1,8 +1,10 @@
 package br.com.ivy.implementation;
 
 
-import java.util.Collection;
+import java.util.List;
+
 import br.com.ivy.dao.UrlDAO;
+import br.com.ivy.entity.Target;
 import br.com.ivy.entity.Url;
 
 public class UrlImplementation {
@@ -17,9 +19,13 @@ public class UrlImplementation {
 		return dao.get(id);
     }
 	
-	public Collection<Url> list() {
+	public List<Url> list() {
 		return dao.list();
     }
+	
+	public List<Url> list(Target target){
+		return dao.list(target);
+	}
 
 	public void persist(Url url) {
 		dao.insert(url);
@@ -32,5 +38,4 @@ public class UrlImplementation {
 	public void remove(Url url) {
     	dao.delete(url);
     }
-
 }

@@ -1,6 +1,7 @@
 package br.com.ivy.view;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,19 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.ivy.entity.Target;
+import br.com.ivy.entity.Url;
 import br.com.ivy.implementation.TargetImplementation;
+import br.com.ivy.implementation.UrlImplementation;
 import br.com.ivy.service.injection.SqlInjection;
 import br.com.ivy.service.scan.TargetScan;
-import br.com.ivy.service.scan.WhoisScan;
 import br.com.ivy.util.WebPage;
+import br.com.ivy.util.Whois;
 
 @WebServlet("/scan")
 public class Scan extends HttpServlet {
+	
+	private long today;
+	
+	private static final double week = 1000 * 60 * 60 * 24 * 7;
 	
 	private static final long serialVersionUID = -2937378935464874585L;
 
 	public Scan() {
         super();
+        
+        this.today = Calendar.getInstance().getTimeInMillis();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,42 +48,40 @@ public class Scan extends HttpServlet {
 		if (request.getParameter("domain") != null) {
 			domain = request.getParameter("domain");
 			
-
-			
-			TargetScan target = new TargetScan();
 			if(WebPage.isReachable(domain)){
-			
-			//System.out.println(new SqlInjection().exploit(target.mappingDomain(WebPage.getHost(domain))));
-			
-			}
-			
-			
-			
-			TargetImplementation targetImplementation = new TargetImplementation();
-			
-			Target tg = targetImplementation.get(WebPage.getHost(domain).getHost());
-			
-			if(tg == null){
+				TargetImplementation targetImplementation = new TargetImplementation();
 				
-				Map<String, String> whoisMap = null;
+				Target target = targetImplementation.get(WebPage.getHost(domain).getHost());
 				
-				try {
-					whoisMap = new WhoisScan().get(WebPage.getHost(domain).getHost());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				if(whoisMap != null) {
+				if(target == null || (today - target.getLastScan() >= week) ){
 					
-					targetImplementation.persist(whoisMap);
+					try {
+						target = Whois.get(WebPage.getHost(domain).getHost());
+					} catch (InterruptedException e) {}
+					
+					if(target != null){
+						
+						Map<String, Boolean> sqlMap = new SqlInjection().exploit(new TargetScan().mappingDomain(WebPage.getHost(domain)));
+						
+						if(sqlMap != null){
+
+							targetImplementation.persist(target);
+							
+							UrlImplementation urlImplementation = new UrlImplementation();
+							
+							for(String key : sqlMap.keySet()){
+								Url url = new Url();
+								
+								url.setPath(key);
+								url.setSqlVulnerability(sqlMap.get(key));
+								url.setTarget(target);
+								urlImplementation.persist(url);
+							}
+						}
+					}
 				}
-				
-				System.out.println("OK");
 			}
 		}
-		
-
-		
 		request.getRequestDispatcher("/").forward(request, response);
 	}
 }

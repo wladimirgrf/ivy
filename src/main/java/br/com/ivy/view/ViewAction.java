@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public abstract class ViewAction<C> extends HttpServlet{
+public abstract class ViewAction<E> extends HttpServlet{
 	
 	private static final long serialVersionUID = 3068351859046703651L;
 	
@@ -63,6 +63,7 @@ public abstract class ViewAction<C> extends HttpServlet{
 	}
 	
 	protected void get() {
+		subList();
 		request.setAttribute("object", getObject());
 	}
 	
@@ -72,9 +73,11 @@ public abstract class ViewAction<C> extends HttpServlet{
 	
 	protected HttpServletResponse response;
 	
-	protected abstract C getObject();
+	protected abstract E getObject();
 	
-	protected abstract List<C> getList();
+	protected abstract List<E> getList();
+	
+	protected abstract void subList();
 	
 	protected abstract String getLayoutPath();
 	    

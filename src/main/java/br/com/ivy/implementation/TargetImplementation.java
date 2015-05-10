@@ -1,9 +1,6 @@
 package br.com.ivy.implementation;
 
-
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import br.com.ivy.dao.TargetDAO;
 import br.com.ivy.entity.Target;
@@ -25,19 +22,7 @@ public class TargetImplementation {
 		return dao.list();
     }
 
-	public void persist(Map<String,String> map) {
-		Target target = new Target();
-		
-		target.setHost(map.get("host"));
-		target.setOwner(map.get("owner"));
-		target.setCountry(map.get("country"));
-		target.setChanged(map.get("changed"));
-		target.setPerson(map.get("person"));
-		target.setEmail(map.get("email"));
-		
-		Calendar date =  Calendar.getInstance();
-		target.setLastScan(date.getTimeInMillis());
-		
+	public void persist(Target target) {		
 		dao.insert(target);
     }
 

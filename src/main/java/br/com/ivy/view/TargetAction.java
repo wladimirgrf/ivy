@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 
 import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
+import br.com.ivy.implementation.UrlImplementation;
 
 @WebServlet("/target")
 public class TargetAction extends ViewAction<Target>{
@@ -18,6 +19,7 @@ public class TargetAction extends ViewAction<Target>{
 	@Override
 	public void init() throws ServletException {
 		super.init();
+
 		implementation = new TargetImplementation();
 	}
 
@@ -29,6 +31,11 @@ public class TargetAction extends ViewAction<Target>{
 	@Override
 	protected List<Target> getList() {
 		return implementation.list();
+	}
+	
+	@Override
+	protected void subList(){
+		request.setAttribute("list", new UrlImplementation().list(implementation.get(id)));
 	}
 
 	@Override

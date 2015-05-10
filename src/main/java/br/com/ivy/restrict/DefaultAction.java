@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public abstract class DefaultAction<C,T> extends HttpServlet{
+public abstract class DefaultAction<E,T> extends HttpServlet{
 	
 	private static final long serialVersionUID = 4626463527834813889L;
 
@@ -92,9 +92,9 @@ public abstract class DefaultAction<C,T> extends HttpServlet{
 	
 	protected String action;
 	
-	protected abstract C getObject();
+	protected abstract E getObject();
 	
-	protected abstract List<C> getList();
+	protected abstract List<E> getList();
 	
 	protected abstract void actionSave();
 	

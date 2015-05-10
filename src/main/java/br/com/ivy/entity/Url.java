@@ -32,8 +32,10 @@ public class Url implements Serializable {
 	@Field
 	private String path;
 	
+	private boolean sqlVulnerability, xssVulnerability;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Target target;
+	private Target target; 
 
 	public Long getId() {
 		return id;
@@ -49,6 +51,22 @@ public class Url implements Serializable {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public boolean isSqlVulnerability() {
+		return sqlVulnerability;
+	}
+
+	public void setSqlVulnerability(boolean sqlVulnerability) {
+		this.sqlVulnerability = sqlVulnerability;
+	}
+
+	public boolean isXssVulnerability() {
+		return xssVulnerability;
+	}
+
+	public void setXssVulnerability(boolean xssVulnerability) {
+		this.xssVulnerability = xssVulnerability;
 	}
 
 	public Target getTarget() {

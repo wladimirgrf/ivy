@@ -1,30 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form action="/restrict/scope?action=save" method="post">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 						%>
 	
-	<div>
-		<label for="id">Id:</label>
-		<input type="text" name="id" value="${object.id}"/>
-	</div>
-	<div>
-		<label for="owner">Owner:</label>
-		<input type="text" name="owner" value="${object.owner}"/>
-	</div>
-	<div>
-		<label for="person">Person:</label>
-		<input type="text" name="person" value="${object.person}"/>
-	</div>	
-	<div>
-		<label for="country">Country:</label>
-		<input type="text" name="country" value="${object.country}"/>
-	</div>	
-	<div>
-		<label for="email">Email:</label>
-		<input type="text" name="email" value="${object.email}"/>
-	</div>
-	<div>
-		<label for="changed">Changed:</label>
-		<input type="text" name="changed" value="${object.changed}"/>
-	</div>						
-
-	<input type="submit" value="Salvar"/>
-</form>
+<div>
+	<label>${object.id}</label>
+</div>
+<div>
+	<label>${object.host}</label>
+</div>
+<div>
+	<label>${object.owner}</label>
+</div>	
+<div>
+	<label>${object.person}</label>
+</div>	
+<div>
+	<label>${object.email}</label>
+</div>
+<div>
+	<label>${object.country}</label>
+</div>		
+<div>
+	<label>${object.changed}</label>
+</div>	
+<div>
+	<table>
+	<c:forEach items="${list}" var="url">
+		<tr>
+			<td>${url.path}</td>
+			<td>${url.sqlVulnerability}</td>
+			<td>${url.xssVulnerability}</td>					
+		</tr>
+	</c:forEach>
+	</table>				
+</div>
