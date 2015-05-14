@@ -24,12 +24,12 @@
 </div>	
 <div>
 	<table>
-	<c:forEach items="${list}" var="url">
-		<tr>
-			<td>${url.path}</td>
-			<td>${url.sqlVulnerability}</td>
-			<td>${url.xssVulnerability}</td>					
-		</tr>
-	</c:forEach>
+		<c:forEach items="${list}" var="url">
+			<tr>
+				<td>${url.path}</td>
+				<td>${url.sqlVulnerability}</td>
+				<td>${url.xssVulnerability}</td>					
+			</tr>
+		</c:forEach>
 	</table>				
 </div>
