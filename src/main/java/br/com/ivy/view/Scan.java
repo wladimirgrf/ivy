@@ -24,7 +24,7 @@ public class Scan extends HttpServlet {
 	
 	private long today;
 	
-	private static final double week = 1000 * 60 * 60 * 24 * 7;
+	private static final long week = 1000 * 60 * 60 * 24 * 7;
 	
 	private static final long serialVersionUID = -2937378935464874585L;
 
