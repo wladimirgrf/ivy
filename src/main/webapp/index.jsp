@@ -6,11 +6,12 @@
 		<title>Ivy - Vulnerability Scan</title>		
 	</head>
 	<body>
-		<form action="/scan" method="get">			    
+		<form action="/exploit" method="get">			    
 			<div>
 				<input type="text" name="domain"/> 
 				<input type="submit" value="Scan"/>    	
 			</div>			
-		</form>		
+		</form>
+		<label>${error}</label>
 	</body>
 </html>

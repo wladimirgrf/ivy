@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Calendar;
 
 import br.com.ivy.entity.Target;
 import br.com.ivy.entity.WhoisScope;
@@ -86,7 +85,6 @@ public final class Whois {
 				target.setChanged(getElement(scope.getChanged(),document));
 				target.setPerson(getElement(scope.getPerson(),  document));
 				target.setEmail(getElement(scope.getEmail(),    document));
-				target.setLastScan(Calendar.getInstance().getTimeInMillis());
 			}
 		}
 		return target;

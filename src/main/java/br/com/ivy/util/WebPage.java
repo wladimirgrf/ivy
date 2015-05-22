@@ -16,12 +16,10 @@ public final class WebPage {
 	
 	private WebPage() {}
 	
-	public static boolean isReachable(String domain) throws IOException{
+	public static boolean isReachable(URL host) throws IOException{
 		boolean reachable = false;
 		
-		URL url = getHost(domain);
-		
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection connection = (HttpURLConnection) host.openConnection();
 	    connection.setRequestMethod("HEAD");
 
 	    try{
