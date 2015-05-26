@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 
 public abstract class ViewAction<E> extends HttpServlet{
 	
@@ -33,8 +35,8 @@ public abstract class ViewAction<E> extends HttpServlet{
 			list();
 		}
 		
-		request.setAttribute("content", getContentPath());
-		request.getRequestDispatcher(getLayoutPath()).forward(request, response);
+		request.setAttribute("content", content);
+		request.getRequestDispatcher(layout).forward(request, response);
 	}
 	
 	private void clear() {
@@ -59,12 +61,14 @@ public abstract class ViewAction<E> extends HttpServlet{
 	}
 	
 	protected void list() {
-		request.setAttribute("list", getList());
+		Gson gson = new Gson();
+		request.setAttribute("list", gson.toJson(getList()));
 	}
 	
 	protected void get() {
 		subList();
-		request.setAttribute("object", getObject());
+		Gson gson = new Gson();
+		request.setAttribute("object", gson.toJson(getObject()));
 	}
 	
 	protected long id;
@@ -79,7 +83,7 @@ public abstract class ViewAction<E> extends HttpServlet{
 	
 	protected abstract void subList();
 	
-	protected abstract String getLayoutPath();
-	    
-	protected abstract String getContentPath();
+	protected static final String content = "/public/default/home.jsp";
+	
+	protected static final String layout = "/public/default/layout.jsp";
 }

@@ -9,7 +9,7 @@ import br.com.ivy.entity.Target;
 import br.com.ivy.entity.WhoisScope;
 import br.com.ivy.implementation.WhoisScopeImplementation;
 
-public final class Whois {
+public class Whois {
 	
 	private static final String defaultWhoisServer = "whois.iana.org";
 	

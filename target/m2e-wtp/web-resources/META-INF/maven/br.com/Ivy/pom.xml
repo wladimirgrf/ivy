@@ -83,6 +83,10 @@
   		<groupId>taglibs</groupId>
   		<artifactId>standard</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>com.google.code.gson</groupId>
+  		<artifactId>gson</artifactId>
+  	</dependency>
   </dependencies>
   <dependencyManagement>
   	<dependencies>
@@ -150,6 +154,11 @@
   			<groupId>taglibs</groupId>
   			<artifactId>standard</artifactId>
   			<version>1.1.2</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.google.code.gson</groupId>
+  			<artifactId>gson</artifactId>
+  			<version>2.3.1</version>
   		</dependency>
   	</dependencies>
   </dependencyManagement>
