@@ -1,11 +1,15 @@
 package br.com.ivy.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -30,8 +34,14 @@ public class Target implements Serializable {
 	@Field
 	private String host, owner, person, email, country, changed;
 	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Url> urls;
+	
 	@Field
 	private long lastScan;
+	
+	@Field
+	private boolean security;
 	
 
 	public Long getId() {
@@ -90,11 +100,27 @@ public class Target implements Serializable {
 		this.changed = changed;
 	}
 
+	public List<Url> getUrls() {
+		return urls;
+	}
+
+	public void setUrls(List<Url> urls) {
+		this.urls = urls;
+	}
+	
 	public long getLastScan() {
 		return lastScan;
 	}
 
 	public void setLastScan(long lastScan) {
 		this.lastScan = lastScan;
+	}
+
+	public boolean isSecurity() {
+		return security;
+	}
+
+	public void setSecurity(boolean security) {
+		this.security = security;
 	}
 }

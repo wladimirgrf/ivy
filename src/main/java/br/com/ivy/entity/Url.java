@@ -3,11 +3,9 @@ package br.com.ivy.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -32,10 +30,7 @@ public class Url implements Serializable {
 	@Field
 	private String path;
 	
-	private boolean sqlVulnerability, xssVulnerability;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Target target; 
+	private boolean sqlVulnerability;
 
 	public Long getId() {
 		return id;
@@ -59,21 +54,5 @@ public class Url implements Serializable {
 
 	public void setSqlVulnerability(boolean sqlVulnerability) {
 		this.sqlVulnerability = sqlVulnerability;
-	}
-
-	public boolean isXssVulnerability() {
-		return xssVulnerability;
-	}
-
-	public void setXssVulnerability(boolean xssVulnerability) {
-		this.xssVulnerability = xssVulnerability;
-	}
-
-	public Target getTarget() {
-		return target;
-	}
-
-	public void setTarget(Target target) {
-		this.target = target;
 	}
 }

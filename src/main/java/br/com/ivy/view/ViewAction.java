@@ -34,9 +34,8 @@ public abstract class ViewAction<E> extends HttpServlet{
 		}else{
 			list();
 		}
-		
-		request.setAttribute("content", content);
-		request.getRequestDispatcher(layout).forward(request, response);
+
+		request.getRequestDispatcher(getContentPath()).forward(request, response);
 	}
 	
 	private void clear() {
@@ -66,7 +65,6 @@ public abstract class ViewAction<E> extends HttpServlet{
 	}
 	
 	protected void get() {
-		subList();
 		Gson gson = new Gson();
 		request.setAttribute("object", gson.toJson(getObject()));
 	}
@@ -80,10 +78,6 @@ public abstract class ViewAction<E> extends HttpServlet{
 	protected abstract E getObject();
 	
 	protected abstract List<E> getList();
-	
-	protected abstract void subList();
-	
-	protected static final String content = "/public/default/home.jsp";
-	
-	protected static final String layout = "/public/default/layout.jsp";
+
+	protected abstract String getContentPath();
 }

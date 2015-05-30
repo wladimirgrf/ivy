@@ -5,11 +5,9 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
-import com.google.gson.Gson;
-
 import br.com.ivy.entity.Target;
 import br.com.ivy.implementation.TargetImplementation;
-import br.com.ivy.implementation.UrlImplementation;
+
 
 @WebServlet("/target")
 public class TargetAction extends ViewAction<Target>{
@@ -34,11 +32,9 @@ public class TargetAction extends ViewAction<Target>{
 	protected List<Target> getList() {
 		return implementation.list();
 	}
-	
-	@Override
-	protected void subList(){
-		Gson gson = new Gson();
-		request.setAttribute("sublist", gson.toJson(new UrlImplementation().list(implementation.get(id))));
-	}
 
+	@Override
+	protected String getContentPath() {
+		return (this.id > 0 ? "/public/target/get.jsp" : "/public/target/list.jsp");
+	}
 }
