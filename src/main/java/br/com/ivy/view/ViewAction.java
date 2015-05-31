@@ -60,13 +60,11 @@ public abstract class ViewAction<E> extends HttpServlet{
 	}
 	
 	protected void list() {
-		Gson gson = new Gson();
-		request.setAttribute("list", gson.toJson(getList()));
+		request.setAttribute("list", new Gson().toJson(getList()));
 	}
 	
 	protected void get() {
-		Gson gson = new Gson();
-		request.setAttribute("object", gson.toJson(getObject()));
+		request.setAttribute("object", new Gson().toJson(getObject()));
 	}
 	
 	protected long id;

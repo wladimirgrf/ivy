@@ -3,41 +3,50 @@ package br.com.ivy.service.scan;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import br.com.ivy.entity.Url;
 import br.com.ivy.util.WebPage;
 
 public class TargetScan {
 	
-	private static final int tryNumber = 5;
+	private static final int tryNumber = 3;
 	
 	
-	public Set<String> mappingDomain(URL host) throws IOException{
+	public List<Url> mappingDomain(URL host) throws IOException{
 		
-		URL url = host;
+		URL address = host;
 		
-		List<String> links = new ArrayList<String>();
-		
+		Set<String> links = new HashSet<String>();
+		Set<String> checked = new HashSet<String>();
 		Set<String> sampling = new HashSet<String>();
 		
 		do{
-			links = WebPage.linkChecker(url);
+			links.addAll(WebPage.linkChecker(address));
+			links.removeAll(checked);
 			
 			for (String link : links) {
 				if(sampling.size() >= tryNumber) break;
 				if(link.contains("?")) sampling.add(link);
 			}
 			if(sampling.size() < tryNumber && links.size() > 0){
-				Collections.shuffle(links);
-				String link = links.get(0);
+				String link = links.iterator().next();
+				checked.add(link);
 				links.remove(0);
-				url = new URL(link);
+				address = new URL(link);
 			}
 		}while(sampling.size() < tryNumber);
+		
+		List<Url> urls = new ArrayList<Url>();
+		
+		for(String path : sampling){
+			Url url = new Url();
+			url.setPath(path);
+			urls.add(url);
+		}
 
-		return sampling;
+		return urls;
 	}
 }

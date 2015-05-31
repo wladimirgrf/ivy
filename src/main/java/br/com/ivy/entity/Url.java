@@ -55,4 +55,23 @@ public class Url implements Serializable {
 	public void setSqlVulnerability(boolean sqlVulnerability) {
 		this.sqlVulnerability = sqlVulnerability;
 	}
+	
+	@Override
+	public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (!(object instanceof Url)) {
+            return false;
+        }
+        Url other = (Url)object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+	}
 }

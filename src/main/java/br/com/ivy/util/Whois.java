@@ -38,7 +38,7 @@ public class Whois {
 		
 		Process process = Runtime.getRuntime().exec(command.toString());
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "ISO-8859-1"));
 
 		StringBuilder document = new StringBuilder();
 		

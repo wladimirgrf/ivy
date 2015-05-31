@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,9 +60,9 @@ public class WebPage {
 	}
 	
 	
-	public static List<String> linkChecker(URL host) throws IOException{
+	public static Set<String> linkChecker(URL host) throws IOException{
 		
-		List<String> links = new ArrayList<String>();
+		Set<String> links = new HashSet<String>();
 
 		String content = getContent(host);
 
