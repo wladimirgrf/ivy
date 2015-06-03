@@ -5,6 +5,9 @@
 		<jsp:include page="/public/default/head.jsp"/>
 	</head>
 	<body>
+		<div class="header">
+			<jsp:include page="/public/default/header.jsp"/>
+		</div>
 		<div class="content">
 			<jsp:include page="${content}"/>
 		</div>
