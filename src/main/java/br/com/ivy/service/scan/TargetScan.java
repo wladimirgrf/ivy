@@ -12,7 +12,11 @@ import br.com.ivy.util.WebPage;
 
 public class TargetScan {
 	
-	private static final int tryNumber = 3;
+	private static final int linksNumer = 3;
+	
+	private static final int tryLimit = 20;
+	
+	private int tryNumber = 0;
 	
 	
 	public List<Url> mappingDomain(URL host) throws IOException{
@@ -28,23 +32,29 @@ public class TargetScan {
 			links.removeAll(checked);
 			
 			for (String link : links) {
-				if(sampling.size() >= tryNumber) break;
+				if(sampling.size() >= linksNumer) break;
 				if(link.contains("?")) sampling.add(link);
 			}
-			if(sampling.size() < tryNumber && links.size() > 0){
+			if(sampling.size() < linksNumer && links.size() > 0){
 				String link = links.iterator().next();
 				checked.add(link);
 				links.remove(0);
 				address = new URL(link);
 			}
-		}while(sampling.size() < tryNumber);
+			tryNumber++;
+			
+		}while(sampling.size() < linksNumer && tryNumber < tryLimit );
 		
-		List<Url> urls = new ArrayList<Url>();
+		List<Url> urls = null;
 		
-		for(String path : sampling){
-			Url url = new Url();
-			url.setPath(path);
-			urls.add(url);
+		if(sampling.size() > 0){
+			urls = new ArrayList<Url>();
+			
+			for(String path : sampling){
+				Url url = new Url();
+				url.setPath(path);
+				urls.add(url);
+			}
 		}
 
 		return urls;

@@ -11,5 +11,8 @@
 		<div class="content">
 			<jsp:include page="${content}"/>
 		</div>
+		<div class="footer">
+			<jsp:include page="/public/default/footer.jsp"/>
+		</div>
 	</body>
 </html>

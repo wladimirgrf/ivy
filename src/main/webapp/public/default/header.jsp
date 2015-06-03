@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 						%>
 
 
-<div class="logo">
-	<img src="/public/img/logo-horizontal.png" height="50px">
+<div class="menu">
+	<a class="logo" href="/">
+		<img src="/public/img/logo-horizontal.png" height="50px">
+	</a>
 </div>

@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 
 
-div.content div.analyze input[type=text] { border-color: #c0c0c0 #d9d9d9 #d9d9d9; border-image: none; border-style: solid; border-width: 1px; height: 23px; width: 339px; padding-left: 4px; font-size: 12px; }
+div.content div.analyze input[type=text] { border-color: #c0c0c0 #d9d9d9 #d9d9d9; border-image: none; border-style: solid; border-width: 1px; height: 30px; width: 335px; padding-left: 4px; font-size: 12px; }
 div.content div.analyze input[type=text]:focus { border-color: #4d90fe; }
-div.content div.analyze input[type=button] { padding : 4px; background-color:#452343; border: 1px solid #3079ed; box-shadow: none; color: #fff; cursor: pointer; font-size: 12px; }
+div.content div.analyze input[type=button] { padding : 8px; background-color:#452343; border: 1px solid #3079ed; box-shadow: none; color: #fff; cursor: pointer; font-size: 12px; }
 div.content div.analyze input[type=button]:HOVER { background: #357ae8; border: 1px solid #2f5bb7; box-shadow: 0 1px 0; }
 
-div.targets { background-color: #fff; float: left; height: 400px; overflow: hidden; width: 400px; padding:10px; border-radius: 3px;  border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
+div.targets { background-color: #fff; float: left; height: 350px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
 div.targets div.header-targets { float: left; width: 400px; height: 40px; }
 div.targets div.header-targets h1  { float: left; background-color: #03a56c; height: 30px; padding-top: 10px; font-weight: bold;  color: #fff;}
 div.targets div.header-targets h1.header-host{ width: 309px; text-align: left;  padding-left:10px; border-right: 1px solid #fff;}
@@ -20,7 +20,11 @@ div.targets div.last-targets div.target div.host { float: left; width: 310px; he
 div.targets div.last-targets div.target div.host a { color: #000; text-decoration: none; }
 div.targets div.last-targets div.target div.result { float: left; width: 80px; height: 30px; margin-top: 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center;}
 
-
+div.info {
+	height: 465px;
+	margin-top: 15px;
+	margin-left: 15px;
+}
 
 
 div.detail{
@@ -66,3 +70,4 @@ div.detail div.sub-title{
 div.detail div#d-urls ul li{
 	list-style-type: none;
 }
+

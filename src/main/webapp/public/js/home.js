@@ -59,7 +59,7 @@ function analyze(path){
                     $('div#d-email').text(data.email);
                     $('div#d-changed').text(data.changed);
 
-                    var urls = $('ul#in-urls')
+                    var urls = $('ul#in-urls').empty();
 			        for(var i = 0; i < data.urls.length; i++){
 			        	urls.append($('<li>').text(data.urls[i].path))
                     }
