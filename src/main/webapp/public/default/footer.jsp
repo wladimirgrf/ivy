@@ -5,7 +5,6 @@
 <div class="botton">
 	<div class="scope">
 		<div class="text">Accepted Domain by IVI</div>
-		<img src="/public/img/dotcom.png" height="18px">
-		<img src="/public/img/dotbr.png" height="18px">
+		<div class="extensions">.COM and .BR</div>
 	</div>
 </div>

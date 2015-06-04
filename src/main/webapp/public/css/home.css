@@ -71,3 +71,31 @@ div.detail div#d-urls ul li{
 	list-style-type: none;
 }
 
+div#error {
+	background-color: #fdcbc0;
+	border: 2px solid #b2301d;
+	width: 400px;
+	border-radius: 3px;
+}
+
+div#error div.error-header{
+	
+	margin: 8px;
+}
+
+div#error div.error-header h3{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div#error div.error-header img{
+	float:right;
+}
+
+div#error div.error-msg{
+	float:left;
+	position:relative;
+	font-size: 16px;
+	margin: 8px;
+}
+

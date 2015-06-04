@@ -67,7 +67,7 @@ function analyze(path){
                     $('div.detail').show();
 				        
 				}else{
-					alert(data.error);
+					$("div.error-msg").html(data.error);
 				}
 			}
 		}

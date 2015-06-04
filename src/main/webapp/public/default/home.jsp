@@ -3,7 +3,14 @@
 
 <div class="box-1024 padding-top-15">
 	<div class="box-540 info">
-			<div id="error"></div>
+			<div id="error">
+				<div class="error-header">
+					<h3>Error:</h3>
+					<img id="close" src="/public/img/close.png" width="25px">
+				</div>
+				
+				<div class="error-msg"></div>
+			</div>
 
 			<div class="detail">
 				<div class="d-header">

@@ -5,6 +5,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+<link href="/public/img/logo-vertical.png" rel="shortcut icon"/>
+
 <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
 
 <link href="/public/css/main.css" rel="stylesheet" type="text/css"/>
