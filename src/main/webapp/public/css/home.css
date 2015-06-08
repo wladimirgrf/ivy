@@ -8,24 +8,48 @@ div.content div.analyze input[type=button]:HOVER { background: #357ae8; border: 
 
 div.targets { background-color: #fff; float: left; height: 350px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
 div.targets div.header-targets { float: left; width: 400px; height: 40px; }
-div.targets div.header-targets h1  { float: left; background-color: #03a56c; height: 30px; padding-top: 10px; font-weight: bold;  color: #fff;}
-div.targets div.header-targets h1.header-host{ width: 309px; text-align: left;  padding-left:10px; border-right: 1px solid #fff;}
-div.targets div.header-targets h1.header-result { width: 80px; text-align: center; }
+div.targets div.header-targets h1  { float: left; background-color: #ecd073; height: 30px; padding-top: 10px; font-weight: bold;  color: #fff;}
+div.targets div.header-targets h1.header-host{ width: 277px; text-align: left;  padding-left:10px; border-right: 1px solid #fff;}
+div.targets div.header-targets h1.header-result { width: 112px; text-align: center; }
 
 div.targets div.last-targets { float: left; width: 400px; height: 1333px; overflow: hidden; position: relative; }
 
 div.targets div.last-targets div.target { float: left; width: 400px; height: 40px; border-bottom: 1px solid #e8e8ea; }
 
-div.targets div.last-targets div.target div.host { float: left; width: 310px; height: 30px; margin-top: 10px; margin-left:10px; font-size: 14px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+div.targets div.last-targets div.target div.host { float: left; width: 277px; height: 30px; margin-top: 10px; margin-left:10px; font-size: 14px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 div.targets div.last-targets div.target div.host a { color: #000; text-decoration: none; }
-div.targets div.last-targets div.target div.result { float: left; width: 80px; height: 30px; margin-top: 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center;}
+div.targets div.last-targets div.target div.result { float: left; width: 112px; height: 30px; margin-top: 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center;}
+
 
 div.info {
-	height: 465px;
 	margin-top: 15px;
 	margin-left: 15px;
 }
 
+div.about{
+	background-color: #fff;
+    border-color: #d8d8d8;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 27px 1px 2px;
+    box-sizing: border-box;
+    vertical-align: top; 
+    border-top-color: #ecd073;
+    width: 500px;
+}
+
+div.about p{
+	font-size: 14px;
+	max-width: 520px;
+	margin-bottom: 15px;
+	margin:7px;
+}
+
+div.about p.title{
+	text-align: center;
+	font-weight: bold;
+}
 
 div.detail{
     background-color: #fff;
@@ -36,14 +60,14 @@ div.detail{
     border-width: 1px 1px 2px;
     box-sizing: border-box;
     vertical-align: top; 
-    border-top-color: #6f85bf;
+    border-top-color: #ecd073;
     width: 500px;
 }
 
 div.detail div.d-header{
 	width: 494px;
 	height: 27px;
-	background-color: #6f85bf;
+	background-color: #ecd073;
 	text-align: right;
 	padding: 2px;
 }
@@ -65,6 +89,7 @@ div.detail div.sub-title{
 	color: #aaa;
 	font-size: 13px;
 	margin: 5px;
+	padding-bottom:8px;
 }
 
 div.detail div#d-urls ul li{
@@ -73,5 +98,5 @@ div.detail div#d-urls ul li{
 
 div.index { background-color: #fff; float: left; height: 27px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
 div.index h3 {float: left; margin-left:5px}
-div.index img {float: left; margin-left: 70px;}
+div.index img {float: left; margin-left: 58px;}
 

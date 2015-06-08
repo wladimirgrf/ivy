@@ -2,6 +2,19 @@ $(function() {
 	
 	$("div.detail").hide();
 	
+	listTargets();
+	
+	$("#btnAnalyze").click(function() {
+		analyze("/exploit?domain=" + $("#domain").val());
+	});
+	
+	$("#close").click(function() { 
+		$("div.detail").hide();
+		$("div.about").show();
+	});
+});
+
+function listTargets(){
 	$.ajax({
 		url : "/target",
 		cache : false,
@@ -12,16 +25,7 @@ $(function() {
 			}
 		}
 	});
-	
-	
-	$("#btnAnalyze").click(function() {
-		analyze("/exploit?domain=" + $("#domain").val());
-	});
-	
-	$("#close").click(function() { 
-		$("div.detail").hide();
-	});
-});
+}
 
 function getTarget(id){
 	analyze("/target?id=" + id);
@@ -37,7 +41,7 @@ function listTable(data){
 		targets.append(
 			$('<div>').append(
 				$('<div>').addClass("host").append($("<a>").attr("href","javascript:getTarget(" + data[i].id + ");").html(data[i].host)),
-				$('<div>').addClass("result").append((data[i].security ? infected : unfected ))
+				$('<div>').addClass("result").append((data[i].security ? unfected : infected))
              ).addClass("target")
         )
 	}
@@ -64,7 +68,9 @@ function analyze(path){
 			        	urls.append($('<li>').text(data.urls[i].path))
                     }
                     
+			        $("div.about").hide();
                     $('div.detail').show();
+                    listTargets();
 				        
 				}else{
 					

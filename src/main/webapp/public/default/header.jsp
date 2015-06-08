@@ -4,6 +4,6 @@
 
 <div class="menu">
 	<a class="logo" href="/">
-		<img src="/public/img/logo-horizontal.png" height="50px">
+		<img src="/public/img/logo-horizontal.png" width="138px">
 	</a>
 </div>
