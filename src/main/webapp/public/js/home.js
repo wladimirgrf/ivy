@@ -2,6 +2,8 @@ $(function() {
 	
 	$("div.detail").hide();
 	
+	$('.loader').hide(); 
+	
 	listTargets();
 	
 	$("#btnAnalyze").click(function() {
@@ -52,6 +54,13 @@ function analyze(path){
 		url : path,
 		cache : false,
 		dataType: "json",
+		beforeSend: function(){
+			$("div.about").hide();
+			$('.loader').show(); 
+		},
+		complete: function(){ 
+			$('.loader').hide(); 
+		},
 		success : function(data) {
 			if (data != null) {
 				if(data.error == null){					
@@ -68,18 +77,19 @@ function analyze(path){
 			        	urls.append($('<li>').text(data.urls[i].path))
                     }
                     
-			        $("div.about").hide();
                     $('div.detail').show();
                     listTargets();
 				        
 				}else{
 					
 					swal({
-					  title: "Error!",
+					  title: "Erro!",
 					  text: data.error,
 					  type: "error",
 					  confirmButtonText: "OK"
 					});
+					
+					$("div.about").show();
 				}
 			}
 		}

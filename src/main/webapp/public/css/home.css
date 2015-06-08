@@ -100,3 +100,8 @@ div.index { background-color: #fff; float: left; height: 27px; overflow: hidden;
 div.index h3 {float: left; margin-left:5px}
 div.index img {float: left; margin-left: 58px;}
 
+div.loader {
+	padding-left: 120px;
+	padding-top: 64px;
+}
+

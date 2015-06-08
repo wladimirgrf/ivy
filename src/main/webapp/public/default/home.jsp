@@ -4,6 +4,10 @@
 <div class="box-1024 padding-top-15">
 
 	<div class="box-540 info">
+		<div class="loader">
+			<img src="/public/img/loading.gif">
+		</div>
+	
 		<div class="about">
 			<p class="title">Sobre</p>
 			<p>IVI é sistema que tem por objetivo analise de vulnerabilidades em outros sistemas web.</p>
