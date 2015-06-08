@@ -14,7 +14,7 @@ public class TargetScan {
 	
 	private static final int linksNumer = 3;
 	
-	private static final int tryLimit = 20;
+	private static final int tryLimit = 50;
 	
 	private int tryNumber = 0;
 	

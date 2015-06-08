@@ -14,6 +14,12 @@
 <link href="/public/css/home.css" rel="stylesheet" type="text/css"/>
 
 
+<!-- sweetalert -->
+<script src="/frameworks/js/sweetalert.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/frameworks/css/sweetalert.css">
+<!-- sweetalert -->
+
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <script src="/public/js/home.js"></script>

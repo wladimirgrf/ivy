@@ -67,7 +67,13 @@ function analyze(path){
                     $('div.detail').show();
 				        
 				}else{
-					$("div.error-msg").html(data.error);
+					
+					swal({
+					  title: "Error!",
+					  text: data.error,
+					  type: "error",
+					  confirmButtonText: "OK"
+					});
 				}
 			}
 		}

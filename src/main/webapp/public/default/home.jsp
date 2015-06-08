@@ -3,14 +3,6 @@
 
 <div class="box-1024 padding-top-15">
 	<div class="box-540 info">
-			<div id="error">
-				<div class="error-header">
-					<h3>Error:</h3>
-					<img id="close" src="/public/img/close.png" width="25px">
-				</div>
-				
-				<div class="error-msg"></div>
-			</div>
 
 			<div class="detail">
 				<div class="d-header">
@@ -19,22 +11,22 @@
 				<div class="title">Host</div>
 				<div id="d-host" class="sub-title"></div>
 				
-				<div class="title">Country</div>
+				<div class="title">País</div>
 				<div id="d-country" class="sub-title"></div>
 				
-				<div class="title">Owner</div>
+				<div class="title">Proprietário</div>
 				<div id="d-owner" class="sub-title"></div>
 				
-				<div class="title">Person</div>
+				<div class="title">Responsavel</div>
 				<div id="d-person" class="sub-title"></div>
 				
 				<div class="title">E-mail</div>
 				<div id="d-email" class="sub-title"></div>
 			
-				<div class="title">Update</div>
+				<div class="title">Ultima atualização.</div>
 				<div id="d-changed" class="sub-title"></div>
 				
-				<div class="title">Tested Links</div>
+				<div class="title">Links Testados</div>
 				<div id="d-urls" class="sub-title"><ul id="in-urls"></ul></div>
 			</div>
 	</div>
@@ -44,16 +36,23 @@
 		<div class="analyze">
 			<form>			    
 				<input type="text" id="domain" name="domain"/> 
-				<input id="btnAnalyze" type="button" value="ANALYZE"/>    		
+				<input id="btnAnalyze" type="button" value="ANALISAR"/>    		
 			</form>
 		</div>	
 		
 		<div class="targets margin-top-15">
 			<div class="header-targets">
-				<h1 class="header-host">Domains</h1>
-				<h1 class="header-result">Safe</h1>
+				<h1 class="header-host">Dominios</h1>
+				<h1 class="header-result">Seguro</h1>
 			</div>
 			<div class="last-targets"></div>
+		</div>
+		<div class="index margin-top-15">
+			<img alt="" src="/public/img/unfected.png" width="24px">
+			<h3>Seguro</h3>
+ 				
+ 			<img alt="" src="/public/img/infected.png" width="24px">
+ 			<h3>Inseguro</h3>
 		</div>
 
 	</div>

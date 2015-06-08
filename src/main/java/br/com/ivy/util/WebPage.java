@@ -84,7 +84,7 @@ public class WebPage {
 	
 	private static String linkFormat(String link, String host){
 		
-		if(Pattern.matches("^[a-zA-Z/].*", link) && !link.startsWith("http://")){
+		if(Pattern.matches("^[a-zA-Z/].*", link) && !link.startsWith("http")){
 			link = String.format("http://%s%s", host, (link.startsWith("/") ? link : String.format("/%s",link)));
 		}
 		

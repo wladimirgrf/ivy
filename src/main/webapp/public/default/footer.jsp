@@ -4,7 +4,7 @@
 
 <div class="botton">
 	<div class="scope">
-		<div class="text">Accepted Domain by IVI</div>
-		<div class="extensions">.COM and .BR</div>
+		<div class="text">Hosts aceitos por IVI</div>
+		<div class="extensions">.COM e .BR</div>
 	</div>
 </div>

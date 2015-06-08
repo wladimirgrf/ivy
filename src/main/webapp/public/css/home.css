@@ -71,31 +71,7 @@ div.detail div#d-urls ul li{
 	list-style-type: none;
 }
 
-div#error {
-	background-color: #fdcbc0;
-	border: 2px solid #b2301d;
-	width: 400px;
-	border-radius: 3px;
-}
-
-div#error div.error-header{
-	
-	margin: 8px;
-}
-
-div#error div.error-header h3{
-	font-weight: bold;
-	font-size: 16px;
-}
-
-div#error div.error-header img{
-	float:right;
-}
-
-div#error div.error-msg{
-	float:left;
-	position:relative;
-	font-size: 16px;
-	margin: 8px;
-}
+div.index { background-color: #fff; float: left; height: 27px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
+div.index h3 {float: left; margin-left:5px}
+div.index img {float: left; margin-left: 70px;}
 
