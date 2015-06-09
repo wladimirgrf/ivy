@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 				return;
 			}
 		}
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 	
 	private String parseHash(String password) {

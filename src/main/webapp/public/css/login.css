@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+
+.box-shadow { box-shadow: 3px 3px 3px #777; }
+
+
+form.login {
+    height: 270px;
+    left: 50%;
+    margin-left: -215px;
+    margin-top: -135px;
+    position: absolute;
+    top: 50%;
+    width: 430px;
+    background-color: #452343;
+}
+
+form.login input[type=submit]{
+	width: 100px;
+	height: 40px;
+	background-color: #fec053;
+	left:50%;
+	margin-left: -50px;
+	float: left;
+	position: relative;
+	font-weight: bold;
+	color: #452343;
+}
+
+form.login img.top {
+	margin-left: 145px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+form.login div.user{
+	width: 430px;
+	height: 50px;
+}
+
+form.login div.user img{
+	position: relative;
+	float: left;
+	margin-left: 25px;
+}
+
+form.login div.user input[type=text]{
+	margin: 9px;
+	position: relative;
+	float: left;
+	width: 300px;
+}
+
+form.login div.password{
+	width: 430px;
+	height: 50px;
+}
+
+form.login div.password img{
+	position: relative;
+	float: left;
+	margin-left: 25px;
+}
+
+form.login div.password input[type=password]{
+	margin: 9px;
+	position: relative;
+	float: left;
+	width: 300px;
+}
+

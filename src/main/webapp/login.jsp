@@ -2,16 +2,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="/public/css/login.css" />
 	</head>
 	<body>
-		<form action="/login" method="post">							    
-			<div>
-				<label for="user">Usuario</label>
+		<form action="/login" method="post" class="box-shadow login">
+			<img class="top" src="/public/img/gear.png" width="120px">
+								    
+			<div class="user">
+				<img src="/public/img/user.png">
 				<input type="text" name="user"/>  
-				<label for="password">Senha</label>
-				<input type="password" name="password"/>   	    			
-				<input type="submit" value="Enviar"/>    	
-			</div>			
+			</div>
+			
+			<div class="password">
+				<img src="/public/img/pass.png">
+				<input type="password" name="password"/>
+			</div>
+				 	    			
+			<input type="submit" value="Entrar"/>    	
+						
 		</form>		
 	</body>
 </html>
