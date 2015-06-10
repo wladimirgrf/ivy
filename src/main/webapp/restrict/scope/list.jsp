@@ -2,41 +2,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 						 %>
 <script type="text/javascript">
 	function remove(id) {
-		if (confirm("Tem certeza de que deseja excluir ?")) {			
-			window.location.href = "/restrict/scope?action=delete&id=" + id;
-		}	
+		
+		swal({
+			  title: "Tem certeza de que deseja excluir?",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonColor: "#DD6B55",
+			  confirmButtonText: "Sim, deletar!",
+			  closeOnConfirm: false
+			},
+			function(){
+			  window.location.href = "/restrict/scope?action=delete&id=" + id;
+			}
+		);
 	}
 </script>
-<table>
+<nav class="ym-hlist">
+	<ul>
+		<li class="active">
+			<strong>Template</strong>
+		</li>
+		<li>
+			<a href="/restrict/scope?action=edit">Novo</a>
+		</li>		
+	</ul>
+</nav>
+<table class="list">
 	<thead>
 		<tr>
 			<th>Id</th>
-			<th>Proprietario</th>
-			<th>Pais</th>
-			<th>Ultima atualizaçao</th>
-			<th>Responsavel</th>
-			<th>E-mail</th>
-			<th><a href="/restrict/scope?action=edit">Novo</a></th>			
+			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${list}" var="object">
 			<tr>
 				<td>${object.id}</td>
-				<td>${object.owner}</td>
-				<td>${object.country}</td>
-				<td>${object.changed}</td>
-				<td>${object.person}</td>	
-				<td>${object.email}</td>
 						
-				<td>
+				<td class="td">
 					<a href="/restrict/scope?action=edit&id=${object.id}">Editar</a>
 				</td>	
-				<td>
+				<td class="td">
 					<a href="javascript:remove('${object.id}');">Excluir</a>
 				</td>							
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-<a href="/restrict/preferences.jsp">Voltar</a>

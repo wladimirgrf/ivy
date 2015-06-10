@@ -5,8 +5,24 @@
 		<jsp:include page="/restrict/default/head.jsp"/>
 	</head>
 	<body>
-		<div class="content">
-			<jsp:include page="${content}"/>
+		<div class="ym-wrapper" id="wrapper">
+			<div class="ym-wbox">
+				<div id="header">
+					<img src="/public/img/logo-vertical.png" width="70px">
+				</div>
+				<div class="ym-column">
+					<div class="ym-col1" id="content">
+						<div class="ym-cbox">
+							<jsp:include page="${content}"/>
+						</div>
+					</div>
+					<div class="ym-col3" id="menu">
+						<div class="ym-cbox">
+							<jsp:include page="/restrict/default/menu.jsp"/>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

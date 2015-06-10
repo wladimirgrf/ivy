@@ -47,7 +47,8 @@ public class Login extends HttpServlet {
 			if (user != null) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
-				request.getRequestDispatcher("/restrict/preferences.jsp").forward(request, response);
+				request.setAttribute("content", "/restrict/default/home.jsp");
+				request.getRequestDispatcher("/restrict/default/layout.jsp").forward(request, response);
 				return;
 			}
 		}

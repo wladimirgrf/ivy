@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+
+.ym-wrapper {
+	min-width: 760px;
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+div#content h2{
+	padding: 20px;
+	left: 10%;
+	position: relative;
+}
+
+#header {
+	background-color: #fffdef;
+	padding: 10px;
+}
+
+#header img{
+	left: 50%;
+	margin-left: -35px;
+	position: relative;
+}
+
+#menu {
+	border-right: 2px solid gray;
+	padding-top: 10px;
+}
+
+#menu .ym-cbox {
+	padding: 0 10px 0 0;
+}
+
+#content .ym-cbox {
+	padding: 0 0 0 0px;
+}
+
+table.list {
+	border-top: 0;
+	margin-top: 0;
+	margin-left: 10px;
+	width: 98.8%;
+}
+
+.ym-column {
+display: block;
+overflow: hidden;
+padding-left: 150px; /* column width */
+width: auto;
+}
+.ym-col1 { /* content */
+position: relative;
+float: left;
+width: 100%;
+padding-left: 0;
+}
+.ym-col3 { /* sidebar */
+position: relative;
+float: left;
+width: 150px; /* column width */
+right: 150px; /* column width */
+*right: 0px; /* fix for ie6 & ie7 */
+margin: 0 0 0 -100%;
+}
+
+td.td{    
+    padding: 10px;
+    text-align: end;
+}
+
+.ym-form{
+    background: none repeat scroll 0 0 #F4F4F4;    
+    border: 2px solid #FFFFFF;
+    margin: 10px 1px 10px 10px;
+    padding: 0;
+}
+
+.ym-form div.ym-fbox-button {
+	background: none repeat scroll 0 0 #F4F4F4;    
+    border-top: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+.ym-form input, .ym-form input, .ym-form textarea, .ym-form select { 
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.ym-hlist ul { 
+    padding: 10px;
+}
+
+.ym-form div.ym-fbox-select, .ym-form div.ym-fbox-check {
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.ym-form label{
+	margin: 5px 0px 5px 0px;
+		
+}
+
+.red {
+    color: red;
+}
+#pp,#cp,#np {
+    height: 20px;
+    float: left;
+    margin: 6px 0;
+    text-align: center;
+}
+#pp {
+    width: 150px;
+}
+#cp {
+    width: 250px;
+}
+#np {
+    width: 150px;
+    float: none;
+    margin-left: 400px;
+}
+
+.ym-button-override{
+	margin: 1px 0;
+	padding: 0 20px;
+	font-family: arial, helvetica;
+	font-size: 15px;
+}

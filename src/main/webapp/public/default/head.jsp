@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 						 %>
 
-<title>Ivi - Vulnerability Scan</title>	
+<title>IVI</title>	
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -15,9 +15,9 @@
 
 
 <!-- sweetalert -->
-<script src="/frameworks/js/sweetalert.min.js"></script>
+<script src="/frameworks/sweetalert/js/sweetalert.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/frameworks/css/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="/frameworks/sweetalert/css/sweetalert.css">
 <!-- sweetalert -->
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
