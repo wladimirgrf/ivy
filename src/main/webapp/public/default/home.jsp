@@ -61,10 +61,10 @@
 			<div class="last-targets"></div>
 		</div>
 		<div class="index margin-top-15">
-			<img alt="" src="/public/img/unfected.png" width="24px">
+			<img alt="" src="/public/img/infected.png" width="24px">
 			<h3>Vulnerável</h3>
  				
- 			<img alt="" src="/public/img/infected.png" width="24px">
+ 			<img alt="" src="/public/img/unfected.png" width="24px">
  			<h3>Não Vulnerável</h3>
 		</div>
 	</div>

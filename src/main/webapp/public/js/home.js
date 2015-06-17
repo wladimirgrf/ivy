@@ -43,7 +43,7 @@ function listTable(data){
 		targets.append(
 			$('<div>').append(
 				$('<div>').addClass("host").append($("<a>").attr("href","javascript:getTarget(" + data[i].id + ");").html(data[i].host)),
-				$('<div>').addClass("result").append((data[i].security ? unfected : infected))
+				$('<div>').addClass("result").append((data[i].security ? infected : unfected))
              ).addClass("target")
         )
 	}

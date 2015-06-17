@@ -8,7 +8,7 @@
 		<div class="ym-wrapper" id="wrapper">
 			<div class="ym-wbox">
 				<div id="header">
-					<img src="/public/img/logo-vertical.png" width="70px">
+					<img src="/public/img/logo-horizontal.png" width="110px">
 				</div>
 				<div class="ym-column">
 					<div class="ym-col1" id="content">

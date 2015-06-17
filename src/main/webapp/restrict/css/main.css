@@ -14,13 +14,13 @@ div#content h2{
 }
 
 #header {
-	background-color: #fffdef;
+	background-color: #f0f0ec;
 	padding: 10px;
 }
 
 #header img{
 	left: 50%;
-	margin-left: -35px;
+	margin-left: -55px;
 	position: relative;
 }
 
