@@ -14,7 +14,7 @@ public class TargetScan {
 	
 	private static final int linksNumer = 3;
 	
-	private static final int tryLimit = 50;
+	private static final int tryLimit = 30;
 	
 	private int tryNumber = 0;
 	
@@ -28,7 +28,10 @@ public class TargetScan {
 		Set<String> sampling = new HashSet<String>();
 		
 		do{
-			links.addAll(WebPage.linkChecker(address));
+			try{
+				links.addAll(WebPage.linkChecker(address));
+			}catch(Exception e){}
+			
 			links.removeAll(checked);
 			
 			for (String link : links) {

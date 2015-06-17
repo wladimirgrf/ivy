@@ -34,8 +34,6 @@ function getTarget(id){
 }
 
 function listTable(data){
-	var infected = $("<img>").attr("src", "/public/img/infected.png").width("24px");
-	var unfected = $("<img>").attr("src", "/public/img/unfected.png").width("24px");
 	
 	var targets = $("div.last-targets").empty();
 	
@@ -43,7 +41,10 @@ function listTable(data){
 		targets.append(
 			$('<div>').append(
 				$('<div>').addClass("host").append($("<a>").attr("href","javascript:getTarget(" + data[i].id + ");").html(data[i].host)),
-				$('<div>').addClass("result").append((data[i].security ? infected : unfected))
+				$('<div>').addClass("result").append((data[i].security ? 
+						$("<img>").attr("src", "/public/img/infected.png").width("24px") 
+						: 
+						$("<img>").attr("src", "/public/img/unfected.png").width("24px")))
              ).addClass("target")
         )
 	}
