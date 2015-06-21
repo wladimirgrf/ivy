@@ -11,8 +11,9 @@ public abstract class Injection {
 	protected String[] exceptions;
 	
 	public boolean exploit(String link) throws MalformedURLException{
-		
-		return getResult(WebPage.getContent(new URL(String.format("%s=%s", link.split("=")[0], code))));
+		try{
+			return getResult(WebPage.getContent(new URL(String.format("%s=%s", link.split("=")[0], code))));
+		}catch(Exception e){ return false; }
 	}
 	
 	public boolean getResult(String content){

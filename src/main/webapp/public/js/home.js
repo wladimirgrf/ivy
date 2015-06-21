@@ -56,6 +56,7 @@ function analyze(path){
 		cache : false,
 		dataType: "json",
 		beforeSend: function(){
+			$("div.detail").hide();
 			$("div.about").hide();
 			$('.loader').show(); 
 		},
