@@ -32,13 +32,13 @@
 			<div class="title">Proprietário</div>
 			<div id="d-owner" class="sub-title"></div>
 			
-			<div class="title">Responsavel</div>
+			<div class="title">Responsável</div>
 			<div id="d-person" class="sub-title"></div>
 			
 			<div class="title">E-mail</div>
 			<div id="d-email" class="sub-title"></div>
 		
-			<div class="title">Ultima atualização.</div>
+			<div class="title">Última atualização.</div>
 			<div id="d-changed" class="sub-title"></div>
 			
 			<div class="title">Links Testados</div>
