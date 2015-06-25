@@ -10,12 +10,13 @@
 	
 		<div class="about">
 			<p class="title">Sobre</p>
-			<p>IVI é sistema que tem por objetivo analise de vulnerabilidades em outros sistemas web.</p>
-			<p>Esse projeto oferece uma "auditoria" livre de custos, afim de minimizar erros em outro sistemas.</p>
-			<p>Para uma alanise basta inserir seu domínio no campo de entrada ao lado e aguardar o resultado.</p>
-			<p>Ao lado temos também a lista de domínios já analisados pelo nosso sistema.</p>
+	
+			<p>IVI é um sistema que tem por objetivo a análise de vulnerabilidades em outros sistemas web.</p>
+			<p>Esse projeto oferece uma "auditoria" livre de custos, a fim de minimizar erros em outros sistemas.</p>
+			<p>Para uma análise, basta inserir seu domínio no campo de entrada ao lado e aguardar o resultado.</p>
+			<p>Ao lado temos também a lista de domínios já analisados pelo sistema.</p>
 			</br>
-			<p class="red bold">Atenção: O teste cobrem apenas erros básicos que coloquem sua aplicação em risco de ataques maliciosos.</p>
+			<p class="red bold">Atenção: Os testes cobrem apenas erros básicos que colocam sua aplicação  em risco de ataques maliciosos.</p>
 		</div>
 	
 		<div class="detail">
