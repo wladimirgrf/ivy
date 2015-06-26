@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.HashSet;
@@ -24,8 +25,8 @@ public class WebPage {
 
 	    try{
 	        reachable = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-	    } catch (UnknownHostException noInternetConnection){}
-		
+	    } catch (Exception e){}
+
 		return reachable;
 	}
 	
