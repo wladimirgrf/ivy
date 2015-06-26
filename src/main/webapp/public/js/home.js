@@ -58,10 +58,13 @@ function analyze(path){
 		beforeSend: function(){
 			$("div.detail").hide();
 			$("div.about").hide();
-			$('.loader').show(); 
+			$('.loader').show();
+			
+			$('#btnAnalyze').attr("disabled", true);
 		},
 		complete: function(){ 
-			$('.loader').hide(); 
+			$('.loader').hide();
+			$('#btnAnalyze').removeAttr("disabled");;
 		},
 		success : function(data) {
 			if (data != null) {
