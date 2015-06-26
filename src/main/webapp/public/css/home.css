@@ -12,7 +12,7 @@ div.targets div.header-targets h1  { float: left; background-color: #ecd073; hei
 div.targets div.header-targets h1.header-host{ width: 277px; text-align: left;  padding-left:10px; border-right: 1px solid #fff;}
 div.targets div.header-targets h1.header-result { width: 112px; text-align: center; }
 
-div.targets div.last-targets { float: left; width: 400px; height: 295px; overflow-y:auto; position: relative; }
+div.targets div.last-targets { float: left; width: 400px; height: 295px; overflow-y:auto; position: relative; overflow-x: hidden;  }
 
 div.targets div.last-targets div.target { float: left; width: 400px; height: 40px; border-bottom: 1px solid #e8e8ea; }
 
