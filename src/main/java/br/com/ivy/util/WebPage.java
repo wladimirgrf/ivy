@@ -1,7 +1,6 @@
 package br.com.ivy.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -15,61 +14,63 @@ public class WebPage {
 	
 	private WebPage() {}
 	
-	public static boolean isReachable(URL host) throws IOException{
+	public static boolean isReachable(URL host) {
 		boolean reachable = false;
 		
-		HttpURLConnection connection = (HttpURLConnection) host.openConnection();
-	    connection.setRequestMethod("HEAD");
-
 	    try{
+	    	HttpURLConnection connection = (HttpURLConnection) host.openConnection();
+	    	connection.setRequestMethod("HEAD");
 	        reachable = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-	    } catch (Exception e){}
-
+	        connection.disconnect();
+	        
+	    } catch (Exception e){ 
+	    	e.printStackTrace(); 
+	    }
 		return reachable;
 	}
 	
-	public static URL getHost(String domain) throws MalformedURLException{
+	public static URL getHost(String domain) {
+		
+		URL url = null;
 		
 		if (!domain.matches("^(http|https)://.*")) domain = String.format("http://%s", domain);
 		
 		if(domain.contains("www")) domain = domain.replace("www.", "");
 		
-		return new URL(domain);
+		try {
+			url = new URL(domain);
+		} catch (MalformedURLException e) {
+			e.printStackTrace(); 
+		}
+		return url;
 	}
 	
 	public static String getContent(URL host){
 		try{
-			HttpURLConnection connection = (HttpURLConnection) host.openConnection();
-	
-			HttpURLConnection.setFollowRedirects(false);
-			connection.setRequestMethod("GET");
-	
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-	
 			String line;
 			StringBuilder content = new StringBuilder();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(host.openStream(), "UTF-8"));
 	
-			while ((line = reader.readLine()) != null) content.append(String.format("%s\n",line));
-	
+			while ((line = reader.readLine()) != null) {
+				content.append(String.format("%s\n",line));
+			}
 			reader.close();
-			connection.disconnect();
 	
 			return content.toString();
-		}catch(Exception e){ return null; }
+			
+		}catch(Exception e){ 
+			e.printStackTrace();
+			return null; 
+		}
 	}
 	
-	
-	public static Set<String> linkChecker(URL host) throws IOException{
-		
+	public static Set<String> linkChecker(URL host) {
+		String content 	  = getContent(host);
+		String[] lines 	  = content.split("\n");
 		Set<String> links = new HashSet<String>();
-
-		String content = getContent(host);
-
-		String[] lines = content.split("\n");
-
+		
 		for (int i=0; i < lines.length; i++) {
-			
-			if(!lines[i].contains("<a")) continue;
+			if(!lines[i].contains("<a") || !lines[i].contains("href")) continue;
 			
 			Matcher matcher = Pattern.compile("href=\"(.*?)\"").matcher(lines[i]);
 			
@@ -82,13 +83,13 @@ public class WebPage {
 	}
 	
 	private static String linkFormat(String link, String host){
-		
 		if(Pattern.matches("^[a-zA-Z/].*", link) && !link.startsWith("http")){
 			link = String.format("http://%s%s", host, (link.startsWith("/") ? link : String.format("/%s",link)));
 		}
+		link = link.replace(" ", "%20");
 		
-		if(!link.contains(host)) link = null;
-		
+		if(!link.contains(host) || link.contains("javascript")) link = null;
+	
 		return link;
 	}
 }

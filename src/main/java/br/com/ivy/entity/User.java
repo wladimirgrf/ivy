@@ -19,7 +19,6 @@ import org.hibernate.search.annotations.Indexed;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User implements Serializable {
 
-
 	private static final long serialVersionUID = -1030932318394851201L;
 
 	@Id

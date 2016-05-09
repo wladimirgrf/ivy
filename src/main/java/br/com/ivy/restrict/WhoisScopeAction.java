@@ -7,8 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import br.com.ivy.entity.WhoisScope;
 import br.com.ivy.implementation.WhoisScopeImplementation;
 
-
-
 @WebServlet("/restrict/scope")
 public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 

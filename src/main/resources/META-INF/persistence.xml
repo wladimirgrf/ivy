@@ -6,7 +6,6 @@
 	<persistence-unit name="Ivy" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.com.ivy.entity.Target</class>
-		<class>br.com.ivy.entity.Url</class>
 		<class>br.com.ivy.entity.WhoisScope</class>
 		<class>br.com.ivy.entity.User</class>
 	

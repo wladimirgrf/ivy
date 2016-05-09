@@ -1,15 +1,11 @@
 package br.com.ivy.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -24,7 +20,6 @@ import org.hibernate.search.annotations.Indexed;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Target implements Serializable {
 
-	
 	private static final long serialVersionUID = 2963284138834087179L;
 
 	@Id
@@ -32,16 +27,24 @@ public class Target implements Serializable {
 	private Long id;
 	
 	@Field
-	private String host, owner, person, email, country, changed;
+	private String host;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Url> urls;
+	private String owner;
 	
-	@Field
+	private String person;
+	
+	private String email;
+	
+	private String country;
+	
+	private String changed;
+
+	private String url;
+	
 	private long lastScan;
 	
 	@Field
-	private boolean security;
+	private boolean safe;
 	
 
 	public Long getId() {
@@ -100,14 +103,14 @@ public class Target implements Serializable {
 		this.changed = changed;
 	}
 
-	public List<Url> getUrls() {
-		return urls;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setUrls(List<Url> urls) {
-		this.urls = urls;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	
+
 	public long getLastScan() {
 		return lastScan;
 	}
@@ -115,15 +118,15 @@ public class Target implements Serializable {
 	public void setLastScan(long lastScan) {
 		this.lastScan = lastScan;
 	}
-
-	public boolean isSecurity() {
-		return security;
-	}
-
-	public void setSecurity(boolean security) {
-		this.security = security;
-	}
 	
+	public boolean isSafe() {
+		return safe;
+	}
+
+	public void setSafe(boolean safe) {
+		this.safe = safe;
+	}
+
 	@Override
 	public int hashCode() {
         int hash = 0;
