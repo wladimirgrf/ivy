@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 
 import br.com.ivy.util.WebPage;
 
-@WebServlet("/url-mapping")
-public class UrlMapping extends API{
+@WebServlet("/api/url-mapping")
+public class UrlMappingAPI extends API{
 
 	private static final long serialVersionUID = -4207305214306807800L;
 
@@ -20,7 +20,7 @@ public class UrlMapping extends API{
 	
 	private URL host;
 	
-	private long linksNumer = 5;
+	private int linksNumber = 5;
 	
 	private String character = "";
 	
@@ -30,30 +30,22 @@ public class UrlMapping extends API{
 	
 	private Set<String> sampling;
 	
-	public UrlMapping(){
+	public UrlMappingAPI(){
 		links 	 = new HashSet<String>();
 		checked  = new HashSet<String>();
 		sampling = new HashSet<String>();
 	}
 	
 	public void execute(){
-		if (request.getParameter("character") != null) {
-			character = request.getParameter("character");
+		String object = "ERROR";
+		
+		setParameters();
+		
+		if(host != null && WebPage.isReachable(host)){
+			object = new Gson().toJson(map());
 		}
-		if (request.getParameter("host") != null) {
-			host = WebPage.getHost(request.getParameter("host")) ;
-		}
-		if (request.getParameter("linksNumer") != null) {
-			try {
-				long number = Integer.parseInt(request.getParameter("linksNumer"));
-				
-				if(number <= 20) linksNumer = number;
-				
-			} catch (Exception e) { }
-		}
-		if(host !=null && WebPage.isReachable(host)){
-			request.setAttribute("object", new Gson().toJson(map()));
-		}
+		
+		request.setAttribute("object", object);
 	}
 	
 	private Set<String> map() {
@@ -78,8 +70,23 @@ public class UrlMapping extends API{
 		}
 		for (String link : links) {
 			if(character.isEmpty() || link.contains(character)) sampling.add(link);
-			if(sampling.size() > linksNumer) break;
+			if(sampling.size() > linksNumber) break;
 		}
 		return sampling;
+	}
+	
+	private void setParameters() {
+		if (request.getParameter("character") != null) {
+			character = request.getParameter("character");
+		}
+		if (request.getParameter("host") != null) {
+			host = WebPage.getHost(request.getParameter("host")) ;
+		}
+		if (request.getParameter("linksNumer") != null) {
+			try {
+				int number = Integer.parseInt(request.getParameter("linksNumber"));
+				if(number <=20) linksNumber = number;	
+			} catch (Exception e) { }
+		}
 	}
 }

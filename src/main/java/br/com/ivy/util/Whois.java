@@ -1,7 +1,6 @@
 package br.com.ivy.util;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
@@ -15,20 +14,30 @@ public class Whois {
 	
 	private Whois() {}
 	
-	public static Target get(String host) throws IOException, InterruptedException{
+	public static Target get(String host) {
+		
+		Target target = null;
 		
 		String document = getDocument(host, defaultWhoisServer);
 		
-		String extension = getElement("domain", document);
+		if(document != null){
+			String extension = getElement("domain", document);
+			
+			document = getDocument(host, null);
+			
+			if(document != null && extension != null){
+				target = mappingTarget(document, host, new WhoisScopeImplementation().get(extension));
+			}
+		}
 		
-		document = getDocument(host, null);
-		
-		return mappingTarget(document, host, new WhoisScopeImplementation().get(extension));
+		return target;
 	}
 	
-	private static String getDocument(String host, String whoisServer) throws InterruptedException, IOException{
+	private static String getDocument(String host, String whoisServer) {
 		
 		StringBuilder command = new StringBuilder();
+		
+		String result = null;
 		
 		command.append("whois ");
 		
@@ -36,21 +45,29 @@ public class Whois {
 				
 		command.append(host);
 		
-		Process process = Runtime.getRuntime().exec(command.toString());
+		try {
+			
+			Process process = Runtime.getRuntime().exec(command.toString());
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "ISO-8859-1"));
+			
+			StringBuilder document = new StringBuilder();
+			
+			String line = "";
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream(), "ISO-8859-1"));
+	        while((line = reader.readLine()) != null) {
+	        	document.append(line + "\n");
+	        }
+	        
+	        process.destroy();
+	        
+	        result = document.toString();
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		StringBuilder document = new StringBuilder();
-		
-		String line = "";
-
-        while((line = reader.readLine()) != null) {
-        	document.append(line + "\n");
-        }
-
-		process.destroy();  
-		      
-		return document.toString();
+		return result;
 	}
 	
 	private static String getElement(String element, String document){
@@ -71,11 +88,9 @@ public class Whois {
 	}
 	
 	private static Target mappingTarget(String document, String host, WhoisScope scope){
-		
 		Target target = null;
 		
 		if(scope != null) {
-			
 			if(getElement(scope.getOwner(), document) != null){
 				target = new Target();
 				

@@ -29,23 +29,26 @@ public class Target implements Serializable {
 	@Field
 	private String host;
 	
+	@Field
+	private String country;
+	
+	@Field
+	private String url;
+	
+	@Field
+	private String tags;
+	
 	private String owner;
 	
 	private String person;
 	
 	private String email;
 	
-	private String country;
-	
 	private String changed;
 
-	private String url;
-	
 	private long lastScan;
 	
-	@Field
 	private boolean safe;
-	
 
 	public Long getId() {
 		return id;
@@ -61,6 +64,30 @@ public class Target implements Serializable {
 
 	public void setHost(String host) {
 		this.host = host;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 
 	public String getOwner() {
@@ -87,28 +114,12 @@ public class Target implements Serializable {
 		this.email = email;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getChanged() {
 		return changed;
 	}
 
 	public void setChanged(String changed) {
 		this.changed = changed;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public long getLastScan() {
@@ -118,7 +129,7 @@ public class Target implements Serializable {
 	public void setLastScan(long lastScan) {
 		this.lastScan = lastScan;
 	}
-	
+
 	public boolean isSafe() {
 		return safe;
 	}

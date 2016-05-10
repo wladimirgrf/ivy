@@ -9,16 +9,29 @@ import com.google.gson.Gson;
 
 import br.com.ivy.util.WebPage;
 
-@WebServlet("/injection")
-public class Injection extends API{
+@WebServlet("/api/injection")
+public class InjectionAPI extends API{
 	
 	private static final long serialVersionUID = 4804775703220751697L;
 
 	private String code =  "'";
 	
-	private String link = "";
+	private URL link = null;
 	
 	private String[] exceptions = new String[]{"erro","sql","select"};
+	
+	
+	public void execute(){
+		String object = "ERROR";
+		
+		setParameters();
+
+		if(link != null && WebPage.isReachable(link)){
+			object = new Gson().toJson(exploit(link.getPath()));
+		}
+
+		request.setAttribute("object", object);
+	}
 	
 	public boolean exploit(String link) {
 		boolean vulnerable = false;
@@ -34,25 +47,6 @@ public class Injection extends API{
 		return vulnerable;
 	}
 	
-	public void execute(){
-		if (request.getParameter("code") != null) {
-			code = request.getParameter("code");
-		}
-		if (request.getParameter("exceptions") != null) {
-			exceptions = request.getParameter("exceptions").split(",");
-		}
-		if (request.getParameter("link") != null) {
-			link = request.getParameter("link");
-		}
-		try {
-			if(!link.isEmpty() && WebPage.isReachable(new URL(link))){
-				request.setAttribute("object", new Gson().toJson(exploit(link)));
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	private boolean getResult(String content){
 		int error = 0;
 		boolean result = false;
@@ -65,5 +59,19 @@ public class Injection extends API{
 		if(error >= 2) result = true;
 		
 		return result;
+	}
+	
+	private void setParameters() {
+		if (request.getParameter("code") != null) {
+			code = request.getParameter("code");
+		}
+		if (request.getParameter("exceptions") != null) {
+			exceptions = request.getParameter("exceptions").split(",");
+		}
+		if (request.getParameter("link") != null) {
+			try {
+				link = new URL(request.getParameter("link"));
+			} catch (MalformedURLException e) { }
+		}
 	}
 }
