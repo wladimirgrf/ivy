@@ -16,7 +16,7 @@ public class InjectionAPI extends API{
 
 	private String code =  "'";
 	
-	private URL link = null;
+	private String link = "";
 	
 	private String[] exceptions = new String[]{"erro","sql","select"};
 	
@@ -26,22 +26,23 @@ public class InjectionAPI extends API{
 		
 		setParameters();
 
-		if(link != null && WebPage.isReachable(link)){
-			object = new Gson().toJson(exploit(link.getPath()));
-		}
-
+		object = new Gson().toJson(exploit());
 		request.setAttribute("object", object);
 	}
 	
-	public boolean exploit(String link) {
+	public boolean exploit() {
 		boolean vulnerable = false;
 		
 		if(link.contains("=")){
+			URL url = null;
+			
 			try {
-				String content = WebPage.getContent(new URL(String.format("%s=%s", link.split("=")[0], code)));
-				if (content != null && !content.isEmpty()) vulnerable = getResult(content);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
+				url = new URL(String.format("%s=%s", link.split("=")[0], code));
+			} catch (MalformedURLException e) { }
+			
+			if(url != null && WebPage.isReachable(url)){
+				String content = WebPage.getContent(url);
+				vulnerable = getResult(content);
 			}
 		}
 		return vulnerable;
@@ -69,9 +70,7 @@ public class InjectionAPI extends API{
 			exceptions = request.getParameter("exceptions").split(",");
 		}
 		if (request.getParameter("link") != null) {
-			try {
-				link = new URL(request.getParameter("link"));
-			} catch (MalformedURLException e) { }
+			link = request.getParameter("link");
 		}
 	}
 }

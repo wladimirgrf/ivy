@@ -25,6 +25,12 @@ public class TargetAPI extends API {
 	
 	private URL host;
 	
+	private String url;
+	
+	private String tags;
+	
+	private Boolean safe;
+	
 	private Target target;
 	
 	private TargetImplementation implementation;
@@ -43,7 +49,9 @@ public class TargetAPI extends API {
 		
 		if(host != null && WebPage.isReachable(host)){
 			target = implementation.get(this.host.getHost());
-			sincronize(target);
+			
+			sincronize();
+			
 			if(target != null) id = target.getId();
 		}
 	
@@ -56,34 +64,56 @@ public class TargetAPI extends API {
 		request.setAttribute("object", object);
 	}
 	
-	private void sincronize(Target target){
+	private void sincronize(){
+		boolean isNew = false;
+		
 		if(target == null){
+			isNew = true;
 			target = Whois.get(host.getHost());
+		}	
+		
+		if(url != null){
+			target.setUrl(url);
+		}
+		if(tags != null){
+			target.setTags(tags);
+		}
+
+		target.setSafe(safe);
+
+		if(isNew){
 			target.setLastScan(getCurrentDate());
-			target.setSafe(true);
 			
 			implementation.persist(target);
 			
-		} else if (getCurrentDate() - target.getLastScan() >= week){
+		} else if((getCurrentDate() - target.getLastScan()) >= week) {
 			target.setLastScan(getCurrentDate());
-			target.setSafe(true);
 			
 			implementation.update(target);
 		}
 	}
 	
-	public long getCurrentDate(){
-		return Calendar.getInstance().getTimeInMillis();
-	}
-	
 	private void setParameters(){
+		if(request.getParameter("tags") != null){
+			tags = request.getParameter("tags");
+		}
+		if(request.getParameter("url") != null){
+			url = request.getParameter("url");
+		}
+		if(request.getParameter("host") != null){
+			host = WebPage.getHost(request.getParameter("host"));
+		}
+		if(request.getParameter("safe") != null){
+			safe = Boolean.parseBoolean(request.getParameter("safe"));
+		}
 		if (request.getParameter("id") != null) {
 			try {
 				id = Integer.parseInt(request.getParameter("id"));
 			} catch (Exception e) { }
 		}
-		if(request.getParameter("host") != null){
-			host = WebPage.getHost(request.getParameter("host"));
-		}
+	}
+	
+	public long getCurrentDate(){
+		return Calendar.getInstance().getTimeInMillis();
 	}
 }
