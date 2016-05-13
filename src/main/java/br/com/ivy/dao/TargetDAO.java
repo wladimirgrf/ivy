@@ -13,6 +13,11 @@ public class TargetDAO extends DAO<Target>{
 		return Target.class;
 	}
 	
+	@Override
+	public String[] getSearchFields() {
+		return new String[] {"host", "country", "url", "tags"};
+	}
+	
 	private static TargetDAO instance;
 	
 	public static TargetDAO getInstance() {

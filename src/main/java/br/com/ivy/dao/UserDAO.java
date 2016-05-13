@@ -19,6 +19,11 @@ public class UserDAO extends DAO<User> {
 		return User.class;
 	}
 	
+	@Override
+	public String[] getSearchFields() {
+		return new String[] {"user"};
+	}
+	
 	private static UserDAO instance;
 	
 	public static UserDAO getInstance() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.ivy.dao.TargetDAO;
 import br.com.ivy.entity.Target;
+import br.com.ivy.util.ResultHolder;
 
 
 public class TargetImplementation {
@@ -32,6 +33,10 @@ public class TargetImplementation {
 
 	public void remove(Target target) {
     	dao.delete(target);
+    }
+	
+	public ResultHolder<Target> search(String query, int page, int pagesize) {
+    	return dao.search(query, page, pagesize);
     }
     
 	public Target get(String host) {

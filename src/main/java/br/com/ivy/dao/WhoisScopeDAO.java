@@ -13,6 +13,11 @@ public class WhoisScopeDAO extends DAO<WhoisScope>{
 		return WhoisScope.class;
 	}
 	
+	@Override
+	public String[] getSearchFields() {
+		return new String[] {"id", "owner", "person", "email", "country"};
+	}
+	
 	private static WhoisScopeDAO instance;
 	
 	public static WhoisScopeDAO getInstance() {
