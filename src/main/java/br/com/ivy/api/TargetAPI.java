@@ -60,7 +60,7 @@ public class TargetAPI extends API {
 				page 	 = (page > 0 ? page : 1); 
 				pagesize = (pagesize > 0 ? pagesize : 5);
 				
-				object = new Gson().toJson(implementation.search(query, page, pagesize));
+				object = new Gson().toJson(implementation.search(query, page, pagesize).getResult());
 				
 			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
 				save(); 
