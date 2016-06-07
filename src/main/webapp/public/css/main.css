@@ -15,46 +15,25 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
 
-html, body { float: left; width: 100%; height: 100%; padding: 0; margin: 0; z-index: 1; font-family: Metrophobic; font-size: 1em; background-color: #f9fafa; }
+html, body { float: left; width: 100%; height: 100%; padding: 0; margin: 0; z-index: 1; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 1em; background-color: #f5f8fa; }
 
-div.content { margin: 0 auto; width: 1024px;}
-.red {color: red;}
+div.content { margin: 0 auto; width: 590px;}
+
 .bold {font-weight: bold;}
 .show { display: block; }
 .hide { display: none; }
 .box-shadow { box-shadow: 3px 3px 3px #777; }
-.padding-top-15 { float: left; padding-top: 15px; }
-.padding-bottom-15 { float: left; padding-bottom: 15px; }
-.padding-left-15 { float: left; padding-left: 15px; }
-.padding-15 { float: left; padding: 15px; }
-.margin-top-15 { float: left; margin-top: 15px; }
-.margin-left-15 { float: left; margin-left: 15px; }
-.margin-bottom-15 { float: left; margin-bottom: 15px; }
-.margin-15 { float: left; margin: 15px; }
+
 
 .box { background-color: #fff; }
-.box-1024 { float: left; width: 1024px; }
-.box-439 { float: left; width: 439px; }
-.box-540 { float: left; width: 540px; }
+.box-590 { float: left; width: 590px; }
 
-body > div.header { float: left; width: 100%; background-color: #452343; z-index: 2; box-shadow: 3px 3px 3px #777; }
 
-body > div.header div.menu { width: 1024px; height: 36px; margin: 0 auto; padding: 15px 0; position: relative; }
+body > div.header { float: left; width: 100%; background-color: #ffffff; z-index: 2; box-shadow: 2px 2px 2px #777; height: 46px; }
+
+body > div.header div.menu-left { width: auto; float:left; position: relative; }
+body > div.header div.menu-right { width: auto; float:right; position: relative; }
+
 body > div.header div.menu a.logo { float: left; cursor: pointer;  left: 50%; margin-left: -69px; position:relative;}
 
-div.footer { float: left; width: 100%; border-bottom: 0.1em solid black; background-color: #452343; margin-top: 15px; box-shadow: 0px 3px 3px 3px #777; margin-bottom: 0;}
-div.footer div.left { float: left; width: 25%; border-right: 0.1em solid #fff; padding-bottom: 1%; }
-div.footer div.left img { float: left; margin: 35% 0 0 30%; }
-div.footer div.left div { float: left; font-size: 1em; line-height: 1.5em; margin: 2% 0 0 27%; width: 60%; color: #fff;}
-div.footer div.left div br { float: left; }
-div.footer div.left div.host { color: white; } 
-div.footer div.right { float: left; width: 74%; padding-bottom: 1%; }
-div.footer div.col { float: left; margin-left: 2%; width: 30%; }
-div.footer div.col h1 { float: left; margin-top: 5%; width: 100%; }
-div.footer div.col h1 a { color: #ecd073; float: left; font-size: 20px; text-decoration: none; }
-div.footer div.col ul { float: left; list-style: outside none none; width: 100%; }
-div.footer div.col ul li { float: left; padding: 5% 0 0 10%; width: 90%; }
-div.footer div.col ul li a { color: #fff; float: left; font-size: 16px; text-decoration: none; }
-div.footer div.col h1.top { float: left; width: 100%; }
-div.footer div.col h1.top a { float: left; color: #f03e22; font-size: 0.8em; }
 

@@ -1,53 +1,68 @@
 $(function() {
-	
-	$("div.detail").hide();
-	
-	$('.loader').hide(); 
-	
-	listTargets();
-	
-	$("#btnAnalyze").click(function() {
-		analyze("/exploit?domain=" + $("#domain").val());
-	});
-	
-	$("#close").click(function() { 
-		$("div.detail").hide();
-		$("div.about").show();
-	});
+	globalHosts();
 });
 
-function listTargets(){
+function globalHosts(){
 	$.ajax({
-		url : "/target",
+		url : "/api/target",
 		cache : false,
 		dataType : "json",
 		success : function(data) {
 			if (data != null) {
-				listTable(data);
+				addPage(data);
 			}
 		}
 	});
 }
 
-function getTarget(id){
-	analyze("/target?id=" + id);
-}
-
-function listTable(data){
-	
-	var targets = $("div.last-targets").empty();
-	
+function addPage(data){
+	var itens = $("div.itens").empty();
 	for(var i = 0; i < data.length; i++){
-		targets.append(
+		itens.append(
 			$('<div>').append(
-				$('<div>').addClass("host").append($("<a>").attr("href","javascript:getTarget(" + data[i].id + ");").html(data[i].host)),
-				$('<div>').addClass("result").append((data[i].security ? 
-						$("<img>").attr("src", "/public/img/infected.png").width("24px") 
-						: 
-						$("<img>").attr("src", "/public/img/unfected.png").width("24px")))
-             ).addClass("target")
+				$('<div>').append(
+					$('<a>').attr("href", data[i].host).append(
+						$('<strong>').addClass("host").html(data[i].host)
+					),
+					$('<span>').addClass("location").html(data[i].country),
+					$('<span>').addClass("time").html(getTimeStamp(Number(data[i].lastScan)))
+				).addClass("bloc-info"),
+				$('<div>').addClass("url " + (!data[i].safe ? "url-red" : "url-green")).append(
+					$('<a>').attr("href", data[i].url).html(data[i].url)	
+				),
+				$('<div>').addClass("search-tags").append(formatTags(data[i].tags))
+             ).addClass("item")
         )
 	}
+}
+
+function getTimeStamp(time){
+	var date = new Date().getTime();
+	var timestamp = "";
+	
+	switch (true) {
+		case ((date - time) <= (10 * 60 * 1000)):
+			timestamp = Math.round((date - time) / (60 * 1000)) + " min";
+            break;
+        case ((date - time) <= (48 * 60 * 60 * 1000)):
+        	timestamp = Math.round((date - time) / (60 * 60 * 1000)) + " h";
+            break;
+        default:
+        	timestamp = Math.round((date - time) / (24 * 60 * 60 * 1000)) + " days";
+	}
+	return timestamp;
+}
+
+function formatTags(line){
+	if(line == null || line == "") return;
+	
+	var tags = line.split(" ");
+	var result = $("<div>");
+	
+	for(var i = 0; i < tags.length; i++){
+		result.append($("<a>").attr("href", "/search?query=" + tags[i]).html("#"+tags[i]));
+	}
+	return result;
 }
 
 function analyze(path){
