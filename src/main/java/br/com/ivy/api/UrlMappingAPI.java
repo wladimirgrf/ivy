@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.servlet.annotation.WebServlet;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import br.com.ivy.util.WebPage;
 
@@ -18,8 +17,6 @@ public class UrlMappingAPI extends API{
 	private static final long serialVersionUID = -4207305214306807800L;
 
 	private static final long tryLimit = 50;
-	
-	Gson gson;
 	
 	private URL host;
 	
@@ -37,8 +34,6 @@ public class UrlMappingAPI extends API{
 		links 	 = new HashSet<String>();
 		checked  = new HashSet<String>();
 		sampling = new HashSet<String>();
-		
-		gson = new GsonBuilder().create();
 	}
 	
 	public void execute(){
@@ -47,7 +42,7 @@ public class UrlMappingAPI extends API{
 		setParameters();
 		
 		if(host != null && WebPage.isReachable(host)){
-			object = gson.toJson(map());
+			object = new Gson().toJson(map());
 		}
 		
 		request.setAttribute("object", object);

@@ -49,7 +49,7 @@ public class WebPage {
 		try{
 			String line;
 			StringBuilder content = new StringBuilder();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(host.openStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(host.openStream(), "UTF-8"));
 	
 			while ((line = reader.readLine()) != null) {
 				content.append(String.format("%s\n",line));
@@ -106,11 +106,9 @@ public class WebPage {
 		    {"\\u003F", "?"},
 		    {"\\u003f", "?"}
 		};
-		
 		for(String[] unicode: unicodes){
 			object = object.replace(unicode[0], unicode[1]);
 		}
-		
 		return object;
 	}
 }
