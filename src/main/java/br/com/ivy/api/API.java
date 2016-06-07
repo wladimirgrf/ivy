@@ -40,6 +40,7 @@ public abstract class API extends HttpServlet{
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) { }
+		
 		this.request  = request;
 		this.response = response;
 	}

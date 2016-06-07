@@ -49,7 +49,7 @@ public class WebPage {
 		try{
 			String line;
 			StringBuilder content = new StringBuilder();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(host.openStream(), "UTF-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(host.openStream()));
 	
 			while ((line = reader.readLine()) != null) {
 				content.append(String.format("%s\n",line));
@@ -74,7 +74,7 @@ public class WebPage {
 			
 			Matcher matcher = Pattern.compile("href=\"(.*?)\"").matcher(lines[i]);
 			
-			if(matcher.find()) {
+			while(matcher.find()) {
 				String link = linkFormat(matcher.group(1), host.getHost());
 				if(link != null) links.add(link);
 			}
@@ -91,5 +91,26 @@ public class WebPage {
 		if(!link.contains(host) || link.contains("javascript")) link = null;
 	
 		return link;
+	}
+	
+	public static String jsonToUTF8(String object){
+		String[][] unicodes = {
+			{"\\u0020", "%20"},
+		    {"\\u0022", "\""},
+		    {"\\u0026", "&"},
+		    {"\\u0027", "\'"},
+		    {"\\u002C", ","},
+		    {"\\u002c", ","},
+		    {"\\u003D", "="},
+		    {"\\u003d", "="},
+		    {"\\u003F", "?"},
+		    {"\\u003f", "?"}
+		};
+		
+		for(String[] unicode: unicodes){
+			object = object.replace(unicode[0], unicode[1]);
+		}
+		
+		return object;
 	}
 }

@@ -2,6 +2,8 @@ package br.com.ivy.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -16,7 +18,7 @@ public class InjectionAPI extends API{
 
 	private String code =  "'";
 	
-	private String link = "";
+	private String[] links = null;
 	
 	private String[] exceptions = new String[]{"erro","sql","select"};
 	
@@ -25,27 +27,33 @@ public class InjectionAPI extends API{
 		String object = "ERROR";
 		
 		setParameters();
-
-		object = new Gson().toJson(exploit());
-		request.setAttribute("object", object);
-	}
-	
-	public boolean exploit() {
-		boolean vulnerable = false;
 		
-		if(link.contains("=")){
+		Map<String, Boolean> results = new HashMap<String, Boolean>();
+		
+		for(String originalLink : links){
+			String link = WebPage.jsonToUTF8(originalLink);
+			
+			if(!link.contains("=")) continue;
+			
 			URL url = null;
+			URL domain = null;
 			
 			try {
 				url = new URL(String.format("%s=%s", link.split("=")[0], code));
+				domain = new URL(String.format("http://%s",url.getHost()));
 			} catch (MalformedURLException e) { }
 			
-			if(url != null && WebPage.isReachable(url)){
+			boolean vulnerable = false;
+			
+			if(url != null && domain != null && WebPage.isReachable(domain)){
 				String content = WebPage.getContent(url);
-				vulnerable = getResult(content);
+				vulnerable = (content != null ? getResult(content) : false);
 			}
+			results.put(originalLink, vulnerable);
 		}
-		return vulnerable;
+
+		object = new Gson().toJson(results);
+		request.setAttribute("object", object);
 	}
 	
 	private boolean getResult(String content){
@@ -62,15 +70,15 @@ public class InjectionAPI extends API{
 		return result;
 	}
 	
-	private void setParameters() {
+	public void setParameters(){
 		if (request.getParameter("code") != null) {
 			code = request.getParameter("code");
 		}
+		if (request.getParameter("links") != null) {
+			links = request.getParameter("links").split(",");
+		}
 		if (request.getParameter("exceptions") != null) {
 			exceptions = request.getParameter("exceptions").split(",");
-		}
-		if (request.getParameter("link") != null) {
-			link = request.getParameter("link");
 		}
 	}
 }
