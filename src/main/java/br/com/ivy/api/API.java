@@ -27,7 +27,7 @@ public abstract class API extends HttpServlet{
 		
 		execute();
 
-		request.getRequestDispatcher("/public/feed/page.jsp").forward(request, response);
+		request.getRequestDispatcher("/public/api/page.jsp").forward(request, response);
 	}
 	
 	private void clear() {

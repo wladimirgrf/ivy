@@ -20,7 +20,7 @@
 <nav class="ym-hlist">
 	<ul>
 		<li class="active">
-			<strong>Template</strong>
+			<strong>Target</strong>
 		</li>	
 	</ul>
 </nav>

@@ -59,7 +59,6 @@ public class WebPage {
 			return content.toString();
 			
 		}catch(Exception e){ 
-			e.printStackTrace();
 			return null; 
 		}
 	}
