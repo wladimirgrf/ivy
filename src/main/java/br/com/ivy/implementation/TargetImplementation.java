@@ -22,6 +22,14 @@ public class TargetImplementation {
 	public List<Target> list() {
 		return dao.list();
     }
+	
+	public List<Target> list(int page, int pageSize) {
+		return dao.list(page, pageSize);
+    }
+	
+	public List<Target> list(int page, int pageSize, String orderBy, String order) {
+		return dao.list(page, pageSize, orderBy, order);
+    }
 
 	public void persist(Target target) {		
 		dao.insert(target);

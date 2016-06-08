@@ -55,10 +55,11 @@ public class TargetAPI extends API {
 		
 		setParameters();
 		
+		page = (page > 0 ? page : 1); 
+		pagesize = (pagesize > 0 ? pagesize : 5);
+		
 		if(action != null){
-			if (action.equals("search") && query != null && !query.isEmpty()) {			
-				page 	 = (page > 0 ? page : 1); 
-				pagesize = (pagesize > 0 ? pagesize : 5);
+			if (action.equals("search") && query != null && !query.isEmpty()) {	
 				
 				object = new Gson().toJson(implementation.search(query, page, pagesize).getResult());
 				
@@ -68,7 +69,7 @@ public class TargetAPI extends API {
 		}
 		
 		if(object == null){
-			object = new Gson().toJson(( id > 0 ? implementation.get(id) : implementation.list()));
+			object = new Gson().toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize,"lastScan","desc")));
 		}
 		
 		request.setAttribute("object", object);

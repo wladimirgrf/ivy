@@ -61,14 +61,26 @@ public abstract class DAO<T> {
         return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> list(int page, int pageSize) {
+		return list(page, pageSize, null, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> list(int page, int pageSize, String orderBy, String order) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(String.format("from %s o", getClassName()));	
+		
+		if (orderBy != null && !orderBy.equals("") && order != null && !order.equals("")) {
+			sql.append(" order by o." + orderBy + " " + order);	
+		}
 		EntityManager entityManager = ManagerFactory.getCurrentEntityManager();
-		Query query = entityManager.createQuery(String.format("from %s", getClassName()));
+		Query query = entityManager.createQuery(sql.toString());
+		
         if (page > 0 && pageSize > 0) {
             query.setMaxResults(pageSize);
             query.setFirstResult((page - 1) * pageSize);			
 		}
+        query.setHint("org.hibernate.cacheable", true);
         List<T> result = query.getResultList();
         return result;
 	}

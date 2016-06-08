@@ -1,107 +1,19 @@
 @CHARSET "UTF-8";
 
+.itens { float: left; width: 100%; margin-top: 2%;  }
 
-div.content div.analyze input[type=text] { border-color: #c0c0c0 #d9d9d9 #d9d9d9; border-image: none; border-style: solid; border-width: 1px; height: 30px; width: 335px; padding-left: 4px; font-size: 12px; }
-div.content div.analyze input[type=text]:focus { border-color: #4d90fe; }
-div.content div.analyze input[type=button] { padding : 8px; background-color:#452343; border: 1px solid #3079ed; box-shadow: none; color: #fff; cursor: pointer; font-size: 12px; }
-div.content div.analyze input[type=button]:HOVER { background: #357ae8; border: 1px solid #2f5bb7; box-shadow: 0 1px 0; }
+.itens .item { width: 95%; float: left; border: 1px solid #e1e8ed; background-color: #fff; padding: 1.5% 2.5%; font-size: 0.9em; }
 
-div.targets { background-color: #fff; float: left; height: 350px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
-div.targets div.header-targets { float: left; width: 400px; height: 40px; }
-div.targets div.header-targets h1  { float: left; background-color: #ecd073; height: 30px; padding-top: 10px; font-weight: bold;  color: #fff;}
-div.targets div.header-targets h1.header-host{ width: 277px; text-align: left;  padding-left:10px; border-right: 1px solid #fff;}
-div.targets div.header-targets h1.header-result { width: 112px; text-align: center; }
+.itens .item .bloc-info { width: 100%; float: left;  }
+.itens .item .bloc-info a { text-decoration: none; color: #292f33 }
+.itens .item .bloc-info a strong { float:left; color: #292f33; font-weight: bold; line-height: 1.1em; }
+.itens .item .bloc-info  .time { float: left; color:#8899a6; margin-left: 1%; }
+.itens .item .bloc-info  .location { float: left; color:#8899a6; margin-left: 1%; }
 
-div.targets div.last-targets { float: left; width: 400px; height: 295px; overflow-y:auto; position: relative; overflow-x: hidden;  }
+.itens .item .url { float: left; width: 100%; }
+.itens .item .url a { text-decoration: none;  }
+.itens .item .url-red a { color: #e62117; }
+.itens .item .url-green a { color: #008B8B; }
 
-div.targets div.last-targets div.target { float: left; width: 400px; height: 40px; border-bottom: 1px solid #e8e8ea; }
-
-div.targets div.last-targets div.target div.host { float: left; width: 277px; height: 30px; margin-top: 10px; margin-left:10px; font-size: 14px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-div.targets div.last-targets div.target div.host a { color: #000; text-decoration: none; }
-div.targets div.last-targets div.target div.result { float: left; width: 112px; height: 30px; margin-top: 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center;}
-
-
-div.info {
-	margin-top: 15px;
-	margin-left: 15px;
-}
-
-div.about{
-	background-color: #fff;
-    border-color: #d8d8d8;
-    border-image: none;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 27px 1px 2px;
-    box-sizing: border-box;
-    vertical-align: top; 
-    border-top-color: #ecd073;
-    width: 500px;
-}
-
-div.about p{
-	font-size: 14px;
-	max-width: 520px;
-	margin-bottom: 15px;
-	margin:7px;
-}
-
-div.about p.title{
-	text-align: center;
-	font-weight: bold;
-}
-
-div.detail{
-    background-color: #fff;
-    border-color: #d8d8d8;
-    border-image: none;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px 1px 2px;
-    box-sizing: border-box;
-    vertical-align: top; 
-    border-top-color: #ecd073;
-    width: 500px;
-}
-
-div.detail div.d-header{
-	width: 494px;
-	height: 27px;
-	background-color: #ecd073;
-	text-align: right;
-	padding: 2px;
-}
-
-div.detail div.d-header img#close{
-	cursor: pointer;
-}
-
-div.detail div.title{
-	font-size: 14px;
-    font-weight: bold;
-    color: #262626;
-    border-bottom: 1px solid #dadada;
-    padding-bottom: 5px;
-    margin: 5px;
-}
-
-div.detail div.sub-title{
-	color: #6e6e6e;
-	font-size: 13px;
-	margin: 5px;
-	padding-bottom:8px;
-}
-
-div.detail div#d-urls ul li{
-	list-style-type: none;
-}
-
-div.index { background-color: #fff; float: left; height: 27px; overflow: hidden; width: 400px; padding:10px; border-color: #d8d8d8; border-image: none; border-style: solid; border-width: 1px 1px 2px 1px; }
-div.index h3 {float: left; margin-left:5px}
-div.index img {float: left; margin-left: 58px;}
-
-div.loader {
-	padding-left: 120px;
-	padding-top: 64px;
-}
-
+.itens .item .search-tags { float: left; width: 100%; }
+.itens .item .search-tags div a { text-decoration: none; color: #0084b4; margin-right: 1%;  } 

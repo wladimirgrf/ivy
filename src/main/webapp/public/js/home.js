@@ -15,6 +15,19 @@ function globalHosts(){
 	});
 }
 
+function searchHosts(query){
+	$.ajax({
+		url : "/api/target?action=search&query=" + query,
+		cache : false,
+		dataType : "json",
+		success : function(data) {
+			if (data != null) {
+				addPage(data);
+			}
+		}
+	});
+}
+
 function addPage(data){
 	var itens = $("div.itens").empty();
 	for(var i = 0; i < data.length; i++){
@@ -50,7 +63,7 @@ function getTimeStamp(time){
         default:
         	timestamp = Math.round((date - time) / (24 * 60 * 60 * 1000)) + " days";
 	}
-	return timestamp;
+	return "- " + timestamp;
 }
 
 function formatTags(line){
@@ -60,7 +73,10 @@ function formatTags(line){
 	var result = $("<div>");
 	
 	for(var i = 0; i < tags.length; i++){
-		result.append($("<a>").attr("href", "/search?query=" + tags[i]).html("#"+tags[i]));
+		result.append($("<a>").attr({
+			"href" : "#",
+			"onclick" : "searchHosts('" + tags[i] + "'); return false;"
+		}).html("#"+tags[i]));
 	}
 	return result;
 }

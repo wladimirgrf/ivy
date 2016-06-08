@@ -22,18 +22,20 @@ div.content { margin: 0 auto; width: 590px;}
 .bold {font-weight: bold;}
 .show { display: block; }
 .hide { display: none; }
-.box-shadow { box-shadow: 3px 3px 3px #777; }
 
-
-.box { background-color: #fff; }
 .box-590 { float: left; width: 590px; }
 
 
 body > div.header { float: left; width: 100%; background-color: #ffffff; z-index: 2; box-shadow: 2px 2px 2px #777; height: 46px; }
 
-body > div.header div.menu-left { width: auto; float:left; position: relative; }
-body > div.header div.menu-right { width: auto; float:right; position: relative; }
+body > .header .container { float: left; width: 84%; padding: 0 8%; }
 
-body > div.header div.menu a.logo { float: left; cursor: pointer;  left: 50%; margin-left: -69px; position:relative;}
+body > .header .container .menu-left { width: 28%; float:left; position: relative; }
+body > .header .container .menu-left ul { float: left; width: 100%;}
+body > .header .container .menu-left ul li { float: left; list-style-type: none; padding: 0 1%; }
+body > .header .container .menu-left ul li a { float:left; text-decoration: none; width: 100%; }
+
+body > .header .container .menu-right { width: 28%; float:right; position: relative; }
+
 
 
