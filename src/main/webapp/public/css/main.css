@@ -26,16 +26,32 @@ div.content { margin: 0 auto; width: 590px;}
 .box-590 { float: left; width: 590px; }
 
 
-body > div.header { float: left; width: 100%; background-color: #ffffff; z-index: 2; box-shadow: 2px 2px 2px #777; height: 46px; }
+body > div.header { float: left; width: 100%; background-color: #ffffff; z-index: 2; border-bottom: 1px solid rgba(0, 0, 0, 0.15); height: 46px; }
 
-body > .header .container { float: left; width: 84%; padding: 0 8%; }
+body > .header .container { float: left; width: 84%; padding: 0 8%; height: 100%; }
 
-body > .header .container .menu-left { width: 28%; float:left; position: relative; }
-body > .header .container .menu-left ul { float: left; width: 100%;}
-body > .header .container .menu-left ul li { float: left; list-style-type: none; padding: 0 1%; }
-body > .header .container .menu-left ul li a { float:left; text-decoration: none; width: 100%; }
+body > .header .container .menu-left { width: 28%; float:left; position: relative; height: 100%; }
+body > .header .container .menu-left ul { float: left; width: 100%; height: 100%;}
+body > .header .container .menu-left ul li { float: left; list-style-type: none; padding: 3% 7% 0% 4%; font-size: 13px; font-weight: 500; height: 70% }
+body > .header .container .menu-left ul li a { float:left; text-decoration: none; width: 100%; height: 2em; line-height: 2em; height: 100%; }
+body > .header .container .menu-left ul .selected { border-bottom: 5px solid #0084b4; }
+body > .header .container .menu-left ul li:HOVER { border-bottom: 5px solid #0084b4; }
+body > .header .container .menu-left ul li a img { width: 1.7em; height: auto; background-color: #66757f; float: left; margin-top: 0.2em; }
+body > .header .container .menu-left ul li a img:HOVER {  background-color: #0084b4; }
+body > .header .container .menu-left ul li a span { color: #66757f; line-height: 2.2em; float: left; margin-left: 0.4em; }
+body > .header .container .menu-left ul li a span:HOVER { color: #0084b4; }
 
-body > .header .container .menu-right { width: 28%; float:right; position: relative; }
+body > .header .container .menu-right { width: 35%; float:right; position: relative; }
 
+body > .header .container .menu-right .search-form { float: left; font-size: 0.9em; height: 2.3em; margin: 1.6% 5% 0 0; width: 65%; }
+body > .header .container .menu-right .search-form .search-input { float:left; background-color: #f5f8fa;  border: 1px solid #e1e8ed; border-radius: 21px; box-sizing: border-box; color: #292f33; display: block; height: 3em; line-height: 1em; padding: 0.5em 3em 0.5em 1.3em; width: 100%; }
+body > .header .container .menu-right .search-form .search-icon { position: absolute; width: 1.3em; margin: 0.4em 0em 0 -2em; z-index: 99; cursor: pointer; }
+body > .header .container .menu-right .search-form .search-icon img { width: 100%; height: auto; }
+
+body > .header .container .menu-right .new-scan { width: 30%;  float: right; margin-top: 1.4%; background: #E473FF -moz-linear-gradient(bottom, #9F00C5, #E473FF) no-repeat; border: 1px solid transparent; border-radius: 4px; cursor: pointer; }
+body > .header .container .menu-right .new-scan:HOVER { background: #E473FF -moz-linear-gradient(top, #9F00C5, #E473FF) no-repeat; }
+body > .header .container .menu-right .new-scan  .icon { width: 2.5em; float: left; margin: 0.3em 0 0 0.3em;  }
+body > .header .container .menu-right .new-scan  .icon img { width: 100%; height: auto; }
+body > .header .container .menu-right .new-scan .text { color: #fff; font-size: 1.1em; font-weight: bold; margin: 0.52em 0.7em; float: left;  }
 
 

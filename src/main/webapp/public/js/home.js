@@ -37,7 +37,10 @@ function addPage(data){
 					$('<a>').attr("href", data[i].host).append(
 						$('<strong>').addClass("host").html(data[i].host)
 					),
-					$('<span>').addClass("location").html(data[i].country),
+					$('<span>').addClass("location").append(
+							$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon"),
+							$('<strong>').html(data[i].country)
+					),
 					$('<span>').addClass("time").html(getTimeStamp(Number(data[i].lastScan)))
 				).addClass("bloc-info"),
 				$('<div>').addClass("url " + (!data[i].safe ? "url-red" : "url-green")).append(
@@ -63,7 +66,7 @@ function getTimeStamp(time){
         default:
         	timestamp = Math.round((date - time) / (24 * 60 * 60 * 1000)) + " days";
 	}
-	return "- " + timestamp;
+	return "· " + timestamp;
 }
 
 function formatTags(line){
