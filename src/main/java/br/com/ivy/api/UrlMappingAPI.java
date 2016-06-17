@@ -20,9 +20,9 @@ public class UrlMappingAPI extends API{
 	
 	private URL host;
 	
-	private int linksNumber = 5;
+	private int linksNumber;
 	
-	private String character = "";
+	private String character;
 	
 	private Set<String> links;
 	
@@ -31,6 +31,9 @@ public class UrlMappingAPI extends API{
 	private Set<String> sampling;
 	
 	public UrlMappingAPI(){
+		character = "";
+		linksNumber = 5;
+				
 		links 	 = new HashSet<String>();
 		checked  = new HashSet<String>();
 		sampling = new HashSet<String>();
@@ -39,13 +42,19 @@ public class UrlMappingAPI extends API{
 	public void execute(){
 		String object = "ERROR";
 		
+		clear();
 		setParameters();
 		
 		if(host != null && WebPage.isReachable(host)){
 			object = new Gson().toJson(map());
 		}
-		
 		request.setAttribute("object", object);
+	}
+	
+	private void clear(){
+		links.clear();
+		checked.clear();
+		sampling.clear();
 	}
 	
 	private Set<String> map() {
@@ -53,7 +62,6 @@ public class UrlMappingAPI extends API{
 		
 		for(int i = 0; i < tryLimit; i++){
 			links.addAll(WebPage.linkChecker(address));
-			
 			links.removeAll(checked);
 			
 			if(links.size() == 0) break;
@@ -61,14 +69,13 @@ public class UrlMappingAPI extends API{
 			String link = links.iterator().next();
 			
 			checked.add(link);
-			
 			try {
 				address = new URL(link);
 			} catch (MalformedURLException e) { 
 				e.printStackTrace(); 
 			}
 		}
-		for (String link : links) {
+		for (String link : checked) {
 			if(character.isEmpty() || link.contains(character)) sampling.add(link);
 			if(sampling.size() > linksNumber) break;
 		}

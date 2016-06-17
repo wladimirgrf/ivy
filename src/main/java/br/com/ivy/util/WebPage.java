@@ -87,7 +87,7 @@ public class WebPage {
 		}
 		link = link.replace(" ", "%20");
 		
-		if(!link.contains(host) || link.contains("javascript")) link = null;
+		if(!link.contains(host) || link.contains("javascript") || link.contains("mailto:")) link = null;
 	
 		return link;
 	}
