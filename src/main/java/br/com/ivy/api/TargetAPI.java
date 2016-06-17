@@ -41,6 +41,10 @@ public class TargetAPI extends API {
 	
 	private Target target;
 	
+	private String order = "desc";
+	
+	private String orderBy = "lastScan";
+	
 	private TargetImplementation implementation;
 	
 	@Override
@@ -67,9 +71,8 @@ public class TargetAPI extends API {
 				save(); 
 			}
 		}
-		
 		if(object == null){
-			object = new Gson().toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize,"lastScan","desc")));
+			object = new Gson().toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order)));
 		}
 		
 		request.setAttribute("object", object);
@@ -84,18 +87,15 @@ public class TargetAPI extends API {
 			isNew = true;
 			target = Whois.get(host.getHost());
 		}	
-		
 		if(url != null){
 			target.setUrl(url);
 		}
 		if(tags != null){
 			target.setTags(tags);
 		}
-
 		if(safe != null){
 			target.setSafe(safe);
 		}
-
 		if(isNew){
 			target.setLastScan(getCurrentDate());
 			
@@ -143,6 +143,19 @@ public class TargetAPI extends API {
 			try {
 				pagesize = Integer.parseInt(request.getParameter("pagesize"));
 			} catch (Exception e) { }
+		}
+		if (request.getParameter("orderBy") != null) {
+			switch (request.getParameter("orderBy").toLowerCase()) {
+				case "host": 	orderBy = "host"; 	 break;
+				case "country": orderBy = "country"; break;
+				case "owner": 	orderBy = "owner"; 	 break;
+				case "email": 	orderBy = "email"; 	 break;
+				case "changed": orderBy = "changed"; break;
+				case "safe": 	orderBy = "safe"; 	 break;
+			}
+		}
+		if (request.getParameter("order") != null) {
+			if(request.getParameter("order").toLowerCase() == "asc") order = "asc";
 		}
 	}
 	

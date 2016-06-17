@@ -6,11 +6,11 @@
 
 .itens .item .bloc-info { width: 100%; float: left;  }
 .itens .item .bloc-info a { text-decoration: none; color: #292f33 }
-.itens .item .bloc-info a strong { float:left; color: #292f33; font-weight: bold; line-height: 1.1em; }
+.itens .item .bloc-info a strong { float:left; color: #292f33; font-weight: bold; line-height: 1em; }
 .itens .item .bloc-info  .time { float: left; color:#8899a6; line-height: 1.1em }
-.itens .item .bloc-info  .location { float: left; color:#8899a6; margin: 0.3% 1% 0 2%; width: 6%; }
-.itens .item .bloc-info  .location .geo-icon { width: 0.6em; float: left; background-color: #8899a6;  }
-.itens .item .bloc-info  .location strong { line-height: 0.9em; float: right; }
+.itens .item .bloc-info  .location { float: left; color:#8899a6; margin: 0.3% 0.1% 0 4%; width: 6%; }
+.itens .item .bloc-info  .location .geo-icon { width: 0.55em; float: left; background-color: #8899a6;  }
+.itens .item .bloc-info  .location strong { line-height: 0.9em; float: right; margin-right: 0.3em; }
 
 .itens .item .url { float: left; width: 100%; line-height: 1.2em; padding-top: 0.4%; }
 .itens .item .url a { text-decoration: none;  }

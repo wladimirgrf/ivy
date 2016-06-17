@@ -48,9 +48,9 @@ body > .header .container .menu-right .search-form .search-input { float:left; b
 body > .header .container .menu-right .search-form .search-icon { position: absolute; width: 1.3em; margin: 0.4em 0em 0 -2em; z-index: 99; cursor: pointer; }
 body > .header .container .menu-right .search-form .search-icon img { width: 100%; height: auto; }
 
-body > .header .container .menu-right .new-scan { width: 30%;  float: right; margin-top: 1.4%; background: #E473FF -moz-linear-gradient(bottom, #9F00C5, #E473FF) no-repeat; border: 1px solid transparent; border-radius: 4px; cursor: pointer; }
+body > .header .container .menu-right .new-scan { width: auto;  float: right; margin-top: 1.4%; background: #E473FF -moz-linear-gradient(bottom, #9F00C5, #E473FF) no-repeat; border: 1px solid transparent; border-radius: 4px; cursor: pointer; }
 body > .header .container .menu-right .new-scan:HOVER { background: #E473FF -moz-linear-gradient(top, #9F00C5, #E473FF) no-repeat; }
-body > .header .container .menu-right .new-scan  .icon { width: 2.5em; float: left; margin: 0.3em 0 0 0.3em;  }
+body > .header .container .menu-right .new-scan  .icon { width: 2.5em; float: left; margin: 0.3em 0 0 0.2em;  }
 body > .header .container .menu-right .new-scan  .icon img { width: 100%; height: auto; }
 body > .header .container .menu-right .new-scan .text { color: #fff; font-size: 1.1em; font-weight: bold; margin: 0.52em 0.7em; float: left;  }
 
