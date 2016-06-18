@@ -41,9 +41,9 @@ public class TargetAPI extends API {
 	
 	private Target target;
 	
-	private String order = "desc";
+	private String order;
 	
-	private String orderBy = "lastScan";
+	private String orderBy;
 	
 	private TargetImplementation implementation;
 	
@@ -57,10 +57,14 @@ public class TargetAPI extends API {
 	public void execute() {
 		String object = null;
 		
+		clear();
 		setParameters();
 		
-		page = (page > 0 ? page : 1); 
+		page 	 = (page > 0 ? page : 1); 
 		pagesize = (pagesize > 0 ? pagesize : 5);
+		
+		order 	= (order != "" ? order : "desc");
+		orderBy = (orderBy != "" ? orderBy : "lastScan");
 		
 		if(action != null){
 			if (action.equals("search") && query != null && !query.isEmpty()) {	
@@ -108,6 +112,20 @@ public class TargetAPI extends API {
 		}
 		
 		if(target != null) id = target.getId();
+	}
+	
+	private void clear(){
+		host 	= null;
+		safe 	= true;
+		tags 	= "";
+		url 	= "";
+		action 	= "";
+		query 	= "";
+		order 	= "";
+		orderBy = "";
+		id 		 = 0;
+		page 	 = 0;
+		pagesize = 0;
 	}
 	
 	private void setParameters(){

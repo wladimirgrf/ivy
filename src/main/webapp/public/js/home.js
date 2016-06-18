@@ -1,5 +1,17 @@
 $(function() {
 	globalHosts();
+	
+	$('span.search-icon').click(function(){
+		var query = $('input.search-input').val();
+        if(query != "") searchHosts(query);
+	});
+	
+	$('input.search-input').keydown(function(e){
+	    if (e.which == 13) {
+	        var query = $('input.search-input').val();
+	        if(query != "") searchHosts(query);
+	    }
+	});
 });
 
 function globalHosts(){

@@ -19,12 +19,12 @@
 		</ul>	
 	</div>
 	<div class="menu-right">
-		<form action="/search" class="search-form">
-			<input type="text" name="query" class="search-input" placeholder="Search for Domain">
+		<div class="search-form">
+			<input type="text" class="search-input" placeholder="Search for Domain">
 			<span class="search-icon">
 				<img src="/public/img/icon-search.png">
 			</span>
-		</form>
+		</div>
 		<button class="new-scan">
 			<span class="icon">
 				<img src="/public/img/icon-eye.png">
