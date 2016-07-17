@@ -18,6 +18,9 @@
 			</li>
 		</ul>	
 	</div>
+	<div class="menu-middle">
+		<img class="logo" alt="logo" src="/public/img/logo.png">
+	</div>
 	<div class="menu-right">
 		<div class="search-form">
 			<input type="text" class="search-input" placeholder="Search for Domain">

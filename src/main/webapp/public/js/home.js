@@ -6,11 +6,19 @@ $(function() {
         if(query != "") searchHosts(query);
 	});
 	
-	$('input.search-input').keydown(function(e){
-	    if (e.which == 13) {
-	        var query = $('input.search-input').val();
-	        if(query != "") searchHosts(query);
-	    }
+	$('span.search-icon').click(function(){
+		var query = $('input.search-input').val();
+        if(query != "") searchHosts(query);
+	});
+	
+	$('button.new-scan').click(function(){
+	    $('.body-off').show();
+	    $('.popup').show();
+	});
+	
+	$('.body-off').click(function(){
+		$('.body-off').hide();
+	    $('.popup').hide();
 	});
 });
 
