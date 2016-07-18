@@ -11,8 +11,12 @@
 	<div class="title">Scan Domain</div>
 	<input type="text" class="popup-input" placeholder="domain.com.br" >
 	
+	<div class="popup-filter">
+		<input type="text" class="popup-number" disabled="disabled">
+	</div>
+	
 	<div class="popup-footer">
-		<img src="" >
+		<img class="options" src="/public/img/icon-options.png" >
 		<button class="new-scan">
 			<span class="icon">
 				<img src="/public/img/icon-eye.png">

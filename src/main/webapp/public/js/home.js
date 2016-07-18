@@ -20,6 +20,7 @@ $(function() {
 		$('.body-off').hide();
 	    $('.popup').hide();
 	});
+	
 });
 
 function globalHosts(){
@@ -54,7 +55,7 @@ function addPage(data){
 		itens.append(
 			$('<div>').append(
 				$('<div>').append(
-					$('<a>').attr("href", data[i].host).append(
+					$('<a>').attr({"href": "http://" + data[i].host, "target": "_blank"}).append(
 						$('<strong>').addClass("host").html(data[i].host)
 					),
 					$('<span>').addClass("location").append(
@@ -86,7 +87,7 @@ function getTimeStamp(time){
         default:
         	timestamp = Math.round((date - time) / (24 * 60 * 60 * 1000)) + " days";
 	}
-	return "· " + timestamp;
+	return timestamp;
 }
 
 function formatTags(line){
