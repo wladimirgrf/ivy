@@ -4,13 +4,13 @@
 <div class="container">
 	<div class="menu-left">
 		<ul>
-			<li class="selected">
+			<li class="item1">
 				<a href="/">
 					<img class="home-icon" src="/public/img/icon-home-form.png">
 					<span>Home</span>
 				</a>
 			</li>
-			<li>
+			<li class="item2">
 				<a href="/about">
 					<img class="info-icon" src="/public/img/icon-info-form.png">
 					<span>About</span>

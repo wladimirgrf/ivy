@@ -5,13 +5,15 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-<link href="/public/css/main.css" rel="stylesheet" type="text/css"/>
-
-<link href="/public/css/home.css" rel="stylesheet" type="text/css"/>
+<link href="/public/css/main.css?1" rel="stylesheet" type="text/css"/>
 
 
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<c:if test="${model.equals('home')}">
+	<link href="/public/css/home.css?1" rel="stylesheet" type="text/css"/>
+</c:if>
 
-<script src="/public/js/home.js"></script>
+
+
+
 
 
