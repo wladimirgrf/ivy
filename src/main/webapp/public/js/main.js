@@ -1,5 +1,4 @@
 $(function() {	
-	
 	$('button.new-scan').click(function(){
 	    $('.body-off').show();
 	    $('.popup').show();
@@ -15,6 +14,26 @@ $(function() {
         if(query != "") ivy.searchHosts(query);
 	});
 	
+	$('.search-input').keypress(function(event){
+	    var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+	    	var query = $('input.search-input').val();
+	        if(query != "") ivy.searchHosts(query);
+	    }
+	});
+	
+	$('#hack').click(function(){
+		var host   = $('.popup .popup-input').val();
+		var rounds = Number($('.popup .popup-number').val());
+		
+		if(host != ""){
+			ivy.exploit.target = host;
+			
+			if(rounds > 0) ivy.exploit.rounds = rounds;
+			
+			ivy.exploit.execute();
+		}
+	});
 });
 
 var ivy = {
@@ -95,5 +114,28 @@ var ivy = {
 			}).html("#"+tags[i]));
 		}
 		return result;
+	},
+	
+	exploit: {
+		target: "",
+		rounds: 3,
+		urls: [],
+		
+		pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/,
+		
+		execute: function(){
+			if(this.target == "" || !this.pattern.test(this.target) || this.rounds < 1) return;
+			
+			$.ajax({
+				url : "/api/url-mapping?host=" + this.target + "&linksNumber=" + this.rounds,
+				cache : false,
+				dataType : "json",
+				success : function(data) {
+					if (data != null) alert(data);
+				}
+			});
+		},
+	
+
 	}
 }

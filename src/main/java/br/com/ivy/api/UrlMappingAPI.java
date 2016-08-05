@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.annotation.WebServlet;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.ivy.util.WebPage;
 
@@ -46,8 +47,10 @@ public class UrlMappingAPI extends API{
 		setParameters();
 		
 		if(host != null && WebPage.isReachable(host)){
-			object = new Gson().toJson(map());
+			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+			object = gson.toJson(map());
 		}
+			
 		request.setAttribute("object", object);
 	}
 	
@@ -77,7 +80,7 @@ public class UrlMappingAPI extends API{
 		}
 		for (String link : checked) {
 			if(character.isEmpty() || link.contains(character)) sampling.add(link);
-			if(sampling.size() > linksNumber) break;
+			if(sampling.size() >= linksNumber) break;
 		}
 		return sampling;
 	}
@@ -89,7 +92,7 @@ public class UrlMappingAPI extends API{
 		if (request.getParameter("host") != null) {
 			host = WebPage.getHost(request.getParameter("host")) ;
 		}
-		if (request.getParameter("linksNumer") != null) {
+		if (request.getParameter("linksNumber") != null) {
 			try {
 				int number = Integer.parseInt(request.getParameter("linksNumber"));
 				if(number <=20) linksNumber = number;	
