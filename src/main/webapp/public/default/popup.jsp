@@ -10,7 +10,17 @@
 		<input type="text" class="popup-input" placeholder="domain.com.br" >
 		
 		<div class="popup-filter">
-			<input type="text" class="popup-number" disabled="disabled">
+			<span>number of pages to be analyzed:</span>
+			<div class="p-quantity">
+			    <div class="p-minus">-</div>
+			    <div class="p-input">
+			        <input type="text" value="1" disabled="disabled" />
+			    </div>
+			    <div class="p-plus">+</div>
+			</div>
+			<div class="close">
+				<img src="/public/img/icon-close.png">
+			</div>
 		</div>
 		
 		<div class="popup-footer">

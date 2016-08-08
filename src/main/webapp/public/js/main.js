@@ -9,6 +9,15 @@ $(function() {
 	    $('.popup').hide();
 	});
 	
+	$('.popup-filter .close').click(function(){
+		$('.popup-filter').hide();
+		$(".p-input input").val("1");
+	});
+	
+	$('.popup-footer .options').click(function(){
+		$('.popup-filter').show();
+	});
+	
 	$('span.search-icon').click(function(){
 		var query = $('input.search-input').val();
         if(query != "") ivy.searchHosts(query);
@@ -24,7 +33,7 @@ $(function() {
 	
 	$('#hack').click(function(){
 		var host   = $('.popup .popup-input').val();
-		var rounds = Number($('.popup .popup-number').val());
+		var rounds = Number($(".p-input input").val());
 		
 		if(host != ""){
 			ivy.exploit.target = host;
