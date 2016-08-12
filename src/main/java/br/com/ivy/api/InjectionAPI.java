@@ -16,14 +16,15 @@ public class InjectionAPI extends API{
 	
 	private static final long serialVersionUID = 4804775703220751697L;
 
-	private String code =  "'";
+	@Override
+	protected void clear() {
+		code =  "'";
+		links = null;
+		exceptions = new String[]{"erro","sql","select"};
+	}
 	
-	private String[] links = null;
-	
-	private String[] exceptions = new String[]{"erro","sql","select"};
-	
-	
-	public void execute(){
+	@Override
+	protected void execute(){
 		String object = "ERROR";
 		
 		setParameters();
@@ -81,4 +82,13 @@ public class InjectionAPI extends API{
 			exceptions = request.getParameter("exceptions").split(",");
 		}
 	}
+	
+	
+	//Action Properties
+	
+	private String code;
+	
+	private String[] links;
+	
+	private String[] exceptions;
 }

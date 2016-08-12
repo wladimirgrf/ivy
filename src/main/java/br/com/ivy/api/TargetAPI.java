@@ -19,34 +19,6 @@ public class TargetAPI extends API {
 
 	private static final long serialVersionUID = -2198141207687980772L;
 	
-	private static final long week = 7 * 24 * 60 * 60 * 1000;
-
-	private long id;
-	
-	private int page;
-	
-	private int pagesize;
-	
-	private String url;
-	
-	private String tags;
-	
-	private String query;
-	
-	private String action;
-	
-	private URL host;
-	
-	private Boolean safe;
-	
-	private Target target;
-	
-	private String order;
-	
-	private String orderBy;
-	
-	private TargetImplementation implementation;
-	
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -54,67 +26,7 @@ public class TargetAPI extends API {
 	}
 	
 	@Override
-	public void execute() {
-		String object = null;
-		
-		clear();
-		setParameters();
-		
-		page 	 = (page > 0 ? page : 1); 
-		pagesize = (pagesize > 0 ? pagesize : 5);
-		
-		order 	= (order != "" ? order : "desc");
-		orderBy = (orderBy != "" ? orderBy : "lastScan");
-		
-		if(action != null){
-			if (action.equals("search") && query != null && !query.isEmpty()) {	
-				
-				object = new Gson().toJson(implementation.search(query, page, pagesize).getResult());
-				
-			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
-				save(); 
-			}
-		}
-		if(object == null){
-			object = new Gson().toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order)));
-		}
-		
-		request.setAttribute("object", object);
-	}
-	
-	private void save(){
-		target = implementation.get(this.host.getHost());
-		
-		boolean isNew = false;
-		
-		if(target == null){
-			isNew = true;
-			target = Whois.get(host.getHost());
-		}	
-		if(url != null){
-			target.setUrl(url);
-		}
-		if(tags != null){
-			target.setTags(tags);
-		}
-		if(safe != null){
-			target.setSafe(safe);
-		}
-		if(isNew){
-			target.setLastScan(getCurrentDate());
-			
-			implementation.persist(target);
-			
-		} else if((getCurrentDate() - target.getLastScan()) >= week) {
-			target.setLastScan(getCurrentDate());
-			
-			implementation.update(target);
-		}
-		
-		if(target != null) id = target.getId();
-	}
-	
-	private void clear(){
+	protected void clear(){
 		host 	= null;
 		safe 	= true;
 		tags 	= "";
@@ -123,9 +35,91 @@ public class TargetAPI extends API {
 		query 	= "";
 		order 	= "";
 		orderBy = "";
-		id 		 = 0;
+		id 		 = 0l;
 		page 	 = 0;
 		pagesize = 0;
+		
+		gson = new Gson();
+	}
+	
+	@Override
+	protected void execute() {
+		String object = null;
+
+		setParameters();
+		
+		if(action != null){
+			if (action.equals("evaluate") && host != null && WebPage.isReachable(host))  { 
+				evaluate();
+				
+			}else if (action.equals("search") && query != null && !query.isEmpty()) {	
+				object = gson.toJson(implementation.search(query, page, pagesize).getResult());
+				
+			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
+				save(); 
+			}
+		}
+		
+		if(id == null){
+			object = null;
+		}else if(object == null){
+			object = gson.toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order)));
+		}
+		
+		request.setAttribute("object", object);
+	}
+	
+	private void save(){
+		target = implementation.get(this.host.getHost());
+		
+		if(target == null){
+			target = Whois.get(host.getHost());
+			
+			if(url != null && !url.isEmpty()){
+				target.setUrl(url);
+			}
+			if(tags != null && !tags.isEmpty()){
+				target.setTags(tags);
+			}
+			if(safe != null){
+				target.setSafe(safe);
+			}
+			
+			target.setLastScan(getCurrentDate());
+			
+			implementation.persist(target);
+			
+		}else if((getCurrentDate() - target.getLastScan()) >= week){
+			if(url != null && !url.isEmpty()){
+				target.setUrl(url);
+			}
+			if(tags != null && !tags.isEmpty()){
+				target.setTags(tags);
+			}
+			if(safe != null){
+				target.setSafe(safe);
+			}
+			
+			target.setLastScan(getCurrentDate());
+			
+			implementation.update(target);
+		}
+		
+		if(target != null) id = target.getId();
+	}
+	
+	private long getCurrentDate(){
+		return Calendar.getInstance().getTimeInMillis();
+	}
+	
+	private void evaluate(){
+		target = implementation.get(this.host.getHost());
+		
+		id = null;
+		
+		if(target != null && (getCurrentDate() - target.getLastScan()) < week){
+			id = target.getId();
+		}
 	}
 	
 	private void setParameters(){
@@ -149,7 +143,7 @@ public class TargetAPI extends API {
 		}
 		if (request.getParameter("id") != null) {
 			try {
-				id = Integer.parseInt(request.getParameter("id"));
+				id = Long.parseLong(request.getParameter("id"));
 			} catch (Exception e) { }
 		}
 		if (request.getParameter("page") != null) {
@@ -175,9 +169,44 @@ public class TargetAPI extends API {
 		if (request.getParameter("order") != null) {
 			if(request.getParameter("order").toLowerCase() == "asc") order = "asc";
 		}
+		
+		page 	 = (page > 0 ? page : 1); 
+		pagesize = (pagesize > 0 ? pagesize : 5);
+		
+		order 	= (order != "" ? order : "desc");
+		orderBy = (orderBy != "" ? orderBy : "lastScan");
 	}
 	
-	public long getCurrentDate(){
-		return Calendar.getInstance().getTimeInMillis();
-	}
+	
+	//Action Properties
+	
+	private Gson gson;
+
+	private Long id;
+	
+	private int page;
+	
+	private int pagesize;
+	
+	private String url;
+	
+	private String tags;
+	
+	private String query;
+	
+	private String action;
+	
+	private URL host;
+	
+	private Boolean safe;
+	
+	private Target target;
+	
+	private String order;
+	
+	private String orderBy;
+	
+	private TargetImplementation implementation;
+	
+	private static final long week = 7 * 24 * 60 * 60 * 1000;
 }

@@ -30,13 +30,12 @@ public abstract class API extends HttpServlet{
 		request.getRequestDispatcher("/public/api/page.jsp").forward(request, response);
 	}
 	
-	private void clear() {
+	private void prepare(HttpServletRequest request, HttpServletResponse response) {
 		this.request = null;
 		this.response = null;
-	}
-	
-	private void prepare(HttpServletRequest request, HttpServletResponse response) {
+		
 		clear();
+		
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) { }
@@ -48,6 +47,8 @@ public abstract class API extends HttpServlet{
 	protected HttpServletRequest request;
 	
 	protected HttpServletResponse response;
+	
+	protected abstract void clear();
 	
 	protected abstract void execute();
 }

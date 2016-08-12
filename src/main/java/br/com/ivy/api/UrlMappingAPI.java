@@ -16,20 +16,6 @@ import br.com.ivy.util.WebPage;
 public class UrlMappingAPI extends API{
 
 	private static final long serialVersionUID = -4207305214306807800L;
-
-	private static final long tryLimit = 50;
-	
-	private URL host;
-	
-	private int linksNumber;
-	
-	private String character;
-	
-	private Set<String> links;
-	
-	private Set<String> checked;
-	
-	private Set<String> sampling;
 	
 	public UrlMappingAPI(){
 		character = "";
@@ -40,10 +26,17 @@ public class UrlMappingAPI extends API{
 		sampling = new HashSet<String>();
 	}
 	
-	public void execute(){
+	@Override
+	protected void clear() {
+		links.clear();
+		checked.clear();
+		sampling.clear();
+	}
+	
+	@Override
+	protected void execute(){
 		String object = "ERROR";
 		
-		clear();
 		setParameters();
 		
 		if(host != null && WebPage.isReachable(host)){
@@ -52,12 +45,6 @@ public class UrlMappingAPI extends API{
 		}
 			
 		request.setAttribute("object", object);
-	}
-	
-	private void clear(){
-		links.clear();
-		checked.clear();
-		sampling.clear();
 	}
 	
 	private Set<String> map() {
@@ -99,4 +86,21 @@ public class UrlMappingAPI extends API{
 			} catch (Exception e) { }
 		}
 	}
+	
+	
+	//Action Properties
+	
+	private URL host;
+	
+	private int linksNumber;
+	
+	private String character;
+	
+	private Set<String> links;
+	
+	private Set<String> checked;
+	
+	private Set<String> sampling;
+	
+	private static final long tryLimit = 50;
 }

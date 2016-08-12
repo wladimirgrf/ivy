@@ -36,7 +36,7 @@ $(function() {
 		var rounds = Number($(".p-input input").val());
 		
 		if(host != ""){
-			ivy.exploit.target = host;
+			ivy.exploit.host = host;
 			
 			if(rounds > 0) ivy.exploit.rounds = rounds;
 			
@@ -126,25 +126,52 @@ var ivy = {
 	},
 	
 	exploit: {
-		target: "",
-		rounds: 3,
-		urls: [],
+		rounds: 0,
+		host:   "",
+		urls:   [],
+		target: null,
+		
 		
 		pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/,
 		
 		execute: function(){
-			if(this.target == "" || !this.pattern.test(this.target) || this.rounds < 1) return;
 			
-			$.ajax({
-				url : "/api/url-mapping?host=" + this.target + "&linksNumber=" + this.rounds,
+			$.when(ivy.exploit.evaluate()).done(function() { 
+				 if(ivy.exploit.target != null){
+					 ivy.addPage([ivy.exploit.target]);
+				 } 
+			});
+			
+			//$.when(ivy.exploit.map()).done((function(map) { alert(map) }));
+		},
+		
+		map: function(){
+			if(this.host == "" || !this.pattern.test(this.host) || this.rounds < 1) return;
+			
+			return $.ajax({
+				url : "/api/url-mapping?host=" + this.host + "&linksNumber=" + this.rounds,
 				cache : false,
 				dataType : "json",
 				success : function(data) {
-					if (data != null) alert(data);
+					if (data != null) ivy.exploit.urls = data;
 				}
-			});
+			})
 		},
+		
+		evaluate: function(){	
+			if(this.host == "" || !this.pattern.test(this.host)) return;
+			
+			return $.ajax({
+				url : "/api/target?action=evaluate&host=" + this.host,
+				cache : false,
+				dataType : "json",
+				success : function(data) {
+					if (data != null) ivy.exploit.target = data;
+				}
+			})
+		}
+		
+	},
 	
-
-	}
+	
 }
