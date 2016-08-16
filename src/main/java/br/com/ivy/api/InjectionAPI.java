@@ -7,8 +7,6 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.google.gson.Gson;
-
 import br.com.ivy.util.WebPage;
 
 @WebServlet("/api/injection")
@@ -24,11 +22,20 @@ public class InjectionAPI extends API{
 	}
 	
 	@Override
-	protected void execute(){
-		String object = "ERROR";
-		
-		setParameters();
-		
+	protected void requestParameters(){
+		if (request.getParameter("code") != null) {
+			code = request.getParameter("code");
+		}
+		if (request.getParameter("links") != null) {
+			links = request.getParameter("links").split(",");
+		}
+		if (request.getParameter("exceptions") != null) {
+			exceptions = request.getParameter("exceptions").split(",");
+		}
+	}
+	
+	@Override
+	protected Object requestObject(){				
 		Map<String, Boolean> results = new HashMap<String, Boolean>();
 		
 		for(String originalLink : links){
@@ -53,8 +60,7 @@ public class InjectionAPI extends API{
 			results.put(originalLink, vulnerable);
 		}
 
-		object = new Gson().toJson(results);
-		request.setAttribute("object", object);
+		return results;
 	}
 	
 	private boolean getResult(String content){
@@ -69,18 +75,6 @@ public class InjectionAPI extends API{
 		if(error >= 2) result = true;
 		
 		return result;
-	}
-	
-	public void setParameters(){
-		if (request.getParameter("code") != null) {
-			code = request.getParameter("code");
-		}
-		if (request.getParameter("links") != null) {
-			links = request.getParameter("links").split(",");
-		}
-		if (request.getParameter("exceptions") != null) {
-			exceptions = request.getParameter("exceptions").split(",");
-		}
 	}
 	
 	

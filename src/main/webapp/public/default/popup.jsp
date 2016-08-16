@@ -25,6 +25,8 @@
 		
 		<div class="popup-footer">
 			<img class="options" src="/public/img/icon-options.png" >
+			<img class="loading" src="/public/img/gif-gears.gif" >
+			
 			<button id="hack" class="new-scan">
 				<span class="icon">
 					<img src="/public/img/icon-eye.png">

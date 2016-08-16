@@ -7,9 +7,6 @@ import java.util.Set;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import br.com.ivy.util.WebPage;
 
 @WebServlet("/api/url-mapping")
@@ -28,23 +25,38 @@ public class UrlMappingAPI extends API{
 	
 	@Override
 	protected void clear() {
+		host = null;
+		
 		links.clear();
 		checked.clear();
 		sampling.clear();
 	}
 	
 	@Override
-	protected void execute(){
-		String object = "ERROR";
-		
-		setParameters();
+	protected void requestParameters() {
+		if (request.getParameter("character") != null) {
+			character = request.getParameter("character");
+		}
+		if (request.getParameter("host") != null) {
+			host = WebPage.getHost(request.getParameter("host")) ;
+		}
+		if (request.getParameter("linksNumber") != null) {
+			try {
+				int number = Integer.parseInt(request.getParameter("linksNumber"));
+				if(number <= 20) linksNumber = number;	
+			} catch (Exception e) { }
+		}
+	}
+	
+	@Override
+	protected Object requestObject(){
+		Set<String> result = null;
 		
 		if(host != null && WebPage.isReachable(host)){
-			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-			object = gson.toJson(map());
+			result = map();
 		}
-			
-		request.setAttribute("object", object);
+		
+		return result;
 	}
 	
 	private Set<String> map() {
@@ -65,26 +77,14 @@ public class UrlMappingAPI extends API{
 				e.printStackTrace(); 
 			}
 		}
-		for (String link : checked) {
+		
+		links.addAll(checked);
+		
+		for (String link : links) {
 			if(character.isEmpty() || link.contains(character)) sampling.add(link);
 			if(sampling.size() >= linksNumber) break;
 		}
 		return sampling;
-	}
-	
-	private void setParameters() {
-		if (request.getParameter("character") != null) {
-			character = request.getParameter("character");
-		}
-		if (request.getParameter("host") != null) {
-			host = WebPage.getHost(request.getParameter("host")) ;
-		}
-		if (request.getParameter("linksNumber") != null) {
-			try {
-				int number = Integer.parseInt(request.getParameter("linksNumber"));
-				if(number <=20) linksNumber = number;	
-			} catch (Exception e) { }
-		}
 	}
 	
 	
@@ -102,5 +102,5 @@ public class UrlMappingAPI extends API{
 	
 	private Set<String> sampling;
 	
-	private static final long tryLimit = 50;
+	private static final long tryLimit = 40;
 }

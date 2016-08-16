@@ -6,11 +6,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 
 public abstract class API extends HttpServlet{
 	
 	private static final long serialVersionUID = -4761909367235273094L;
 
+	API(){
+		gson = new Gson();
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
@@ -25,8 +31,9 @@ public abstract class API extends HttpServlet{
 		
 		prepare(request, response);
 		
-		execute();
-
+		requestParameters();
+		
+		request.setAttribute("object", gson.toJson(requestObject()));
 		request.getRequestDispatcher("/public/api/page.jsp").forward(request, response);
 	}
 	
@@ -37,7 +44,7 @@ public abstract class API extends HttpServlet{
 		clear();
 		
 		try {
-			request.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");		
 		} catch (Exception e) { }
 		
 		this.request  = request;
@@ -48,7 +55,11 @@ public abstract class API extends HttpServlet{
 	
 	protected HttpServletResponse response;
 	
+	protected Gson gson;
+	
 	protected abstract void clear();
 	
-	protected abstract void execute();
+	protected abstract Object requestObject();
+	
+	protected abstract void requestParameters();
 }

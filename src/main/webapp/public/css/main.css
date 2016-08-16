@@ -89,6 +89,7 @@ body .popup .popup-filter > span { float: left; font-size: 0.8em; margin: 0.9% 3
 body .popup .popup-filter .close { float: right; margin: -0.5em 0.3em 0; cursor: pointer; }
 body .popup .popup-filter .close img { width: 1.1em; }
 
-body .popup .popup-footer { width: 94%; float: left; margin: 0 3% 4%; }
-body .popup .popup-footer .options { background-color: #381b55; width: 30px; margin: 0.16em; float: left; cursor: pointer; }
+body .popup .popup-footer { width: 94%; float: left; margin: 0 3% 3%; }
+body .popup .popup-footer .options { background-color: #381b55; width: 33px; margin: 0.16em; float: left; cursor: pointer; }
+body .popup .popup-footer .loading { float: left; width: 37px; margin-left: 68%; display: none; }
 body .popup .popup-footer .new-scan { margin-top: 0; }

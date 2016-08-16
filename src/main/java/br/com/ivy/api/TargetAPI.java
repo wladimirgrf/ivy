@@ -43,30 +43,81 @@ public class TargetAPI extends API {
 	}
 	
 	@Override
-	protected void execute() {
-		String object = null;
-
-		setParameters();
+	protected void requestParameters(){
+		if(request.getParameter("tags") != null){
+			tags = request.getParameter("tags");
+		}
+		if(request.getParameter("url") != null){
+			url = request.getParameter("url");
+		}
+		if(request.getParameter("action") != null){
+			action = request.getParameter("action");
+		}
+		if(request.getParameter("query") != null){
+			query = request.getParameter("query");
+		}
+		if(request.getParameter("host") != null){
+			host = WebPage.getHost(request.getParameter("host"));
+		}
+		if(request.getParameter("safe") != null){
+			safe = Boolean.parseBoolean(request.getParameter("safe"));
+		}
+		if (request.getParameter("id") != null) {
+			try {
+				id = Long.parseLong(request.getParameter("id"));
+			} catch (Exception e) { }
+		}
+		if (request.getParameter("page") != null) {
+			try {
+				page = Integer.parseInt(request.getParameter("page"));
+			} catch (Exception e) { }
+		}
+		if (request.getParameter("pagesize") != null) {
+			try {
+				pagesize = Integer.parseInt(request.getParameter("pagesize"));
+			} catch (Exception e) { }
+		}
+		if (request.getParameter("orderBy") != null) {
+			switch (request.getParameter("orderBy").toLowerCase()) {
+				case "host": 	orderBy = "host"; 	 break;
+				case "country": orderBy = "country"; break;
+				case "owner": 	orderBy = "owner"; 	 break;
+				case "email": 	orderBy = "email"; 	 break;
+				case "changed": orderBy = "changed"; break;
+				case "safe": 	orderBy = "safe"; 	 break;
+			}
+		}
+		if (request.getParameter("order") != null) {
+			if(request.getParameter("order").toLowerCase() == "asc") order = "asc";
+		}
 		
-		if(action != null){
+		page 	 = (page > 0 ? page : 1); 
+		pagesize = (pagesize > 0 ? pagesize : 5);
+		
+		order 	= (order != "" ? order : "desc");
+		orderBy = (orderBy != "" ? orderBy : "lastScan");
+	}
+	
+	@Override
+	protected Object requestObject() {	
+		Object result = null;
+		
+		if(action != null && !action.isEmpty()){
 			if (action.equals("evaluate") && host != null && WebPage.isReachable(host))  { 
 				evaluate();
 				
 			}else if (action.equals("search") && query != null && !query.isEmpty()) {	
-				object = gson.toJson(implementation.search(query, page, pagesize).getResult());
+				result = implementation.search(query, page, pagesize).getResult();
 				
 			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
 				save(); 
 			}
 		}
-		
-		if(id == null){
-			object = null;
-		}else if(object == null){
-			object = gson.toJson(( id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order)));
+		if(result == null && id != null){
+			result = (id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order));
 		}
 		
-		request.setAttribute("object", object);
+		return result;
 	}
 	
 	private void save(){
@@ -122,65 +173,8 @@ public class TargetAPI extends API {
 		}
 	}
 	
-	private void setParameters(){
-		if(request.getParameter("tags") != null){
-			tags = request.getParameter("tags");
-		}
-		if(request.getParameter("url") != null){
-			url = request.getParameter("url");
-		}
-		if(request.getParameter("action") != null){
-			action = request.getParameter("action");
-		}
-		if(request.getParameter("query") != null){
-			query = request.getParameter("query");
-		}
-		if(request.getParameter("host") != null){
-			host = WebPage.getHost(request.getParameter("host"));
-		}
-		if(request.getParameter("safe") != null){
-			safe = Boolean.parseBoolean(request.getParameter("safe"));
-		}
-		if (request.getParameter("id") != null) {
-			try {
-				id = Long.parseLong(request.getParameter("id"));
-			} catch (Exception e) { }
-		}
-		if (request.getParameter("page") != null) {
-			try {
-				page = Integer.parseInt(request.getParameter("page"));
-			} catch (Exception e) { }
-		}
-		if (request.getParameter("pagesize") != null) {
-			try {
-				pagesize = Integer.parseInt(request.getParameter("pagesize"));
-			} catch (Exception e) { }
-		}
-		if (request.getParameter("orderBy") != null) {
-			switch (request.getParameter("orderBy").toLowerCase()) {
-				case "host": 	orderBy = "host"; 	 break;
-				case "country": orderBy = "country"; break;
-				case "owner": 	orderBy = "owner"; 	 break;
-				case "email": 	orderBy = "email"; 	 break;
-				case "changed": orderBy = "changed"; break;
-				case "safe": 	orderBy = "safe"; 	 break;
-			}
-		}
-		if (request.getParameter("order") != null) {
-			if(request.getParameter("order").toLowerCase() == "asc") order = "asc";
-		}
-		
-		page 	 = (page > 0 ? page : 1); 
-		pagesize = (pagesize > 0 ? pagesize : 5);
-		
-		order 	= (order != "" ? order : "desc");
-		orderBy = (orderBy != "" ? orderBy : "lastScan");
-	}
-	
 	
 	//Action Properties
-	
-	private Gson gson;
 
 	private Long id;
 	

@@ -126,34 +126,66 @@ var ivy = {
 	},
 	
 	exploit: {
-		rounds: 0,
-		host:   "",
-		urls:   [],
-		target: null,
+		rounds: 	0,
+		host:   	"",
+		urls:   	[],
+		vulnerable: {},
+		target: 	null,
 		
-		
+		msg_no_urls: "No link has been found, please contact support.",
 		pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/,
 		
 		execute: function(){
 			
-			$.when(ivy.exploit.evaluate()).done(function() { 
+			$.when(ivy.exploit.evaluate()).done(function() {
+				
 				 if(ivy.exploit.target != null){
 					 ivy.addPage([ivy.exploit.target]);
-				 } 
+					 
+				 } else {
+					 $(".popup-footer .loading").show();
+					 
+					 $.when(ivy.exploit.map()).done(function() { 
+						 if(ivy.exploit.urls.length > 0){
+							 $.when(ivy.exploit.code_injection()).done(function() { 
+								 alert(ivy.exploit.vulnerable[0]);
+							 });
+						 } else {
+							 alert(ivy.exploit.msg_no_urls);
+						 }
+					 });
+				 }
+				 
+
 			});
-			
-			//$.when(ivy.exploit.map()).done((function(map) { alert(map) }));
 		},
 		
 		map: function(){
 			if(this.host == "" || !this.pattern.test(this.host) || this.rounds < 1) return;
 			
 			return $.ajax({
-				url : "/api/url-mapping?host=" + this.host + "&linksNumber=" + this.rounds,
+				url : "/api/url-mapping?character==&host=" + this.host + "&linksNumber=" + this.rounds,
 				cache : false,
 				dataType : "json",
 				success : function(data) {
 					if (data != null) ivy.exploit.urls = data;
+				}
+			})
+		},
+		
+		code_injection: function(){
+			if(this.urls.length <= 0) return;
+			
+			return $.ajax({
+				url : "/api/injection?links=" + this.urls,
+				cache : false,
+				dataType : "json",
+				success : function(data) {
+					if (data != null){
+						for (var key in data) {
+							console.log(key + " - " + data[key]);
+						 }
+					}
 				}
 			})
 		},
