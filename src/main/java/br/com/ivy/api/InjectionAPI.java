@@ -16,8 +16,8 @@ public class InjectionAPI extends API{
 
 	@Override
 	protected void clear() {
-		code =  "'";
-		links = null;
+		code  = "'";
+		links = new String[]{};
 		exceptions = new String[]{"erro","sql","select"};
 	}
 	
