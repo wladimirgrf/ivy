@@ -32,20 +32,19 @@ $(function() {
 	});
 	
 	$('#hack').click(function(){
+		$('#hack').prop("disabled", true);
+		
 		var host   = $('.popup .popup-input').val();
 		var rounds = Number($(".p-input input").val());
 		
-		if(host != ""){
+		if(host != "" && ivy.pattern.test(host)){
 			ivy.exploit.host = host;
 			
 			if(rounds > 0){
 				ivy.exploit.rounds = rounds;
 			}
 			
-			$.when(ivy.exploit.execute()).done(function() { 
-				$('.popup').hide();
-				$('.body-off').hide();
-			});
+			ivy.exploit.execute();
 		}
 	});
 });
@@ -85,14 +84,19 @@ var ivy = {
 			});
 		},
 		
-		save: function(host, url, safe){
-			if($.isEmptyObject(host) || !ivy.pattern.test(host) || $.isEmptyObject(url)) return;
+		save: function(host, url, safe, tags){
+			if($.isEmptyObject(host) 
+			|| !ivy.pattern.test(host)
+			|| $.isEmptyObject(url)) {
+				return;
+			}
 			
 			var params = {
 				"action" : "save", 
 				"host"   : host, 
 				"url"    : url, 
-				"safe"   : (safe ? safe : false)
+				"safe"   : (safe ? safe : false),
+				"tags"   : tags
 			};
 			
 			$.ajax({
@@ -120,36 +124,13 @@ var ivy = {
 		
 		msg_no_urls: "No link has been found, please contact support.",
 		
-		execute: function(){
-			
-			$.when(ivy.exploit.evaluate()).done(function() {
-				
-				 if(ivy.exploit.target == null){
-					 $(".popup-footer .loading").show();
-					 
-					 $.when(ivy.exploit.map()).done(function() { 
-						 if(ivy.exploit.urls.length > 0){
-							 $.when(ivy.exploit.code_injection()).done(function() { 
-								 
-								 ivy.target.save(
-									 ivy.exploit.host, 
-									 ivy.exploit.url, 
-									 ivy.exploit.vulnerable
-								 );
-								 $(".popup-footer .loading").hide();
-							 });
-						 } else {
-							 alert(ivy.exploit.msg_no_urls);
-						 }
-					 });
-				 } else {
-					 ivy.addPage([ivy.exploit.target]);
-				 }
-			});
-		},
-		
+
 		map: function(){
-			if(this.host == "" || !ivy.pattern.test(this.host) || this.rounds < 1) return;
+			if(this.host == "" 
+			|| !ivy.pattern.test(this.host) 
+			|| this.rounds < 1) {
+				return;
+			}
 			
 			var params = {
 				"character"   : "=", 
@@ -164,14 +145,19 @@ var ivy = {
 				data: params,
 				success : function(data) {
 					if (data != null){
-						ivy.exploit.urls = data;
+						for(var index in data){
+							var url = data[index].replace(/&/g,"%26");
+							ivy.exploit.urls.push(url);
+						}
 					}
 				}
 			})
 		},
 		
 		code_injection: function(){
-			if(this.urls.length <= 0) return;
+			if(this.urls.length <= 0){
+				return;
+			}
 			
 			return $.ajax({
 				url : "/api/injection?links="+this.urls,
@@ -199,7 +185,10 @@ var ivy = {
 		},
 		
 		evaluate: function(){	
-			if(this.host == "" || !ivy.pattern.test(this.host)) return;
+			if(this.host == "" 
+			|| !ivy.pattern.test(this.host)) {
+				return;
+			}
 			
 			var params = {
 				"action" : "evaluate", 
@@ -217,19 +206,71 @@ var ivy = {
 					}
 				}
 			})
-		}
+		},
 		
+		execute: function(){
+			$.when(ivy.exploit.evaluate()).done(function() {
+				 if(ivy.exploit.target != null){
+					 ivy.addPage([ivy.exploit.target]);
+					 ivy.close_popup();
+				 } else {
+					 ivy.loading_event();
+					 
+					 $.when(ivy.exploit.map()).done(function() { 
+						 if(ivy.exploit.urls.length <= 0){
+							 alert(ivy.exploit.msg_no_urls);
+							 ivy.close_popup();
+						 } else {
+					
+							 $.when(ivy.exploit.code_injection()).done(function() {
+								 
+								 ivy.target.save(
+									 ivy.exploit.host, 
+									 ivy.exploit.url, 
+									 ivy.exploit.vulnerable,
+									 ivy.create_tags(ivy.exploit.host)
+								 );
+								 
+								 ivy.close_popup();
+							 });
+						 }
+					 });
+				 }
+			});
+		}
 	},
 	
+	create_tags: function(host){
+		var tags = host.split("//")[1];
+		 
+		 tags = tags.replace(/\./g, " ");
+		 tags = tags.replace(/\//g, "");
+		 tags = tags.replace("com", "");
+		 tags = tags.replace("br",  "");
+		 
+		 return $.trim(tags);
+	},
 	
-	pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/,
+	loading_event: function(){
+		$(".popup-footer .loading").show();
+	},
+	
+	close_popup: function(){
+		$('#hack').prop("disabled", false);
+		$(".popup-footer .loading").hide();
+		$('.popup').hide();
+		$('.body-off').hide();
+	},
 	
 	getTimeStamp: function(time) {
 		var date = new Date().getTime();
 		var timestamp = "";
 		
 		switch (true) {
-			case ((date - time) <= (10 * 60 * 1000)):
+			case ((date - time) <= (59 * 1000)):
+				timestamp = Math.round((date - time) / 1000) + " sec";
+            	break;
+			case ((date - time) <= (59 * 60 * 1000)):
 				timestamp = Math.round((date - time) / (60 * 1000)) + " min";
 	            break;
 	        case ((date - time) <= (48 * 60 * 60 * 1000)):
@@ -242,7 +283,10 @@ var ivy = {
 	},
 	
 	formatTags: function(line) {
-		if(line == null || line == "") return;
+		if(line == null 
+		|| line == "")  {
+			return;
+		}
 		
 		var tags = line.split(" ");
 		var result = $("<div>");
@@ -258,6 +302,7 @@ var ivy = {
 	
 	addPage: function(data) {
 		var itens = $("div.page").empty();
+		
 		for(var i = 0; i < data.length; i++){
 			itens.append(
 				$('<div>').append(
@@ -265,18 +310,24 @@ var ivy = {
 						$('<a>').attr({"href": "http://" + data[i].host, "target": "_blank"}).append(
 							$('<strong>').addClass("host").html(data[i].host)
 						),
+						
 						$('<span>').addClass("location").append(
-								$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon"),
-								$('<strong>').html(data[i].country)
+							$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon"),
+							$('<strong>').html(data[i].country)
 						),
+						
 						$('<span>').addClass("time").html(ivy.getTimeStamp(Number(data[i].lastScan)))
 					).addClass("bloc-info"),
+					
 					$('<div>').addClass("url " + (!data[i].safe ? "url-green" : "url-red")).append(
 						$('<a>').attr("href", data[i].url).html(data[i].url)	
 					),
+					
 					$('<div>').addClass("search-tags").append(ivy.formatTags(data[i].tags))
 	             ).addClass("item")
 	        )
 		}
-	}
+	},
+	
+	pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
 }

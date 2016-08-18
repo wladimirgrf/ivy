@@ -87,9 +87,23 @@ public class WebPage {
 		}
 		link = link.replace(" ", "%20");
 		
-		if(!link.contains(host) || link.contains("javascript") || link.contains("mailto:")) link = null;
+		if(!link.contains(host) || link.contains("javascript") || link.contains("mailto:") || isIgnoredUri(link.toLowerCase())) link = null;
 	
 		return link;
+	}
+	
+	private static boolean isIgnoredUri(String uri) {
+		if(uri.endsWith(".doc")
+		|| uri.endsWith(".xls")
+		|| uri.endsWith(".jpg")
+		|| uri.endsWith(".jpeg")
+		|| uri.endsWith(".png")
+		|| uri.endsWith(".gif")
+		|| uri.endsWith(".ico")
+		|| uri.endsWith(".pdf")) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static String jsonToUTF8(String object){

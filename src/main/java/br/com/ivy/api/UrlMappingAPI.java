@@ -63,6 +63,10 @@ public class UrlMappingAPI extends API{
 		URL address = this.host;
 		
 		for(int i = 0; i < tryLimit; i++){
+			if(address == null) break;
+			
+			System.out.println(address);
+			
 			links.addAll(WebPage.linkChecker(address));
 			links.removeAll(checked);
 			

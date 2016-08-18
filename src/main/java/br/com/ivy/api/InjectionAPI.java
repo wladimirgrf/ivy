@@ -1,5 +1,6 @@
 package br.com.ivy.api;
 
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class InjectionAPI extends API{
 	protected void clear() {
 		code  = "'";
 		links = new String[]{};
-		exceptions = new String[]{"erro","sql","select"};
+		exceptions = new String[]{"erro","sql","query", "syntax", "mysql"};
 	}
 	
 	@Override
@@ -69,10 +70,10 @@ public class InjectionAPI extends API{
 		content = content.toLowerCase();
 
 		for(String exception : exceptions){
-			if(error >= 2) break;
+			if(error >= 3) break;
 			if(content.contains(exception)) error++;
 		}
-		if(error >= 2) result = true;
+		if(error >= 3) result = true;
 		
 		return result;
 	}
