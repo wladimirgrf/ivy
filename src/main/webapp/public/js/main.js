@@ -43,12 +43,46 @@ $(function() {
 			if(rounds > 0){
 				ivy.exploit.rounds = rounds;
 			}
-			//ivy.exploit.execute();
+			ivy.exploit.execute();
 		}
 	});
 });
 
 var ivy = {
+		
+	create_tags: function(host){
+		var tags = host.split("//")[1];
+		 
+		 tags = tags.replace(/\./g, " ");
+		 tags = tags.replace(/\//g, "");
+		 tags = tags.replace("com", "");
+		 tags = tags.replace("br",  "");
+		 tags = tags.replace("www", "");
+		 
+		 return $.trim(tags);
+	},
+	
+	loading_event: function(){
+		$("#hack").prop("disabled",true);
+		$("#hack").addClass("disabled");
+		
+		$(".popup-footer .option-container").prop("disabled",true);
+		$(".popup-footer .option-container").addClass("disabled");
+		
+		$(".popup-footer .loading").show();
+	},
+	
+	close_popup: function(){
+		$("#hack").prop("disabled",false);
+		$("#hack").removeClass("disabled");
+		
+		$(".popup-footer .option-container").prop("disabled",false);
+		$(".popup-footer .option-container").removeClass("disabled");
+		
+		$(".popup-footer .loading").hide();
+		$('.popup').hide();
+		$('.body-off').hide();
+	},
 		
 	target:{
 		list: function() {
@@ -240,29 +274,6 @@ var ivy = {
 		}
 	},
 	
-	create_tags: function(host){
-		var tags = host.split("//")[1];
-		 
-		 tags = tags.replace(/\./g, " ");
-		 tags = tags.replace(/\//g, "");
-		 tags = tags.replace("com", "");
-		 tags = tags.replace("br",  "");
-		 tags = tags.replace("www",  "");
-		 
-		 return $.trim(tags);
-	},
-	
-	loading_event: function(){
-		$("#hack").prop("disabled",true);
-		$(".popup-footer .loading").show();
-	},
-	
-	close_popup: function(){
-		$("#hack").prop("disabled",false);
-		$(".popup-footer .loading").hide();
-		$('.popup').hide();
-		$('.body-off').hide();
-	},
 	
 	getTimeStamp: function(time) {
 		var date = new Date().getTime();

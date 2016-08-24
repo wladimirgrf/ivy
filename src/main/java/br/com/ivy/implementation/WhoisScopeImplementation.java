@@ -32,4 +32,8 @@ public class WhoisScopeImplementation {
 	public void remove(WhoisScope scope) {
     	dao.delete(scope);
     }
+	
+	public void indexAll(){
+		dao.indexAll();
+	}
 }

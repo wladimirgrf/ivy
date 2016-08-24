@@ -24,11 +24,11 @@
 		</div>
 		
 		<div class="popup-footer">
-			<div class="option-container">
+			<button class="option-container">
 				<img class="options" src="/public/img/icon-options.png" >
-			</div>
+			</button>
 			<img class="loading" src="/public/img/gif-gears.gif" >
-			<a href="#" id="hack" class="button">Analyze</a>
+			<button id="hack" class="button">Analyze</button>
 		</div>
 	</div>	
 </div>

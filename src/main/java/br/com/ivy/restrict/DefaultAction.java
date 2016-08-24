@@ -35,6 +35,8 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 				save();
 			} else if (action.equals("delete")) {			
 				delete();
+			} else if (action.equals("index")) {
+				index();
 			}
 		}
 		request.getRequestDispatcher(layoutPath).forward(request, response);
@@ -82,6 +84,11 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 		list();	
 	}
 	
+	protected void index() {
+		indexAll();
+		list();
+	}
+	
 	protected String layoutPath = "/restrict/default/layout.jsp";
 	
 	protected HttpServletRequest request;
@@ -107,4 +114,6 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 	protected abstract T parse(String id);
 	
 	protected abstract T idEmpty();
+	
+	protected abstract void indexAll();
 }

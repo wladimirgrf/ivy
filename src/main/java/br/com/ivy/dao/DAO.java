@@ -118,4 +118,28 @@ public abstract class DAO<T> {
        
         return result;
     }
+	
+	@SuppressWarnings("unchecked")
+	public void indexAll() {
+        try {
+        	EntityManager entityManager = ManagerFactory.getCurrentEntityManager();
+            Query query = entityManager.createQuery("select max(a.id) from " + getClassName() + " a");
+            long total = (Long) query.getSingleResult();
+            FullTextEntityManager ft = Search.getFullTextEntityManager(entityManager);
+            ft.purgeAll(getSuperClass());
+            for (long i = 0; i < total / 100 + 1; i++) {
+                query = ft.createQuery("select a from " + getClassName() + " a where a.id >= ? and a.id <= ? order by a.id");
+                query.setParameter(1, i * 100 + 1);
+                query.setParameter(2, (i + 1) * 100);
+				List<T> list = query.getResultList();
+                for (T model : list) {
+                    ft.index(model);
+                }
+                ft.flushToIndexes();
+                ft.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
 }

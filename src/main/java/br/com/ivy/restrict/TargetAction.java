@@ -72,4 +72,9 @@ public class TargetAction extends DefaultAction<Target, Long>{
 	protected Long idEmpty() {
 		return 0l;
 	}
+	
+	@Override
+	protected void indexAll() {
+		implementation.indexAll();
+	}
 }

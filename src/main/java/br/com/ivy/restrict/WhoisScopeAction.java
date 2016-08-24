@@ -85,4 +85,9 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 	protected String idEmpty() {
 		return "";
 	}
+	
+	@Override
+	protected void indexAll() {
+		implementation.indexAll();
+	}
 }

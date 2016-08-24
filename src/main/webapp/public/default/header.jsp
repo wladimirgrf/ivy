@@ -28,6 +28,6 @@
 				<img src="/public/img/icon-search.png">
 			</span>
 		</div>
-		<a href="#" id="open-popup" class="button">Analyze</a>
+		<button id="open-popup" class="button">Analyze</button>
 	</div>
 </div>

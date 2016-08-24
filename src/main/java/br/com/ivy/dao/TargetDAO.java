@@ -15,7 +15,7 @@ public class TargetDAO extends DAO<Target>{
 	
 	@Override
 	public String[] getSearchFields() {
-		return new String[] {"host", "country", "url", "tags"};
+		return new String[] {"host", "country", "tags"};
 	}
 	
 	private static TargetDAO instance;

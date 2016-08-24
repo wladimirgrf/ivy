@@ -51,4 +51,8 @@ public class TargetImplementation {
 		List<Target> targets = dao.find(String.format("from Target where host='%s'",host));
 		try{  return targets.get(0);  }	catch(Exception e){  return null;  }
     }
+	
+	public void indexAll(){
+		dao.indexAll();
+	}
 }

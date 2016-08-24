@@ -27,6 +27,7 @@ div.area { margin: 0 auto; width: 596px;}
 
 .box-590 { float: left; width: 590px; }
 
+body .disabled { opacity: 0.5; box-shadow: none !important; cursor: default !important; }
 
 body div.header { float: left; width: 100%; min-width: 1024px; background-color: #ffffff; z-index: 2; border-bottom: 1px solid rgba(0, 0, 0, 0.15); height: 46px; }
 
@@ -37,11 +38,11 @@ body .header .container .menu-left ul { float: left; width: 100%; height: 100%;}
 body .header .container .menu-left ul li { float: left; list-style-type: none; padding: 3% 7% 0% 4%; font-size: 13px; font-weight: 500; height: 70% }
 body .header .container .menu-left ul li a { float:left; text-decoration: none; width: 100%; height: 2em; line-height: 2em; height: 100%; }
 body .header .container .menu-left ul .selected { border-bottom: 5px solid #48266b; }
-body .header .container .menu-left ul li:HOVER { border-bottom: 5px solid #48266b; }
+body .header .container .menu-left ul li:hover { border-bottom: 5px solid #48266b; }
 body .header .container .menu-left ul li a img { width: 1.5em; height: auto; background-color: #66757f; float: left; margin-top: 0.25em; }
-body .header .container .menu-left ul li a img:HOVER {  background-color: #48266b; }
+body .header .container .menu-left ul li a img:hover {  background-color: #48266b; }
 body .header .container .menu-left ul li a span { color: #66757f; line-height: 2.2em; float: left; margin-left: 0.4em; }
-body .header .container .menu-left ul li a span:HOVER { color: #48266b; }
+body .header .container .menu-left ul li a span:hover { color: #48266b; }
 
 body .header .container .menu-middle { float: left; width: 33%; height: 88%; position: relative; text-align: center; padding-top: 0.5%; }
 body .header .container .menu-middle .logo { margin: auto; width: 32px; background-color: #48266b; }
@@ -54,8 +55,8 @@ body .header .container .menu-right .search-form .search-icon { position: absolu
 body .header .container .menu-right .search-form .search-icon img { width: 100%; height: auto; }
 
 body .button { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset; background-color:#48266b; border-radius:4px; display:inline-block; cursor:pointer; color:#ffffff; font-size:13px; font-weight:500; padding:0.55em 1.4em; text-decoration:none; width: auto; float: right; margin-top: 1.52%; border: 1px solid transparent; }
-body .button:HOVER { background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)); }
-body .button:active { box-shadow: 0 1px 1px rgba(0, 0, 0, 1) inset; }
+body .button:hover:enabled { background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)); }
+body .button:active:enabled { box-shadow: 0 1px 1px rgba(0, 0, 0, 1) inset; }
 
 body .page { float: left; width: 100%; margin-top: 2%;  }
 
@@ -88,9 +89,9 @@ body .popup .popup-filter .close { float: right; margin: -0.5em 0.3em 0; cursor:
 body .popup .popup-filter .close img { width: 1.1em; }
 
 body .popup .popup-footer { width: 94%; float: left; margin: 0 3% 3%; }
-body .popup .popup-footer .option-container { float: left; position: relative; padding: 0.1em 0.3em; border-radius: 4px; cursor: pointer; }
-body .popup .popup-footer .option-container:HOVER { background-color: rgba(255, 255, 255, 0.25); background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 132, 180, 0.1)); border: 0.5px solid #48266b; }
-body .popup .popup-footer .option-container:active { background-image: linear-gradient(rgba(0, 132, 180, 0.1), rgba(255, 255, 255, 0)); }
+body .popup .popup-footer .option-container { float: left; position: relative; padding: 0.1em 0.3em; border-radius: 4px; cursor: pointer; margin-top: 0.2%; border: 1px solid transparent; background-color: transparent; }
+body .popup .popup-footer .option-container:hover:enabled { background-color: rgba(255, 255, 255, 0.25); background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 132, 180, 0.1)); border: 0.5px solid #48266b; }
+body .popup .popup-footer .option-container:active:enabled { background-image: linear-gradient(rgba(0, 132, 180, 0.1), rgba(255, 255, 255, 0)); }
 body .popup .popup-footer .options { width: 30px; margin: 0.16em; float: left; }
-body .popup .popup-footer .loading { float: left; width: 32px; margin-left: 67%; margin-top: 4px; display: none; }
-body .popup .popup-footer .button { margin-top: 0; padding: 0.8em 1.9em; }
+body .popup .popup-footer .loading { float: left; width: 32px; margin-left: 63%; margin-top: 6px; display: none; }
+body .popup .popup-footer .button { margin-top: 0; padding: 0.8em 1.9em; font-weight: 600; }
