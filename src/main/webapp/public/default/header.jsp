@@ -28,11 +28,6 @@
 				<img src="/public/img/icon-search.png">
 			</span>
 		</div>
-		<button class="new-scan">
-			<span class="icon">
-				<img src="/public/img/icon-eye.png">
-			</span> 
-			<span class="text">Scan</span> 
-		</button>
+		<a href="#" id="open-popup" class="button">Analyze</a>
 	</div>
 </div>

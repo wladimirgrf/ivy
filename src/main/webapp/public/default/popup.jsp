@@ -6,7 +6,7 @@
 	<div class="body-off"></div>
 	
 	<div class="popup">
-		<div class="title">Scan Domain</div>
+		<div class="title">Analyze Domain</div>
 		<input type="text" class="popup-input" placeholder="domain.com.br" >
 		
 		<div class="popup-filter">
@@ -24,15 +24,11 @@
 		</div>
 		
 		<div class="popup-footer">
-			<img class="options" src="/public/img/icon-options.png" >
+			<div class="option-container">
+				<img class="options" src="/public/img/icon-options.png" >
+			</div>
 			<img class="loading" src="/public/img/gif-gears.gif" >
-			
-			<button id="hack" class="new-scan">
-				<span class="icon">
-					<img src="/public/img/icon-eye.png">
-				</span> 
-				<span class="text">Scan</span> 
-			</button>
+			<a href="#" id="hack" class="button">Analyze</a>
 		</div>
 	</div>	
 </div>

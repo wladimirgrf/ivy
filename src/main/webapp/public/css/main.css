@@ -44,20 +44,18 @@ body .header .container .menu-left ul li a span { color: #66757f; line-height: 2
 body .header .container .menu-left ul li a span:HOVER { color: #48266b; }
 
 body .header .container .menu-middle { float: left; width: 33%; height: 88%; position: relative; text-align: center; padding-top: 0.5%; }
-body .header .container .menu-middle .logo { margin: auto; width: 32px; background-image: url('/public/img/bg-purple.png'); }
+body .header .container .menu-middle .logo { margin: auto; width: 32px; background-color: #48266b; }
 
 body .header .container .menu-right { width: 38%; float:right; position: relative; }
 
 body .header .container .menu-right .search-form { float: left; font-size: 0.9em; height: 2.3em; margin: 1.6% 5% 0 0; width: 65%; }
-body .header .container .menu-right .search-form .search-input { float:left; background-color: #f5f8fa;  border: 1px solid #e1e8ed; border-radius: 21px; box-sizing: border-box; color: #292f33; display: block; height: 3em; line-height: 1em; padding: 0.5em 3em 0.5em 1.3em; width: 100%; }
+body .header .container .menu-right .search-form .search-input { float:left; background-color: #f5f8fa;  border: 1px solid #e1e8ed; border-radius: 21px; box-sizing: border-box; color: #292f33; display: block; height: 3em; line-height: 1em; padding: 0.5em 3em 0.5em 1.3em; width: 90%; }
 body .header .container .menu-right .search-form .search-icon { position: absolute; width: 1.3em; margin: 0.4em 0em 0 -2em; z-index: 50; cursor: pointer; }
 body .header .container .menu-right .search-form .search-icon img { width: 100%; height: auto; }
 
-body .new-scan { width: auto;  float: right; margin-top: 1.4%; background-image: url('/public/img/bg-purple.png'); background-position: right top; border: 1px solid transparent; border-radius: 5px; cursor: pointer; box-shadow: 1px 1px 3px #777; }
-body .new-scan:HOVER { background-position: bottom;  }
-body .new-scan .icon { width: 2.15em; float: left; margin: 0.4em 0.1em;  }
-body .new-scan  .icon img { width: 100%; height: auto; }
-body .new-scan .text { color: #fff; font-size: 1.2em; font-weight: bold; margin: 0.52em 0.3em; float: left;  }
+body .button { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset; background-color:#48266b; border-radius:4px; display:inline-block; cursor:pointer; color:#ffffff; font-size:13px; font-weight:500; padding:0.55em 1.4em; text-decoration:none; width: auto; float: right; margin-top: 1.52%; border: 1px solid transparent; }
+body .button:HOVER { background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)); }
+body .button:active { box-shadow: 0 1px 1px rgba(0, 0, 0, 1) inset; }
 
 body .page { float: left; width: 100%; margin-top: 2%;  }
 
@@ -78,7 +76,7 @@ body .page .item .url-green a { color: #008B8B; }
 body .page .item .search-tags { float: left; width: 100%; padding-top: 0.7%; font-size: 0.95em; }
 body .page .item .search-tags div a { text-decoration: none; color: #0084b4; margin-right: 1%;  } 
 
-body .body-off { width: 100%; height: 100%; position: absolute; background-color: #000; opacity: 0.5; z-index: 99; left: 0; top:0; display: none; }
+body .body-off { width: 100%; height: 100%; position: absolute; background-color: #000; opacity: 0.7; z-index: 99; left: 0; top:0; display: none; }
 
 body .popup { width: 100%; max-width: 600px; position:absolute; margin: auto; z-index: 100; border-radius: 4px; background-color: #f5f8fa; top: 20%; display: none; }
 body .popup .title { width: 100%; text-align: center; float: left; line-height: 2.2em; color: #fff; border-bottom: 1px solid #fff; background-color: #381b55; border-radius: 4px 4px 0 0; }
@@ -90,6 +88,9 @@ body .popup .popup-filter .close { float: right; margin: -0.5em 0.3em 0; cursor:
 body .popup .popup-filter .close img { width: 1.1em; }
 
 body .popup .popup-footer { width: 94%; float: left; margin: 0 3% 3%; }
-body .popup .popup-footer .options { background-color: #381b55; width: 33px; margin: 0.16em; float: left; cursor: pointer; }
-body .popup .popup-footer .loading { float: left; width: 37px; margin-left: 68%; display: none; }
-body .popup .popup-footer .new-scan { margin-top: 0; }
+body .popup .popup-footer .option-container { float: left; position: relative; padding: 0.1em 0.3em; border-radius: 4px; cursor: pointer; }
+body .popup .popup-footer .option-container:HOVER { background-color: rgba(255, 255, 255, 0.25); background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 132, 180, 0.1)); border: 0.5px solid #48266b; }
+body .popup .popup-footer .option-container:active { background-image: linear-gradient(rgba(0, 132, 180, 0.1), rgba(255, 255, 255, 0)); }
+body .popup .popup-footer .options { width: 30px; margin: 0.16em; float: left; }
+body .popup .popup-footer .loading { float: left; width: 32px; margin-left: 67%; margin-top: 4px; display: none; }
+body .popup .popup-footer .button { margin-top: 0; padding: 0.8em 1.9em; }
