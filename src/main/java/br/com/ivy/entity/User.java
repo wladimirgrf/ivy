@@ -11,7 +11,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -26,9 +28,17 @@ public class User implements Serializable {
 	private Long id;
 	
 	@Field
-	private String user;
+	private String name;
 	
-	private String password;
+	@Field
+	private String email;
+	
+	private String hash;
+	
+	private String securityRule;
+	
+	@Field(index = Index.YES, store = Store.YES)
+	private boolean active = true;
 
 	public Long getId() {
 		return id;
@@ -38,22 +48,46 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
+	}	
+
+	public String getEmail() {
+		return email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
+	public String getHash() {
+		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+
+	public String getSecurityRule() {
+		return securityRule;
+	}
+
+	public void setSecurityRule(String securityRule) {
+		this.securityRule = securityRule;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public int hashCode() {
         int hash = 0;

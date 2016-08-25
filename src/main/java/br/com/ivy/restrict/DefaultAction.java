@@ -7,11 +7,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import br.com.ivy.entity.User;
 
 
 public abstract class DefaultAction<E,T> extends HttpServlet{
 	
 	private static final long serialVersionUID = 4626463527834813889L;
+	
+	private User user;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,6 +30,7 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		prepare(request, response);
+		
 		if (action != null && !action.isEmpty()) {
 			request.setAttribute("action", action);
 			if (action.equals("list")) {
@@ -39,6 +45,10 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 				index();
 			}
 		}
+		
+		request.setAttribute("isAdmin", isAdmin());
+		request.setAttribute("userId",  getUserId());
+		
 		request.getRequestDispatcher(layoutPath).forward(request, response);
 	}
 	
@@ -56,6 +66,9 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 		this.request  = request;
 		this.response = response;
 		action = request.getParameter("action");
+		
+		HttpSession session = request.getSession();
+		user = (User) session.getAttribute("user");
 
 		if (request.getParameter("id") != null) {
 			id = parse(request.getParameter("id"));
@@ -88,6 +101,21 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 		indexAll();
 		list();
 	}
+	
+	protected long getUserId(){
+		if (user != null){
+			return user.getId();
+		}
+		return 0l;
+	}
+	
+	protected boolean isAdmin() {
+		if (user != null && user.getSecurityRule() != null && !user.getSecurityRule().isEmpty() && user.getSecurityRule().equalsIgnoreCase("admin")) {
+			return true;
+		}
+		return false;
+	}
+
 	
 	protected String layoutPath = "/restrict/default/layout.jsp";
 	

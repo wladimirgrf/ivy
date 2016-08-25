@@ -6,7 +6,12 @@
 	<div class="body-off"></div>
 	
 	<div class="popup">
-		<div class="title">Analyze Domain</div>
+		<div class="popup-header">
+			<h3 class="title">Analyze Domain</h3>
+			<div class="close">
+				<img src="/public/img/icon-close-white.png">
+			</div>
+		</div>
 		<input type="text" class="popup-input" placeholder="domain.com.br" >
 		
 		<div class="popup-filter">
@@ -19,7 +24,7 @@
 			    <div class="p-plus">+</div>
 			</div>
 			<div class="close">
-				<img src="/public/img/icon-close.png">
+				<img src="/public/img/icon-close-grey.png">
 			</div>
 		</div>
 		

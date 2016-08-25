@@ -10,7 +10,7 @@
 								    
 			<div class="user">
 				<img src="/public/img/user.png">
-				<input type="text" name="user"/>  
+				<input type="text" name="email"/>  
 			</div>
 			
 			<div class="password">

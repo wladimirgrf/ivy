@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import br.com.ivy.dao.WhoisScopeDAO;
 import br.com.ivy.entity.Target;
 import br.com.ivy.entity.WhoisScope;
-import br.com.ivy.implementation.WhoisScopeImplementation;
 
 public class Whois {
 	
@@ -26,7 +26,8 @@ public class Whois {
 			document = getDocument(host, null);
 			
 			if(document != null && extension != null){
-				target = mappingTarget(document, host, new WhoisScopeImplementation().get(extension));
+				WhoisScopeDAO dao = WhoisScopeDAO.getInstance();
+				target = mappingTarget(document, host, dao.get(extension));
 			}
 		}
 		

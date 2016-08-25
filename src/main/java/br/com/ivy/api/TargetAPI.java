@@ -3,13 +3,14 @@ package br.com.ivy.api;
 import java.net.URL;
 import java.util.Calendar;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import com.google.gson.Gson;
 
+import br.com.ivy.dao.TargetDAO;
 import br.com.ivy.entity.Target;
-import br.com.ivy.implementation.TargetImplementation;
 
 import br.com.ivy.util.WebPage;
 import br.com.ivy.util.Whois;
@@ -19,10 +20,12 @@ public class TargetAPI extends API {
 
 	private static final long serialVersionUID = -2198141207687980772L;
 	
+	private TargetDAO dao;
+	
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		implementation = new TargetImplementation();
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		dao = TargetDAO.getInstance();
 	}
 	
 	@Override
@@ -107,21 +110,21 @@ public class TargetAPI extends API {
 				evaluate();
 				
 			}else if (action.equals("search") && query != null && !query.isEmpty()) {	
-				result = implementation.search(query, page, pagesize).getResult();
+				result = dao.search(query, page, pagesize).getResult();
 				
 			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
 				save(); 
 			}
 		}
 		if(result == null && id != null){
-			result = (id > 0 ? implementation.get(id) : implementation.list(page, pagesize, orderBy, order));
+			result = (id > 0 ? dao.get(id) : dao.list(page, pagesize, orderBy, order));
 		}
 		
 		return result;
 	}
 	
 	private void save(){
-		target = implementation.get(this.host.getHost());
+		target = dao.getByHost(this.host.getHost());
 		
 		if(target == null){
 			target = Whois.get(host.getHost());
@@ -138,7 +141,7 @@ public class TargetAPI extends API {
 			
 			target.setLastScan(getCurrentDate());
 			
-			implementation.persist(target);
+			dao.persist(target);
 			
 		}else if((getCurrentDate() - target.getLastScan()) >= week){
 			if(url != null && !url.isEmpty()){
@@ -153,7 +156,7 @@ public class TargetAPI extends API {
 			
 			target.setLastScan(getCurrentDate());
 			
-			implementation.update(target);
+			dao.merge(target);
 		}
 		
 		if(target != null) id = target.getId();
@@ -164,7 +167,7 @@ public class TargetAPI extends API {
 	}
 	
 	private void evaluate(){
-		target = implementation.get(this.host.getHost());
+		target = dao.getByHost(this.host.getHost());
 		
 		id = null;
 		
@@ -199,8 +202,6 @@ public class TargetAPI extends API {
 	private String order;
 	
 	private String orderBy;
-	
-	private TargetImplementation implementation;
 	
 	private static final long week = 7 * 24 * 60 * 60 * 1000;
 }

@@ -2,51 +2,53 @@ package br.com.ivy.restrict;
 
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import br.com.ivy.dao.TargetDAO;
 import br.com.ivy.entity.Target;
-import br.com.ivy.implementation.TargetImplementation;
 
 @WebServlet("/restrict/target")
 public class TargetAction extends DefaultAction<Target, Long>{
 
 	private static final long serialVersionUID = -6570296534962862169L;
 	
-	private TargetImplementation implementation;
+	private TargetDAO dao;
 	
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		implementation = new TargetImplementation();
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		dao = TargetDAO.getInstance();
 	}
 	
 	@Override
 	protected Target getObject() {
-		return implementation.get(id);
+		return dao.get(id);
 	}
 
 	@Override
 	protected List<Target> getList() {
-		return implementation.list();
+		return dao.list();
 	}
 
 	@Override
 	protected void actionSave() {
 		
-		Target target = getObject() != null ? getObject() : new Target();
+		Target target = (getObject() != null ? getObject() : new Target());
 		
 		if (request.getParameter("tags") != null){
 			target.setTags(request.getParameter("tags"));
 		}
 		
 		if (getObject() != null) {
-			implementation.update(target);
+			dao.merge(target);
 		}
 	}
 
 	@Override
 	protected void actionDelete() {
-		if (!id.equals("")) implementation.remove(getObject());	
+		if (id > 0) dao.remove(getObject());	
 	}
 	
 	@Override
@@ -75,6 +77,6 @@ public class TargetAction extends DefaultAction<Target, Long>{
 	
 	@Override
 	protected void indexAll() {
-		implementation.indexAll();
+		dao.indexAll();
 	}
 }

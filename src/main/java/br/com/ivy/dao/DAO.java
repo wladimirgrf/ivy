@@ -37,15 +37,15 @@ public abstract class DAO<T> {
 		return ManagerFactory.getCurrentEntityManager().find(getSuperClass(), id);		
 	}
 	
-	public void insert(T model) {
+	public void persist(T model) {
 		ManagerFactory.getCurrentEntityManager().persist(model);
 	}
 	
-	public void update(T model) {
+	public void merge(T model) {
 		ManagerFactory.getCurrentEntityManager().merge(model);
 	}
 	
-	public void delete(T model) {
+	public void remove(T model) {
 		ManagerFactory.getCurrentEntityManager().remove(ManagerFactory.getCurrentEntityManager().merge(model));
 	}
 	

@@ -2,38 +2,40 @@ package br.com.ivy.restrict;
 
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import br.com.ivy.dao.WhoisScopeDAO;
 import br.com.ivy.entity.WhoisScope;
-import br.com.ivy.implementation.WhoisScopeImplementation;
 
 @WebServlet("/restrict/scope")
 public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 
 	private static final long serialVersionUID = 6584217161651670606L;
 	
-	private WhoisScopeImplementation implementation;
+	private WhoisScopeDAO dao;
 	
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		implementation = new WhoisScopeImplementation();
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		dao = WhoisScopeDAO.getInstance();
 	}
 	
 	@Override
 	protected WhoisScope getObject() {
-		return implementation.get(id);
+		return dao.get(id);
 	}
 
 	@Override
 	protected List<WhoisScope> getList() {
-		return implementation.list();
+		return dao.list();
 	}
 
 	@Override
 	protected void actionSave() {
 		
-		WhoisScope scope = getObject() != null ? getObject() : new WhoisScope();
+		WhoisScope scope = (getObject() != null ? getObject() : new WhoisScope());
 		
 		if (request.getParameter("id") != null){
 			scope.setId(request.getParameter("id"));
@@ -55,15 +57,15 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 		}
 		
 		if (getObject() != null) {
-			implementation.update(scope);
+			dao.merge(scope);
 		} else {
-			implementation.persist(scope);
+			dao.persist(scope);
 		}
 	}
 
 	@Override
 	protected void actionDelete() {
-		if (!id.equals("")) implementation.remove(getObject());	
+		if (!id.equals("")) dao.remove(getObject());	
 	}
 	
 	@Override
@@ -88,6 +90,6 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 	
 	@Override
 	protected void indexAll() {
-		implementation.indexAll();
+		dao.indexAll();
 	}
 }

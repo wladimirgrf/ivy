@@ -1,5 +1,7 @@
 package br.com.ivy.dao;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -38,15 +40,28 @@ public class UserDAO extends DAO<User> {
 		return instance;
 	}
 	
-	public User get(String user, String password){
-		Query query = ManagerFactory.getCurrentEntityManager().createQuery("from User u where u.user=:user and u.password=:password");
-		query.setParameter("user", user);
-		query.setParameter("password", password);
+	public User get(String email, String hash){
+		Query query = ManagerFactory.getCurrentEntityManager().createQuery("from User u where u.email=:email and u.hash=:hash");
+		query.setParameter("email", email);
+		query.setParameter("hash", hash);
 		List<?> result = query.getResultList();
 		User us = null;
 		if (result != null && result.size() > 0 && result.get(0) instanceof User) {
 			us = (User)result.get(0);
 		}
 		return us;
+	}
+	
+	public String hash(String password) {
+		String salt = password + "pentest@";
+        String hash = null;
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(salt.getBytes(), 0, salt.length());
+            hash = new BigInteger(1, md5.digest()).toString(16);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hash;
 	}
 }

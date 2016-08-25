@@ -14,6 +14,11 @@ $(function() {
 		$(".p-input input").val("1");
 	});
 	
+	$(".popup-header .close").click(function(){
+		$('.popup').hide();
+		$('.body-off').hide();
+	});
+	
 	$(".popup-footer .option-container").click(function(){
 		$('.popup-filter').show();
 	});
@@ -32,12 +37,12 @@ $(function() {
 	});
 	
 	$("#hack").click(function(){
-		ivy.loading_event();
-		
 		var host = $(".popup .popup-input").val();
 		var rounds = Number($(".p-input input").val());
 		
-		if(host != "" && ivy.pattern.test(host)){
+		if(!$.isEmptyObject(host) && ivy.pattern.test(host)){
+			ivy.loading_event();
+			
 			ivy.exploit.host = host;
 			
 			if(rounds > 0){
@@ -159,7 +164,7 @@ var ivy = {
 		
 
 		map: function(){
-			if(this.host == "" 
+			if($.isEmptyObject(this.host) 
 			|| !ivy.pattern.test(this.host) 
 			|| this.rounds < 1) {
 				return;

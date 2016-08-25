@@ -36,15 +36,15 @@ public class Login extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = null;
 		String password = null;
-		if (request.getParameter("user") != null) {
-			email = request.getParameter("user");
+		if (request.getParameter("email") != null) {
+			email = request.getParameter("email");
 		}
 		if (request.getParameter("password") != null) {
 			password = request.getParameter("password");			
 		}
 		if (email != null && !email.isEmpty() && password != null && !password.isEmpty()) {
 			User user = UserDAO.getInstance().get(email, parseHash(password));
-			if (user != null) {
+			if (user != null && user.isActive()) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
 				request.setAttribute("content", "/restrict/default/home.jsp");
@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
 	}
 	
 	private String parseHash(String password) {
-        String salt = password + "pentest";
+        String salt = password + "pentest@";
         String hash = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

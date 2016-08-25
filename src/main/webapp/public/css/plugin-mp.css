@@ -4,11 +4,11 @@
 
 .p-minus { background-color: #d9534f; border-radius: 5px 0 0 5px; }
 
-.p-input { width:2.1em; height:1.7em; float:left; overflow: hidden; }
-.p-input input { width:2.5em; height:2em; text-align:center; border: none; background-color: #fff; font-size: 0.8em; }
+.p-input { width:1.8em; height:1.44em; float:left; overflow: hidden; }
+.p-input input { width:2.1em; height:1.63em; text-align:center; border: none; background-color: #fff; font-size: 0.8em; }
 .p-input input:focus { border:1px solid #e1e1e1; border: none; }
 
-.p-plus { background-color: #5cb85c; border-radius: 0 5px 5px 0; }
+.p-plus { background-color: #008B8B; border-radius: 0 5px 5px 0; }
 
 .p-minus,
-.p-plus { float:left; padding: 0.1em 0.5em 0.3em; color: #fff; font-weight: bold; text-align:center; cursor: pointer;  }
+.p-plus { float:left; padding: 0 0.4em 0.18em; color: #fff; font-weight: bold; text-align:center; cursor: pointer;  }

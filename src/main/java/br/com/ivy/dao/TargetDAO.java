@@ -1,5 +1,7 @@
 package br.com.ivy.dao;
 
+import java.util.List;
+
 import br.com.ivy.entity.Target;
 
 public class TargetDAO extends DAO<Target>{
@@ -30,5 +32,9 @@ public class TargetDAO extends DAO<Target>{
 		}
 		return instance;
 	}
-
+	
+	public Target getByHost(String host) {
+		List<Target> targets = find(String.format("from Target where host='%s'",host));
+		try{ return targets.get(0); } catch(Exception e){ return null; }
+	}
 }

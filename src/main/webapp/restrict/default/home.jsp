@@ -2,4 +2,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 						 %>
 
 
-<h2>Bem vindo</h2>
+<h2>Welcome</h2>
