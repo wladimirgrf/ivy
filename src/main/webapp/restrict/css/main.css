@@ -14,14 +14,25 @@ div#content h2{
 }
 
 #header {
-	background-color: #f0f0ec;
-	padding: 10px;
+	background-color: #48266b;
+	padding: 2%;
+	float: left;
+	width: 96%;
+	text-align: center;
+}
+
+#header span{
+	position: relative;
+	font-size: 2em;
+	color: #fff;
+	top: 7%;
 }
 
 #header img{
-	left: 50%;
-	margin-left: -55px;
 	position: relative;
+	width: 50px;
+	vertical-align: middle;
+	margin: 0 1%;
 }
 
 #menu {

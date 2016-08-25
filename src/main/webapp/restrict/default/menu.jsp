@@ -10,7 +10,7 @@
 	
 	<h6 class="ym-vtitle">Account</h6>
 	<ul>
-		<li><a href="/restrict/user?action=list">User</a></li>
-		<li><a href="/logout">Sair</a></li>
+		<li><a href="/restrict/user?action=list">Manage</a></li>
+		<li><a href="/logout">Logout</a></li>
 	</ul>	
 </nav>

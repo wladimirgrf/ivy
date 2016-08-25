@@ -40,26 +40,29 @@ public class WhoisScopeAction extends DefaultAction<WhoisScope, String>{
 		if (request.getParameter("id") != null){
 			scope.setId(request.getParameter("id"));
 		}
-		if (request.getParameter("owner") != null){
-			scope.setOwner(request.getParameter("owner"));
-		}
-		if (request.getParameter("person") != null){
-			scope.setPerson(request.getParameter("person"));
-		}
-		if (request.getParameter("email") != null){
-			scope.setEmail(request.getParameter("email"));
-		}
-		if (request.getParameter("country") != null){
-			scope.setCountry(request.getParameter("country"));
-		}
-		if (request.getParameter("changed") != null){
-			scope.setChanged(request.getParameter("changed"));
-		}
 		
-		if (getObject() != null) {
-			dao.merge(scope);
-		} else {
-			dao.persist(scope);
+		if(scope.getId() != null && !scope.getId().isEmpty()){
+			if (request.getParameter("owner") != null){
+				scope.setOwner(request.getParameter("owner"));
+			}
+			if (request.getParameter("person") != null){
+				scope.setPerson(request.getParameter("person"));
+			}
+			if (request.getParameter("email") != null){
+				scope.setEmail(request.getParameter("email"));
+			}
+			if (request.getParameter("country") != null){
+				scope.setCountry(request.getParameter("country"));
+			}
+			if (request.getParameter("changed") != null){
+				scope.setChanged(request.getParameter("changed"));
+			}
+			
+			if (getObject() != null) {
+				dao.merge(scope);
+			} else {
+				dao.persist(scope);
+			}
 		}
 	}
 

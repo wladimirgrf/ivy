@@ -4,6 +4,7 @@
 <form action="/restrict/scope?action=save" class="ym-form" method="post">
 	
 	<div class="ym-fbox-text">
+		<input type="hidden" id="current_id">
 
 		<label for="id">Id:</label>
 		<input type="text" name="id" id="id" value="${object.id}"/>
@@ -27,10 +28,15 @@
 	</div>
 </form>
 
-<script>
-	$(function(){
+<script type="text/javascript">
+	$(window).load(function(){ 	
 		if($("#id").val().length > 0){
 			$("#id").attr('disabled','disabled');
+			
+			$("#current_id").attr({
+				"name" : "id",
+				"value" : $("#id").val(),
+			});
 		}
 	});
 </script>
