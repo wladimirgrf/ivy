@@ -20,7 +20,7 @@
 <nav class="ym-hlist">
 	<ul>
 		<li class="active">
-			<strong>Template</strong>
+			<strong>User</strong>
 		</li>
 		<c:if test="${isAdmin}">
 			<li>

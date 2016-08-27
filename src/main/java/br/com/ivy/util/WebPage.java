@@ -63,10 +63,14 @@ public class WebPage {
 		}
 	}
 	
-	public static Set<String> linkChecker(URL host) {
-		String content 	  = getContent(host);
-		String[] lines 	  = content.split("\n");
+	public static Set<String> linkChecker(URL host) {		
 		Set<String> links = new HashSet<String>();
+		
+		String content = getContent(host);
+		
+		if(content == null) return links;
+			
+		String[] lines 	  = content.split("\n");
 		
 		for (int i=0; i < lines.length; i++) {
 			if(!lines[i].contains("<a") || !lines[i].contains("href")) continue;

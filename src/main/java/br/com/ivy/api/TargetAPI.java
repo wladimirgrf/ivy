@@ -39,8 +39,8 @@ public class TargetAPI extends API {
 		order 	= "";
 		orderBy = "";
 		id 		 = 0l;
-		page 	 = 0;
-		pagesize = 0;
+		page 	 = 1;
+		pagesize = 5;
 		
 		gson = new Gson();
 	}
@@ -94,40 +94,43 @@ public class TargetAPI extends API {
 			if(request.getParameter("order").toLowerCase() == "asc") order = "asc";
 		}
 		
-		page 	 = (page > 0 ? page : 1); 
-		pagesize = (pagesize > 0 ? pagesize : 5);
-		
-		order 	= (order != "" ? order : "desc");
-		orderBy = (orderBy != "" ? orderBy : "lastScan");
+		if(order   == "") order   = "desc";
+		if(orderBy == "") orderBy = "lastScan";
 	}
 	
 	@Override
 	protected Object requestObject() {	
 		Object result = null;
 		
-		if(action != null && !action.isEmpty()){
-			if (action.equals("evaluate") && host != null && WebPage.isReachable(host))  { 
-				evaluate();
+		if(action == null || action.isEmpty()){
+			result = (id > 0 ? dao.get(id) : dao.list(page, pagesize, orderBy, order));
+		}else{
+			if(action.equals("supported") && host != null && WebPage.isReachable(host)) {
+				result = (Whois.get(host.getHost()) != null ? true : false);
+			
+			}else if (action.equals("evaluate") && host != null && WebPage.isReachable(host))  { 
+				target = dao.getByHost(this.host.getHost());
 				
+				if(target != null && (getCurrentDate() - target.getLastScan()) < week){
+					result = target;
+				}
 			}else if (action.equals("search") && query != null && !query.isEmpty()) {	
 				result = dao.search(query, page, pagesize).getResult();
 				
 			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
-				save(); 
+				result = save(); 
 			}
 		}
-		if(result == null && id != null){
-			result = (id > 0 ? dao.get(id) : dao.list(page, pagesize, orderBy, order));
-		}
-		
 		return result;
 	}
 	
-	private void save(){
+	private String save(){
 		target = dao.getByHost(this.host.getHost());
 		
 		if(target == null){
 			target = Whois.get(host.getHost());
+			
+			if(target == null) return "NOT-SUPORTED";
 			
 			if(url != null && !url.isEmpty()){
 				target.setUrl(url);
@@ -159,21 +162,13 @@ public class TargetAPI extends API {
 			dao.merge(target);
 		}
 		
-		if(target != null) id = target.getId();
+		if(target != null) return "SUCCESS";
+		
+		return "ERROR";
 	}
 	
 	private long getCurrentDate(){
 		return Calendar.getInstance().getTimeInMillis();
-	}
-	
-	private void evaluate(){
-		target = dao.getByHost(this.host.getHost());
-		
-		id = null;
-		
-		if(target != null && (getCurrentDate() - target.getLastScan()) < week){
-			id = target.getId();
-		}
 	}
 	
 	

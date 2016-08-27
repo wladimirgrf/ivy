@@ -10,6 +10,8 @@ import br.com.ivy.entity.WhoisScope;
 
 public class Whois {
 	
+	private static WhoisScopeDAO dao = WhoisScopeDAO.getInstance();
+	
 	private static final String defaultWhoisServer = "whois.iana.org";
 	
 	private Whois() {}
@@ -25,8 +27,9 @@ public class Whois {
 			
 			document = getDocument(host, null);
 			
-			if(document != null && extension != null){
-				WhoisScopeDAO dao = WhoisScopeDAO.getInstance();
+			if(document != null 
+			&& extension != null 
+			&& dao.get(extension) != null){
 				target = mappingTarget(document, host, dao.get(extension));
 			}
 		}

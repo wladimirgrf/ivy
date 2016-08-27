@@ -64,10 +64,10 @@ body .page .item { width: 95%; float: left; border: 1px solid #e1e8ed; backgroun
 body .page .item .bloc-info { width: 100%; float: left;  }
 body .page .item .bloc-info a { text-decoration: none; color: #292f33 }
 body .page .item .bloc-info a strong { float:left; color: #292f33; font-weight: bold; line-height: 1em; }
-body .page .item .bloc-info  .time { float: right; color:#8899a6; line-height: 0.7em; font-size: 0.9em; }
-body .page .item .bloc-info  .location { float: right; color:#8899a6; margin-left: 2%; width: 6%; font-size: 0.9em; }
-body .page .item .bloc-info  .location .geo-icon { width: 0.50em; float: left; background-color: #8899a6;  }
-body .page .item .bloc-info  .location strong { line-height: 0.8em; float: right; margin-right: 0.4em; }
+body .page .item .bloc-info  .time { float: right; color:#8899a6; line-height: 0.83em; font-size: 0.85em; }
+body .page .item .bloc-info  .location { float: right; color:#8899a6; margin-left: 2%; width: 6%; font-size: 0.85em; }
+body .page .item .bloc-info  .location .geo-icon { width: 0.50em; float: right; background-color: #8899a6;  }
+body .page .item .bloc-info  .location strong { line-height: 0.83em; float: right; margin-left: 0.3em; }
 
 body .page .item .url { float: left; width: 100%; line-height: 1.2em; padding-top: 0.7%; font-size: 0.95em; }
 body .page .item .url a { text-decoration: none;  }
@@ -87,6 +87,12 @@ body .popup .popup-header .close { margin: -1.7em 0.9em 0; }
 body .popup .popup-header .close img { width: 0.65em; }
 
 body .popup > input { float: left; width: 90%; margin: 3%; font-size: 0.9em; border: 1px solid #8ec6dd; border-radius: 3px; padding: 1% 2%; }
+
+body .popup > input.error::-moz-placeholder { color:red; font-style: italic;  }
+body .popup > input.error:-moz-placeholder{ color:red; font-style: italic;  }
+body .popup > input.error::-moz-placeholder { color:red; font-style: italic;  }
+body .popup > input.error:-ms-input-placeholder { color:red; font-style: italic;  }
+body .popup > input.error::-webkit-input-placeholder { color:red; font-style: italic;  }
 
 body .popup .popup-filter { width: 94%; text-align: center; float: left; margin: 0 3% 3%; padding: 1.5% 0; background-color: #f1f1f1; border: 1px solid #ccd6dd; border-radius: 5px; display: none; }
 body .popup .popup-filter > span { float: left; font-size: 0.8em; margin: 0.5% 3% 0 22.5%; color: #aab8c2; font-weight: bold; }

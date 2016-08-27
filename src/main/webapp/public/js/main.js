@@ -78,6 +78,11 @@ var ivy = {
 	},
 	
 	close_popup: function(){
+		$('.popup').hide();
+		$('.body-off').hide();
+	},
+	
+	end_loading: function(){
 		$("#hack").prop("disabled",false);
 		$("#hack").removeClass("disabled");
 		
@@ -85,8 +90,6 @@ var ivy = {
 		$(".popup-footer .option-container").removeClass("disabled");
 		
 		$(".popup-footer .loading").hide();
-		$('.popup').hide();
-		$('.body-off').hide();
 	},
 		
 	target:{
@@ -143,12 +146,16 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					if (data != null){
-						ivy.addPage([data]);
-					}
+					console.log(data);
+					ivy.target.list();
 				}
 			})
 		}
+	},
+	
+	popup_msg: function(msg){
+		$("body .popup > input").addClass("error").attr("placeholder",msg).val("");
+		ivy.end_loading();
 	},
 	
 
@@ -158,9 +165,11 @@ var ivy = {
 		urls:       [],
 		url:        "", 
 		target:     null,
-		vulnerable: false,
+		vulnerable: 		 false,
+		supported_extension: false,
 		
-		msg_no_urls: "No link has been found, please contact support.",
+		msg_no_urls:     "No link has been found, please contact support.",
+		msg_no_supported: "this domain extension is not supported.",
 		
 
 		map: function(){
@@ -246,32 +255,65 @@ var ivy = {
 			})
 		},
 		
+		supported: function(){	
+			if(this.host == "" 
+			|| !ivy.pattern.test(this.host)) {
+				return;
+			}
+			
+			var params = {
+				"action" : "supported", 
+				"host"   : this.host
+			};
+			
+			return $.ajax({
+				url : "/api/target",
+				cache : false,
+				dataType : "json",
+				data: params,
+				success : function(data) {
+					if (data != null){
+						ivy.exploit.supported_extension = data;
+					}
+				}
+			})
+		},
+		
 		execute: function(){
 			$.when(ivy.exploit.evaluate()).done(function() {
 				 if(ivy.exploit.target != null){
 					 ivy.addPage([ivy.exploit.target]);
+					 ivy.end_loading();
 					 ivy.close_popup();
 				 } else {
-					 $.when(ivy.exploit.map()).done(function() { 
-						 
-						 if(ivy.exploit.urls.length <= 0){
-							 alert(ivy.exploit.msg_no_urls);
-							 ivy.close_popup();
+					 
+					 $.when(ivy.exploit.supported()).done(function() { 
+						 if(ivy.exploit.supported_extension){
 							 
-						 } else {
-							 
-							 $.when(ivy.exploit.code_injection()).done(function() {
-								 
-								 $.when(ivy.target.save(
-									 ivy.exploit.host, 
-									 ivy.exploit.url, 
-									 ivy.exploit.vulnerable,
-									 ivy.create_tags(ivy.exploit.host)
-									 
-								 )).done(function() {
+							 $.when(ivy.exploit.map()).done(function() { 
+								 if(ivy.exploit.urls.length <= 0){
+									 ivy.popup_msg(ivy.exploit.msg_no_urls);
+									 ivy.end_loading();
 									 ivy.close_popup();
-								 });
-							 });
+								 } else {
+									 
+									 $.when(ivy.exploit.code_injection()).done(function() {
+										 
+										 $.when(ivy.target.save(
+											 ivy.exploit.host, 
+											 ivy.exploit.url, 
+											 ivy.exploit.vulnerable,
+											 ivy.create_tags(ivy.exploit.host)
+											 
+										 )).done(function() {
+											 ivy.end_loading();
+											 ivy.close_popup();
+										 });
+									 });
+								 }
+							 }); 
+						 }else {
+							 ivy.popup_msg(ivy.exploit.msg_no_supported);
 						 }
 					 });
 				 }
@@ -330,8 +372,8 @@ var ivy = {
 						),
 						
 						$('<span>').addClass("location").append(
-							$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon"),
-							$('<strong>').html(data[i].country)
+							$('<strong>').html(data[i].country),
+							$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon")
 						),
 						
 						$('<span>').addClass("time").html(ivy.getTimeStamp(Number(data[i].lastScan)))
