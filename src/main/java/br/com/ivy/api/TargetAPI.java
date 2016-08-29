@@ -61,6 +61,10 @@ public class TargetAPI extends API {
 		}
 		if(request.getParameter("host") != null){
 			host = WebPage.getHost(request.getParameter("host"));
+			
+			reachable = WebPage.isReachable(host);
+			
+			if(!reachable.equals("true")) host = null;
 		}
 		if(request.getParameter("safe") != null){
 			safe = Boolean.parseBoolean(request.getParameter("safe"));
@@ -105,19 +109,22 @@ public class TargetAPI extends API {
 		if(action == null || action.isEmpty()){
 			result = (id > 0 ? dao.get(id) : dao.list(page, pagesize, orderBy, order));
 		}else{
-			if(action.equals("supported") && host != null && WebPage.isReachable(host)) {
+			if (action.equals("search") && query != null && !query.isEmpty()) {	
+				result = dao.search(query, page, pagesize).getResult();
+			
+			}else if(host == null){
+				if(!reachable.isEmpty()) result = reachable;
+				
+			}else if(action.equals("supported")) {
 				result = (Whois.get(host.getHost()) != null ? true : false);
 			
-			}else if (action.equals("evaluate") && host != null && WebPage.isReachable(host))  { 
+			}else if (action.equals("evaluate"))  { 
 				target = dao.getByHost(this.host.getHost());
 				
 				if(target != null && (getCurrentDate() - target.getLastScan()) < week){
 					result = target;
 				}
-			}else if (action.equals("search") && query != null && !query.isEmpty()) {	
-				result = dao.search(query, page, pagesize).getResult();
-				
-			} else if (action.equals("save") && host != null && WebPage.isReachable(host))  { 
+			} else if (action.equals("save"))  { 
 				result = save(); 
 			}
 		}
@@ -197,6 +204,8 @@ public class TargetAPI extends API {
 	private String order;
 	
 	private String orderBy;
+	
+	private String reachable;
 	
 	private static final long week = 7 * 24 * 60 * 60 * 1000;
 }

@@ -52,7 +52,7 @@ public class UrlMappingAPI extends API{
 	protected Object requestObject(){
 		Set<String> result = null;
 		
-		if(host != null && WebPage.isReachable(host)){
+		if(host != null && WebPage.isReachable(host).equals("true")){
 			result = map();
 		}
 		

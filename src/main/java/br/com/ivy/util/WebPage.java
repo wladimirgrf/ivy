@@ -14,18 +14,17 @@ public class WebPage {
 	
 	private WebPage() {}
 	
-	public static boolean isReachable(URL host) {
-		boolean reachable = false;
+	public static String isReachable(URL host) {
+		String reachable = "connection_refused";
 		
 	    try{
 	    	HttpURLConnection connection = (HttpURLConnection) host.openConnection();
 	    	connection.setRequestMethod("HEAD");
-	        reachable = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+	        reachable = String.format("%s", connection.getResponseCode() == HttpURLConnection.HTTP_OK);
 	        connection.disconnect();
 	        
-	    } catch (Exception e){ 
-	    	e.printStackTrace(); 
-	    }
+	    } catch (Exception e){ }
+	    
 		return reachable;
 	}
 	

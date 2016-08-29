@@ -54,7 +54,7 @@ public class InjectionAPI extends API{
 			
 			boolean vulnerable = false;
 			
-			if(url != null && domain != null && WebPage.isReachable(domain)){
+			if(url != null && domain != null && WebPage.isReachable(domain).equals("true")){
 				String content = WebPage.getContent(url);
 				vulnerable = (content != null ? getResult(content) : false);
 			}

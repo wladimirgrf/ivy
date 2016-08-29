@@ -146,7 +146,6 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					console.log(data);
 					ivy.target.list();
 				}
 			})
@@ -166,10 +165,11 @@ var ivy = {
 		url:        "", 
 		target:     null,
 		vulnerable: 		 false,
-		supported_extension: false,
+		supported_extension: "",
 		
-		msg_no_urls:     "No link has been found, please contact support.",
-		msg_no_supported: "this domain extension is not supported.",
+		msg_no_urls:            "No link has been found, please contact support.",
+		msg_no_supported:       "this domain extension is not supported.",
+		msg_connection_refused: "Connection refused.",
 		
 
 		map: function(){
@@ -281,14 +281,18 @@ var ivy = {
 		
 		execute: function(){
 			$.when(ivy.exploit.evaluate()).done(function() {
-				 if(ivy.exploit.target != null){
+				if(ivy.exploit.target != null 
+				&& (ivy.exploit.target == "connection_refused" || ivy.exploit.target == "false")){
+					ivy.popup_msg(ivy.exploit.msg_connection_refused);
+					
+				}else if(ivy.exploit.target != null){
 					 ivy.addPage([ivy.exploit.target]);
 					 ivy.end_loading();
 					 ivy.close_popup();
-				 } else {
 					 
+				 } else {
 					 $.when(ivy.exploit.supported()).done(function() { 
-						 if(ivy.exploit.supported_extension){
+						 if(ivy.exploit.supported_extension == "true"){
 							 
 							 $.when(ivy.exploit.map()).done(function() { 
 								 if(ivy.exploit.urls.length <= 0){
