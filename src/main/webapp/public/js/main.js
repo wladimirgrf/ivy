@@ -93,14 +93,24 @@ var ivy = {
 	},
 		
 	target:{
-		list: function() {
+		list: function(empty) {
+			var page = Number($("#page").val());
+			
+			var params = {
+				"page"     : page, 
+				"pagesize" : 6
+			};
+			
 			$.ajax({
 				url : "/api/target",
 				cache : false,
 				dataType : "json",
+				data: params,
 				success : function(data) {
-					if (data != null){
-						ivy.addPage(data);
+					if (data != null 
+					&& !$.isEmptyObject(data)){
+						ivy.addPage(data,empty);
+						$("#page").val(page +1);
 					}
 				}
 			});
@@ -118,8 +128,9 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					if (data != null){
-						ivy.addPage(data);
+					if (data != null 
+					&& !$.isEmptyObject(data)){
+						ivy.addPage(data, true);
 					}
 				}
 			});
@@ -146,7 +157,7 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					ivy.target.list();
+					ivy.target.list(true);
 				}
 			})
 		}
@@ -171,7 +182,17 @@ var ivy = {
 		msg_no_supported:       "this domain extension is not supported.",
 		msg_connection_refused: "Connection refused.",
 		
-
+		
+		reset_environment_variables: function(){
+			this.rounds = 0;
+			this.host = "";
+			this.urls = [];
+			this.url = "";
+			this.target = null;
+			this.vulnerable = false;
+			this.supported_extension = "";
+		},
+		
 		map: function(){
 			if($.isEmptyObject(this.host) 
 			|| !ivy.pattern.test(this.host) 
@@ -284,23 +305,26 @@ var ivy = {
 				if(ivy.exploit.target != null 
 				&& (ivy.exploit.target == "connection_refused" || ivy.exploit.target == "false")){
 					ivy.popup_msg(ivy.exploit.msg_connection_refused);
+					ivy.exploit.reset_environment_variables();
 					
 				}else if(ivy.exploit.target != null){
-					 ivy.addPage([ivy.exploit.target]);
+					 ivy.addPage([ivy.exploit.target], true);
 					 ivy.end_loading();
 					 ivy.close_popup();
+					 ivy.exploit.reset_environment_variables();
 					 
 				 } else {
 					 $.when(ivy.exploit.supported()).done(function() { 
-						 if(ivy.exploit.supported_extension == "true"){
+						 if(ivy.exploit.supported_extension){
 							 
 							 $.when(ivy.exploit.map()).done(function() { 
 								 if(ivy.exploit.urls.length <= 0){
 									 ivy.popup_msg(ivy.exploit.msg_no_urls);
 									 ivy.end_loading();
 									 ivy.close_popup();
-								 } else {
+									 ivy.exploit.reset_environment_variables();
 									 
+								 } else {
 									 $.when(ivy.exploit.code_injection()).done(function() {
 										 
 										 $.when(ivy.target.save(
@@ -312,12 +336,14 @@ var ivy = {
 										 )).done(function() {
 											 ivy.end_loading();
 											 ivy.close_popup();
+											 ivy.exploit.reset_environment_variables();
 										 });
 									 });
 								 }
 							 }); 
 						 }else {
 							 ivy.popup_msg(ivy.exploit.msg_no_supported);
+							 ivy.exploit.reset_environment_variables();
 						 }
 					 });
 				 }
@@ -364,8 +390,10 @@ var ivy = {
 		return result;
 	},
 	
-	addPage: function(data) {
-		var itens = $("div.page").empty();
+	addPage: function(data, empty) {
+		var itens = $("div.page");
+		
+		if(empty) itens.empty()
 		
 		for(var i = 0; i < data.length; i++){
 			itens.append(

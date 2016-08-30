@@ -59,7 +59,9 @@ public class Whois {
 			
 			String line = "";
 
-	        while((line = reader.readLine()) != null) {
+			//if(!reader.ready()) return result;
+			
+			for (line = reader.readLine(); line != null; line = reader.readLine()) {
 	        	document.append(line + "\n");
 	        }
 	        

@@ -1,23 +1,22 @@
 $(function() {
-	ivy.target.list();
+	ivy.target.list(true);
 	
 	$(".menu-left .item1").addClass("selected");
 	$(".menu-left .item2").removeClass("selected");
-	
-	
-	var isUpdating = false;
-	var page = $(".content .page");
-	
-	page.scroll(function() {	
-		
-	    var scrollTop = page.scrollTop;
-	    var scrollHeight = page.scrollHeight;
-	    var offsetHeight = page.offsetHeight;
-	    var contentHeight = scrollHeight - offsetHeight;	    
- 	    if (contentHeight <= scrollTop && !isUpdating) {
- 	    	alert("final");
- 	    }
-	});
 });
 
-
+$(document).ready(function(){	
+	var isUpdating = false;
+	
+	$(window).scroll(function () {
+		var scrollHeight = $(window).scrollTop();
+		var documentSize = $(document).height();
+		var sizeWindow   = $(window).height();
+		
+	 	if (scrollHeight + sizeWindow >= documentSize && !isUpdating) {
+	 		isUpdating = true;
+	 		ivy.target.list(false);
+			isUpdating = false;
+		}
+	});
+});

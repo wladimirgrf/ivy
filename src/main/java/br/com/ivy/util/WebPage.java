@@ -90,7 +90,15 @@ public class WebPage {
 		}
 		link = link.replace(" ", "%20");
 		
-		if(!link.contains(host) || link.contains("javascript") || link.contains("mailto:") || isIgnoredUri(link.toLowerCase())) link = null;
+		String h    = String.format("http://%s", host);
+		String hssl = String.format("https://%s", host);
+		
+		if(!(link.startsWith(h) || link.startsWith(hssl))
+		|| link.contains("javascript") 
+		|| link.contains("mailto:") 
+		|| isIgnoredUri(link.toLowerCase())){
+			link = null;
+		}
 	
 		return link;
 	}
