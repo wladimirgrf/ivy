@@ -17,7 +17,7 @@ time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; fo
 
 html, body { float: left; width: 100%; height: 100%; padding: 0; margin: 0; z-index: 1; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 1em; background-color: #f5f8fa; }
 
-div.content { margin: 0 auto; width: 590px;}
+div.content { margin: 0 auto; width: 100%;}
 
 div.area { margin: 0 auto; width: 596px;}
 
@@ -25,7 +25,10 @@ div.area { margin: 0 auto; width: 596px;}
 .show { display: block; }
 .hide { display: none; }
 
-.box-590 { float: left; width: 590px; }
+.box-1024 { width: 1024px; }
+.box-590 { width: 590px; }
+
+.margin-auto { margin: 0 auto; }
 
 body .disabled { opacity: 0.5; box-shadow: none !important; cursor: default !important; }
 
@@ -40,9 +43,9 @@ body .header .container .menu-left ul li a { float:left; text-decoration: none; 
 body .header .container .menu-left ul .selected { border-bottom: 5px solid #48266b; }
 body .header .container .menu-left ul li:hover { border-bottom: 5px solid #48266b; }
 body .header .container .menu-left ul li a img { width: 1.5em; height: auto; background-color: #66757f; float: left; margin-top: 0.25em; }
-body .header .container .menu-left ul li a img:hover {  background-color: #48266b; }
+body .header .container .menu-left ul li a img.hover {  background-color: #48266b; }
 body .header .container .menu-left ul li a span { color: #66757f; line-height: 2.2em; float: left; margin-left: 0.4em; }
-body .header .container .menu-left ul li a span:hover { color: #48266b; }
+body .header .container .menu-left ul li a span.hover { color: #48266b; }
 
 body .header .container .menu-middle { float: left; width: 33%; height: 88%; position: relative; text-align: center; padding-top: 0.5%; }
 body .header .container .menu-middle .logo { margin: auto; width: 32px; background-color: #48266b; }

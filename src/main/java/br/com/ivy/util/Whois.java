@@ -27,6 +27,10 @@ public class Whois {
 			
 			document = getDocument(host, null);
 			
+			if(document == null) {
+				document = getDocument(host, defaultWhoisServer);
+			}
+			
 			if(document != null 
 			&& extension != null 
 			&& dao.get(extension) != null){

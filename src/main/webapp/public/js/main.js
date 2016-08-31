@@ -1,4 +1,29 @@
 $(function() {	
+	
+	var menu_1 = $(".header .item1");
+	
+	menu_1.mouseover(function(){
+		$(".header .item1 img").addClass("hover");
+		$(".header .item1 span").addClass("hover");
+	});
+	
+	menu_1.mouseout(function(){
+		$(".header .item1 img").removeClass("hover");
+		$(".header .item1 span").removeClass("hover");
+	});
+	
+	var menu_2 = $(".header .item2");
+	
+	menu_2.mouseover(function(){
+		$(".header .item2 img").addClass("hover");
+		$(".header .item2 span").addClass("hover");
+	});
+	
+	menu_2.mouseout(function(){
+		$(".header .item2 img").removeClass("hover");
+		$(".header .item2 span").removeClass("hover");
+	});
+	
 	$("#open-popup").click(function(){
 		$('.popup').show();
 		$('.body-off').show();
@@ -49,6 +74,8 @@ $(function() {
 				ivy.exploit.rounds = rounds;
 			}
 			ivy.exploit.execute();
+		}else {
+			ivy.popup_msg(ivy.msg_link_format);
 		}
 	});
 });
@@ -157,7 +184,7 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					ivy.target.list(true);
+					window.location.href = "/";
 				}
 			})
 		}
@@ -353,23 +380,26 @@ var ivy = {
 	
 	
 	getTimeStamp: function(time) {
-		var date = new Date().getTime();
-		var timestamp = "";
+		var date      = new Date().getTime();
+		var timestamp = (24 * 60 * 60 * 1000);
+		var season    = " days";
 		
 		switch (true) {
 			case ((date - time) <= (59 * 1000)):
-				timestamp = Math.round((date - time) / 1000) + " sec";
+				timestamp = 1000;
+	        	season = " sec";
             	break;
 			case ((date - time) <= (59 * 60 * 1000)):
-				timestamp = Math.round((date - time) / (60 * 1000)) + " min";
+				timestamp = (60 * 1000);
+	        	season = " min";
 	            break;
 	        case ((date - time) <= (48 * 60 * 60 * 1000)):
-	        	timestamp = Math.round((date - time) / (60 * 60 * 1000)) + " h";
-	            break;
-	        default:
-	        	timestamp = Math.round((date - time) / (24 * 60 * 60 * 1000)) + " days";
+	        	timestamp = (60 * 60 * 1000);
+	        	season = " h";
+	        	break;
 		}
-		return timestamp;
+		
+		return  (Math.round((date - time) / timestamp) + season);
 	},
 	
 	formatTags: function(line) {
@@ -384,7 +414,7 @@ var ivy = {
 		for(var i = 0; i < tags.length; i++){
 			result.append($("<a>").attr({
 				"href" : "#",
-				"onclick" : "ivy.searchHosts('" + tags[i] + "'); return false;"
+				"onclick" : "ivy.target.search('" + tags[i] + "'); return false;"
 			}).html("#"+tags[i]));
 		}
 		return result;
@@ -393,33 +423,48 @@ var ivy = {
 	addPage: function(data, empty) {
 		var itens = $("div.page");
 		
-		if(empty) itens.empty()
+		if(empty){
+			itens.empty();
+			$("#page").val(0);
+		}
 		
 		for(var i = 0; i < data.length; i++){
 			itens.append(
-				$('<div>').append(
-					$('<div>').append(
-						$('<a>').attr({"href": "http://" + data[i].host, "target": "_blank"}).append(
-							$('<strong>').addClass("host").html(data[i].host)
-						),
-						
-						$('<span>').addClass("location").append(
-							$('<strong>').html(data[i].country),
-							$('<img>').attr("src","/public/img/icon-geo-form.png").addClass("geo-icon")
-						),
-						
-						$('<span>').addClass("time").html(ivy.getTimeStamp(Number(data[i].lastScan)))
-					).addClass("bloc-info"),
-					
-					$('<div>').addClass("url " + (!data[i].safe ? "url-green" : "url-red")).append(
-						$('<a>').attr("href", data[i].url).html(data[i].url)	
+				$('<div>').append($('<div>').append(
+					$('<a>').attr({
+						"href"  : "http://" + data[i].host, 
+						"target": "_blank"
+					}).append(
+						$('<strong>').addClass("host").html(data[i].host)
 					),
 					
-					$('<div>').addClass("search-tags").append(ivy.formatTags(data[i].tags))
-	             ).addClass("item")
-	        )
+					$('<span>').addClass("location").append(
+						$('<strong>').html(data[i].country),
+						$('<img>').attr({
+							"src" : "/public/img/icon-geo-form.png"
+						}).addClass("geo-icon")
+					),
+					
+					$('<span>').addClass("time").html(
+						ivy.getTimeStamp(Number(data[i].lastScan))
+					)
+				).addClass("bloc-info"),
+				
+				$('<div>').addClass("url " + (data[i].safe ? "url-green" : "url-red")).append(
+					$('<a>').attr({
+						"href"  : data[i].url,
+						"target": "_blank"
+					}).html(data[i].url)	
+				),
+				
+				$('<div>').addClass("search-tags").append(
+					ivy.formatTags(data[i].tags)
+				)
+			).addClass("item"))
 		}
 	},
+	
+	msg_link_format : "the link must be in the proper format ex. http://domain.com",
 	
 	pattern: /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
 }

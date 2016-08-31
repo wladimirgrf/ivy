@@ -52,13 +52,13 @@ public class InjectionAPI extends API{
 				domain = new URL(String.format("http://%s",url.getHost()));
 			} catch (MalformedURLException e) { }
 			
-			boolean vulnerable = false;
+			boolean safe = true;
 			
 			if(url != null && domain != null && WebPage.isReachable(domain).equals("true")){
 				String content = WebPage.getContent(url);
-				vulnerable = (content != null ? getResult(content) : false);
+				safe = (content != null ? getResult(content) : true);
 			}
-			results.put(originalLink, vulnerable);
+			results.put(originalLink, safe);
 		}
 
 		return results;
@@ -66,14 +66,14 @@ public class InjectionAPI extends API{
 	
 	private boolean getResult(String content){
 		int error = 0;
-		boolean result = false;
+		boolean result = true;
 		content = content.toLowerCase();
 
 		for(String exception : exceptions){
 			if(error >= 3) break;
 			if(content.contains(exception)) error++;
 		}
-		if(error >= 3) result = true;
+		if(error >= 3) result = false;
 		
 		return result;
 	}

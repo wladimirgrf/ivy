@@ -12,7 +12,7 @@
 				<img src="/public/img/icon-close-white.png">
 			</div>
 		</div>
-		<input type="text" class="popup-input" placeholder="domain.com.br" >
+		<input type="text" class="popup-input" placeholder="http://domain.com" >
 		
 		<div class="popup-filter">
 			<span>number of pages to be analyzed:</span>

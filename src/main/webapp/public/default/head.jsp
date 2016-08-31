@@ -12,6 +12,10 @@
 	<link href="/public/css/home.css?1" rel="stylesheet" type="text/css"/>
 </c:if>
 
+<c:if test="${model.equals('about')}">
+	<link href="/public/css/about.css?1" rel="stylesheet" type="text/css"/>
+</c:if>
+
 
 
 
