@@ -48,19 +48,6 @@ $(function() {
 		$('.popup-filter').show();
 	});
 	
-	$("span.search-icon").click(function(){
-		var query = $("input.search-input").val();
-        if(query != "") ivy.target.search(query);
-	});
-	
-	$(".search-input").keypress(function(event){
-	    var keycode = (event.keyCode ? event.keyCode : event.which);
-	    if(keycode == "13"){
-	    	var query = $("input.search-input").val();
-	        if(query != "") ivy.target.search(query);
-	    }
-	});
-	
 	$("#hack").click(function(){
 		var host = $(".popup .popup-input").val();
 		var rounds = Number($(".p-input input").val());

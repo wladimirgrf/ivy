@@ -13,10 +13,12 @@
 				For now the only pattern recognition are vulnerable to SQL Injection. 
 				Soon new faults may be recognized.
 			</p>
+			
 			<br>
 			<br>
 			
 			<p><strong>Analyzed Properties</strong></p>
+			
 			<br>
 			
 			<div class="photo size420 right">
@@ -25,13 +27,9 @@
 			</div>
 			
 			<p class="padding-bottom-7"><strong>1</strong> - Host</p>
-			
 			<p class="padding-bottom-7"><strong>2</strong> - Sampling link (of all urls found, this was the most promising for the test)</p>
-			
 			<p class="padding-bottom-7"><strong>3</strong> - Tag for search</p>
-			
 			<p class="padding-bottom-7"><strong>4</strong> - Last time this domain was analyzed</p>
-			
 			<p class="padding-bottom-7"><strong>5</strong> - Country where the domain remains hosted</p>
 			
 			<br>
@@ -47,8 +45,6 @@
 				<img alt="example" src="/public/img/banner-example2.jpg">
 				<div>this is an example of a vulnerable web site.</div>
 			</div>
-			
-			
 		</article>
 	</div>
 </div>

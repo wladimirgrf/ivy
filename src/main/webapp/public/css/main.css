@@ -61,25 +61,6 @@ body .button { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset; background-c
 body .button:hover:enabled { background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)); }
 body .button:active:enabled { box-shadow: 0 1px 1px rgba(0, 0, 0, 1) inset; }
 
-body .page { float: left; width: 100%; margin-top: 2%;  }
-
-body .page .item { width: 95%; float: left; border: 1px solid #e1e8ed; background-color: #fff; padding: 1.5% 2.5%; font-size: 0.9em; }
-body .page .item .bloc-info { width: 100%; float: left;  }
-body .page .item .bloc-info a { text-decoration: none; color: #292f33 }
-body .page .item .bloc-info a strong { float:left; color: #292f33; font-weight: bold; line-height: 1em; }
-body .page .item .bloc-info  .time { float: right; color:#8899a6; line-height: 0.83em; font-size: 0.85em; }
-body .page .item .bloc-info  .location { float: right; color:#8899a6; margin-left: 2%; width: 6%; font-size: 0.85em; }
-body .page .item .bloc-info  .location .geo-icon { width: 0.50em; float: right; background-color: #8899a6;  }
-body .page .item .bloc-info  .location strong { line-height: 0.83em; float: right; margin-left: 0.3em; }
-
-body .page .item .url { float: left; width: 100%; line-height: 1.2em; padding-top: 0.7%; font-size: 0.95em; }
-body .page .item .url a { text-decoration: none;  }
-body .page .item .url-red a { color: #d9534f; }
-body .page .item .url-green a { color: #008B8B; }
-
-body .page .item .search-tags { float: left; width: 100%; padding-top: 0.7%; font-size: 0.95em; }
-body .page .item .search-tags div a { text-decoration: none; color: #0084b4; margin-right: 1%;  } 
-
 body .body-off { width: 100%; height: 100%; position: absolute; background-color: #000; opacity: 0.7; z-index: 99; left: 0; top:0; display: none; }
 
 body .popup { width: 100%; max-width: 600px; position:absolute; margin: auto; z-index: 100; border-radius: 4px; background-color: #f5f8fa; top: 20%; display: none; }
