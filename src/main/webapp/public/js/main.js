@@ -49,7 +49,7 @@ $(function() {
 	});
 	
 	$("#hack").click(function(){
-		var host = $(".popup .popup-input").val();
+		var host   = $(".popup .popup-input").val();
 		var rounds = Number($(".p-input input").val());
 		
 		if(!$.isEmptyObject(host) && ivy.pattern.test(host)){
@@ -105,9 +105,13 @@ var ivy = {
 		
 		$(".popup-footer .loading").hide();
 	},
+	
+	redirect_page: function(page){
+		window.location.href = page;
+	},
 		
 	target:{
-		list: function(empty) {
+		list: function() {
 			var page = Number($("#page").val());
 			
 			var params = {
@@ -115,18 +119,11 @@ var ivy = {
 				"pagesize" : 6
 			};
 			
-			$.ajax({
+			return $.ajax({
 				url : "/api/target",
 				cache : false,
 				dataType : "json",
-				data: params,
-				success : function(data) {
-					if (data != null 
-					&& !$.isEmptyObject(data)){
-						ivy.addPage(data,empty);
-						$("#page").val(page +1);
-					}
-				}
+				data: params
 			});
 		},
 		
@@ -136,16 +133,13 @@ var ivy = {
 				"query" : query
 			};
 			
-			$.ajax({
+			return $.ajax({
 				url : "/api/target",
 				cache : false,
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					if (data != null 
-					&& !$.isEmptyObject(data)){
-						ivy.addPage(data, true);
-					}
+					return data;
 				}
 			});
 		},
@@ -171,7 +165,7 @@ var ivy = {
 				dataType : "json",
 				data: params,
 				success : function(data) {
-					window.location.href = "/";
+					ivy.redirect_page("/");
 				}
 			})
 		}
@@ -322,10 +316,11 @@ var ivy = {
 					ivy.exploit.reset_environment_variables();
 					
 				}else if(ivy.exploit.target != null){
-					 ivy.addPage([ivy.exploit.target], true);
+					 var path = "/?query=" + ivy.exploit.target.host;
 					 ivy.end_loading();
 					 ivy.close_popup();
 					 ivy.exploit.reset_environment_variables();
+					 ivy.redirect_page(path);
 					 
 				 } else {
 					 $.when(ivy.exploit.supported()).done(function() { 
@@ -363,93 +358,7 @@ var ivy = {
 				 }
 			});
 		}
-	},
-	
-	
-	getTimeStamp: function(time) {
-		var date      = new Date().getTime();
-		var timestamp = (24 * 60 * 60 * 1000);
-		var season    = " days";
-		
-		switch (true) {
-			case ((date - time) <= (59 * 1000)):
-				timestamp = 1000;
-	        	season = " sec";
-            	break;
-			case ((date - time) <= (59 * 60 * 1000)):
-				timestamp = (60 * 1000);
-	        	season = " min";
-	            break;
-	        case ((date - time) <= (48 * 60 * 60 * 1000)):
-	        	timestamp = (60 * 60 * 1000);
-	        	season = " h";
-	        	break;
-		}
-		
-		return  (Math.round((date - time) / timestamp) + season);
-	},
-	
-	formatTags: function(line) {
-		if(line == null 
-		|| line == "")  {
-			return;
-		}
-		
-		var tags = line.split(" ");
-		var result = $("<div>");
-		
-		for(var i = 0; i < tags.length; i++){
-			result.append($("<a>").attr({
-				"href" : "#",
-				"onclick" : "ivy.target.search('" + tags[i] + "'); return false;"
-			}).html("#"+tags[i]));
-		}
-		return result;
-	},
-	
-	addPage: function(data, empty) {
-		var itens = $("div.page");
-		
-		if(empty){
-			itens.empty();
-			$("#page").val(0);
-		}
-		
-		for(var i = 0; i < data.length; i++){
-			itens.append(
-				$('<div>').append($('<div>').append(
-					$('<a>').attr({
-						"href"  : "http://" + data[i].host, 
-						"target": "_blank"
-					}).append(
-						$('<strong>').addClass("host").html(data[i].host)
-					),
-					
-					$('<span>').addClass("location").append(
-						$('<strong>').html(data[i].country),
-						$('<img>').attr({
-							"src" : "/public/img/icon-geo-form.png"
-						}).addClass("geo-icon")
-					),
-					
-					$('<span>').addClass("time").html(
-						ivy.getTimeStamp(Number(data[i].lastScan))
-					)
-				).addClass("bloc-info"),
-				
-				$('<div>').addClass("url " + (data[i].safe ? "url-green" : "url-red")).append(
-					$('<a>').attr({
-						"href"  : data[i].url,
-						"target": "_blank"
-					}).html(data[i].url)	
-				),
-				
-				$('<div>').addClass("search-tags").append(
-					ivy.formatTags(data[i].tags)
-				)
-			).addClass("item"))
-		}
-	},
+	},	
 	
 	msg_link_format : "the link must be in the proper format ex. http://domain.com",
 	
