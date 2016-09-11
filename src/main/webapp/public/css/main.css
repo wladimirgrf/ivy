@@ -29,8 +29,13 @@ div.area { margin: 0 auto; width: 596px;}
 .box-590 { width: 590px; }
 .box-290 { width: 290px; }
 
+.left { float: left; }
+.right { float: right; }
+
 .margin-auto { margin: 0 auto; }
 .margin-left { margin: 0; }
+
+.margin-v-10 { margin: 0 10px; }
 
 body .disabled { opacity: 0.5; box-shadow: none !important; cursor: default !important; }
 
@@ -94,3 +99,4 @@ body .popup .popup-footer .option-container:active:enabled { background-image: l
 body .popup .popup-footer .options { width: 30px; margin: 0.16em; float: left; }
 body .popup .popup-footer .loading { float: left; width: 32px; margin-left: 63%; margin-top: 6px; display: none; }
 body .popup .popup-footer .button { margin-top: 0; padding: 0.8em 1.9em; font-weight: 600; }
+

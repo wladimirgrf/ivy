@@ -10,20 +10,23 @@ div.content div.text strong { font-weight: 600; }
 
 div.content div.text { float: left; margin-top: 15px; width: 1024px; background-color: #fff; border: 1px solid rgba(0, 0, 0, 0.15); font-family: Metrophobic; }
 
-div.content div.text article { float: left; margin-top: 15px; width: 679px; }
-div.content div.text p { color: #7d7d7d; font-size: 13px; line-height: 19px; max-width: 1024px; word-wrap: break-word; }
-div.content div.text p a { text-decoration: none; }
 div.content div.text div.title { float: left; font-size: 26px; font-weight: bold; line-height: 20px; padding: 15px 15px 0; width: 994px; }
 
-div.content div.text div.photo { background-color: white; padding: 0px; display: table; margin-top: 0 auto; }
-div.content div.text div.photo img { display: block; border: 0px; margin: 0px; padding: 0px; }
-div.content div.text div.photo div { background-color: #48266b; color: #fff; text-align: center; opacity: 0.9; }
+div.content div.text article { float: left; margin-top: 15px; width: 679px; }
+div.content div.text article p { color: #7d7d7d; font-size: 13px; line-height: 19px; max-width: 1024px; word-wrap: break-word; }
+div.content div.text article p a { text-decoration: none; }
 
-div.content div.text div.size420,
-div.content div.text div.size420 img { width: 420px; }
-div.content div.text div.size420 > div { font-size: 12px; line-height: 20px; padding: 10px; width: 400px; }
+div.content div.text article div.photo { background-color: white; padding: 0px; display: table; margin-top: 0 auto; }
+div.content div.text article div.photo img { display: block; border: 0px; margin: 0px; padding: 0px; }
+div.content div.text article div.photo div { background-color: #48266b; color: #fff; text-align: center; opacity: 0.9; }
 
-div.content div.text div.right { float: right; clear: right; margin-left: 15px; }
-div.content div.text div.center { width: 100%; }
-div.content div.text div.center img,
-div.content div.text div.center div { display: table; margin: 0 auto; }
+div.content div.text article div.size420,
+div.content div.text article div.size420 img { width: 420px; }
+div.content div.text article div.size420 > div { font-size: 12px; line-height: 20px; padding: 10px; width: 400px; }
+
+div.content div.text article div.right { float: right; clear: right; margin-left: 15px; }
+div.content div.text article div.center { width: 100%; }
+div.content div.text article div.center img,
+div.content div.text article div.center div { display: table; margin: 0 auto; }
+
+div.content div.ads { float: right; margin: 20px 10px; }

@@ -46,5 +46,9 @@
 				<div>this is an example of a vulnerable web site.</div>
 			</div>
 		</article>
+		
+		<div class="box-290 right">
+			<div class="ads" id="arroba_banner"></div>
+		</div>
 	</div>
 </div>
