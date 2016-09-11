@@ -12,6 +12,17 @@ $(function() {
 		}
 	});
 	
+	$.when(ivy.whois_scope.list()).done(function(data) {
+		
+		if(data && !$.isEmptyObject(data)){
+			var itens = $("div.topics .itens");
+			
+			for(var i = 0; i < data.length; i++){
+				itens.append($('<a>').attr("href", "/?query=" + data[i].id).html("#"+data[i].id)); 			
+			}
+		}
+	});
+	
 	$("span.search-icon").click(function(){
 		var query = $("input.search-input").val();
         if(query == "") return;
@@ -44,14 +55,14 @@ $(function() {
 
 ivy.page = {
 		 
-	 add: function(data, empty) {
+	add: function(data, empty) {
 		var itens = $("div.page");
-		
+	
 		if(empty){
 			itens.empty();
 			$("#page").val(0);
 		}
-		
+	
 		for(var i = 0; i < data.length; i++){
 			itens.append(
 				$('<div>').append($('<div>').append(
@@ -100,7 +111,7 @@ ivy.page = {
 		for(var i = 0; i < tags.length; i++){
 			result.append($("<a>").attr({
 				"href" : "#",
-				"onclick" : "ivy.target.search('" + tags[i] + "'); return false;"
+				"onclick" : "ivy.redirect_page('/?query=" + tags[i] + "'); return false;"
 			}).html("#"+tags[i]));
 		}
 		return result;

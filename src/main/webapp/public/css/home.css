@@ -1,6 +1,13 @@
 @CHARSET "UTF-8";
 
-body .page { float: left; width: 100%; margin-top: 2%;  }
+body div.header { position: fixed; }
+
+body .topics { float: left; width: 62%; margin-top: 3.5em; background: #fff; border: 1px solid #e1e8ed; border-radius: 6px; padding: 5% 19%; }
+body .topics span { color: #66757f; font-size: 17px; font-weight: 300; width: 100%; line-height: 1.3em; float: left; }
+body .topics .itens { float: left; margin-top: 0.7em;  }
+body .topics .itens a { float: left; text-decoration: none; color: #0084b4; font-weight: bold; width: 100%; line-height: 2.5em; font-size: 12.5px;} 
+
+body .page { float: left; width: 100%; margin: 3.5em 10px;  }
 
 body .page .item { width: 95%; float: left; border: 1px solid #e1e8ed; background-color: #fff; padding: 1.5% 2.5%; font-size: 0.9em; }
 body .page .item .bloc-info { width: 100%; float: left;  }

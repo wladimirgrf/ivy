@@ -3,11 +3,16 @@
 
 <div class="box-290 margin-left">
 	<div class="topics">
-		<span></span>
+		<span>Supported Extensions</span>
 		
+		<div class="itens"></div>	
 	</div>
 </div>
 
 <div class="box-590 margin-auto">
 	<div class="page"></div>
+</div>
+
+<div class="box-290 margin-left">
+	<div id="arroba_banner"></div>
 </div>

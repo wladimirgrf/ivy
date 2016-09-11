@@ -109,8 +109,25 @@ var ivy = {
 	redirect_page: function(page){
 		window.location.href = page;
 	},
+	
+	whois_scope: {
+		list: function() {
+			
+			var params = {
+				"page"     : 1, 
+				"pagesize" : 5
+			};
+			
+			return $.ajax({
+				url : "/api/scope",
+				cache : false,
+				dataType : "json",
+				data: params
+			});
+		}
+	},
 		
-	target:{
+	target: {
 		list: function() {
 			var page = Number($("#page").val());
 			
@@ -137,10 +154,7 @@ var ivy = {
 				url : "/api/target",
 				cache : false,
 				dataType : "json",
-				data: params,
-				success : function(data) {
-					return data;
-				}
+				data: params
 			});
 		},
 		

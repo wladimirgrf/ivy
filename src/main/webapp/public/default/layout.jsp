@@ -16,6 +16,7 @@
 
 		<jsp:include page="/public/default/popup.jsp"/>
 		<jsp:include page="/public/default/scripts.jsp"/>
+		<jsp:include page="/public/default/dfp-script.jsp"/>
 		
 		<input type="hidden" id="page" value="1">
 	</body>
