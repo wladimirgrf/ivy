@@ -9,7 +9,7 @@ body .topics .itens a { float: left; text-decoration: none; color: #0084b4; font
 
 body .placard { float: left; width: 90%; margin-top: 10px; background: #fff; border: 1px solid #e1e8ed; border-radius: 6px; padding: 5%; }
 body .placard span { color: #8899a6; line-height: 22px; font-size: 12px; float: left; }
-body .placard a { text-decoration: none; color: #8899a6; line-height: 22px; font-size: 12px; float: left; margin-left: 18%; }
+body .placard a { text-decoration: none; color: #8899a6; line-height: 22px; font-size: 12px; float: right; margin-left: 20%; }
 
 body .page { float: left; width: 100%; margin: 3.5em 0;  }
 
