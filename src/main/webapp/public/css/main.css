@@ -17,7 +17,7 @@ time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; fo
 
 html, body { float: left; width: 100%; height: 100%; padding: 0; margin: 0; z-index: 1; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 1em; background-color: #f5f8fa; }
 
-div.content { margin: 0 auto; width: 100%; display: table; width: 1190px; }
+div.content { margin: 0 auto; display: table; width: 1190px; }
 
 div.area { margin: 0 auto; width: 596px;}
 
@@ -39,7 +39,7 @@ div.area { margin: 0 auto; width: 596px;}
 
 body .disabled { opacity: 0.5; box-shadow: none !important; cursor: default !important; }
 
-body div.header { float: left; width: 100%; min-width: 1024px; background-color: #ffffff; z-index: 2; border-bottom: 1px solid rgba(0, 0, 0, 0.15); height: 46px; }
+body .header { float: left; width: 100%; min-width: 1024px; background-color: #ffffff; z-index: 2; border-bottom: 1px solid rgba(0, 0, 0, 0.15); height: 46px; }
 
 body .header .container { float: left; width: 84%; padding: 0 8%; height: 100%; }
 
@@ -100,3 +100,58 @@ body .popup .popup-footer .options { width: 30px; margin: 0.16em; float: left; }
 body .popup .popup-footer .loading { float: left; width: 32px; margin-left: 63%; margin-top: 6px; display: none; }
 body .popup .popup-footer .button { margin-top: 0; padding: 0.8em 1.9em; font-weight: 600; }
 
+body .header .container-mobile { display: none; }
+
+@media screen and (max-width: 800px){
+	html, body { background-color: #fff; } 
+	
+	.box-1024,
+	.box-590,
+	.box-290 { width: 100%; }
+	
+	div.content { width: 100%; margin: 8% 0; }
+	
+	.margin-v-10 { margin: 0; }
+	
+	body .header { min-width: 320px; height: auto; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.20); border: none; }
+	
+	body .header .container { display: none; }
+	
+	body .header .container-mobile { display: block; float: left; width: 100%; }
+	
+	body .header .container-mobile .menu-top { float: left; width: 100%; position: relative; padding: 1% 0; }
+	body .header .container-mobile .menu-top .logo { width: 5%; background-color: #48266b; float: left; margin: 0 2%; }
+	body .header .container-mobile .menu-top .search-icon { float: right; width: 3.7%; margin: 0.2% 2%;  cursor: pointer; }
+	body .header .container-mobile .menu-top .search-icon img { width: 100%; }
+	
+	body .header .container-mobile .search-input { display: none; width: 94%; padding: 2% 3%; margin: 0 0 1.5%; font-size: 1em; background-color: #f5f8fa; border-bottom: 1px solid #e1e8ed; color: #0084b4; border-top: none; border-left: none; border-right: none; }
+	
+	body .header .container-mobile .search-input::-moz-placeholder { color:#66757f; }
+	body .header .container-mobile .search-input:-moz-placeholder{ color:#66757f;  }
+	body .header .container-mobile .search-input::-moz-placeholder { color:#66757f;  }
+	body .header .container-mobile .search-input:-ms-input-placeholder { color:#66757f; }
+	body .header .container-mobile .search-input::-webkit-input-placeholder { color:#66757f;  }
+	
+	body .header .container-mobile .menu-bottom { width: 100%; float:left; position: relative; height: 100%; }
+	body .header .container-mobile .menu-bottom ul { float: left; width: 100%; height: 100%;}
+	body .header .container-mobile .menu-bottom ul li { float: left; list-style-type: none; padding: 1% 23%; width:4%; text-align: center;  }
+	body .header .container-mobile .menu-bottom ul li a { float:left; width: 100%;}
+	body .header .container-mobile .menu-bottom ul .selected { border-bottom: 5px solid #48266b; }
+	body .header .container-mobile .menu-bottom ul li:hover { border-bottom: 5px solid #48266b; }
+	body .header .container-mobile .menu-bottom ul li a img { width: 100%; height: auto; background-color: #66757f;  }
+	body .header .container-mobile .menu-bottom ul li a img.hover {  background-color: #48266b; }
+}
+
+@media screen and (max-width: 600px){
+	body .header .container-mobile .menu-bottom ul li { width: 5%; padding: 1.5% 22.5%; }
+	
+	body .header .container-mobile .menu-top .logo { width: 6%; margin: 0 3%; }
+	body .header .container-mobile .menu-top .search-icon { margin: 0.3% 3%; width: 4.5%; }
+}
+
+@media screen and (max-width: 420px){
+	body .header .container-mobile .menu-bottom ul li { width: 7%; padding: 2% 21.5%; }
+	
+	body .header .container-mobile .menu-top .logo { width: 7%; margin: 0 4%; }
+	body .header .container-mobile .menu-top .search-icon { margin: 0.7% 4%; width: 5%; }
+}

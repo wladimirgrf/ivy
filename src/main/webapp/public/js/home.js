@@ -2,6 +2,9 @@ $(function() {
 	$(".menu-left .item1").addClass("selected");
 	$(".menu-left .item2").removeClass("selected");
 	
+	$(".menu-bottom .item1").addClass("selected");
+	$(".menu-bottom .item2").removeClass("selected");
+	
 	var query = $.urlParam('query');
 	
 	$.when((query ? ivy.target.search(query) : ivy.target.list())).done(function(data) {
@@ -23,7 +26,7 @@ $(function() {
 		}
 	});
 	
-	$("span.search-icon").click(function(){
+	$(".container span.search-icon").click(function(){
 		var query = $("input.search-input").val();
         if(query == "") return;
         
@@ -36,10 +39,15 @@ $(function() {
     	});
 	});
 	
+	$(".container-mobile span.search-icon").click(function(){
+		$(".container-mobile input.search-input").show();
+		$("div.content").css({"margin": "18% 0"});
+	});
+	
 	$(".search-input").keypress(function(event){
 	    var keycode = (event.keyCode ? event.keyCode : event.which);
 	    if(keycode == "13"){
-	    	var query = $("input.search-input").val();
+	    	var query = $(".container input.search-input").val() || $(".container-mobile input.search-input").val();
 	        if(query == "") return;
 	        
 	        $.when(ivy.target.search(query)).done(function(data) {

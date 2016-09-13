@@ -31,3 +31,30 @@
 		<button id="open-popup" class="button">Analyze</button>
 	</div>
 </div>
+
+<div class="container-mobile">
+	<input type="text" class="search-input" placeholder="Search for Domain">
+	
+	<div class="menu-top">
+		<img class="logo" alt="logo" src="/public/img/logo.png">
+			
+		<span class="search-icon">
+			<img src="/public/img/icon-search.png">
+		</span>
+	</div>
+	
+	<div class="menu-bottom">
+		<ul>
+			<li class="item1">
+				<a href="/">
+					<img class="home-icon" src="/public/img/icon-home-form.png">
+				</a>
+			</li>
+			<li class="item2">
+				<a href="/about">
+					<img class="info-icon" src="/public/img/icon-info-form.png">
+				</a>
+			</li>
+		</ul>	
+	</div>
+</div>
