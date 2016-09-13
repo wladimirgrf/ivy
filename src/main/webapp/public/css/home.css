@@ -22,8 +22,8 @@ body .page .item .bloc-info  .location { float: right; color:#8899a6; margin-lef
 body .page .item .bloc-info  .location .geo-icon { width: 0.50em; float: right; background-color: #8899a6;  }
 body .page .item .bloc-info  .location strong { line-height: 0.83em; float: right; margin-left: 0.3em; }
 
-body .page .item .url { float: left; width: 100%; line-height: 1.2em; padding-top: 0.7%; font-size: 0.95em; }
-body .page .item .url a { text-decoration: none; width: 100%;  }
+body .page .item .url { float: left; width: 100%; line-height: 1.2em; padding-top: 0.7%; font-size: 0.95em;  }
+body .page .item .url a { text-decoration: none; width: 100%; }
 body .page .item .url-red a { color: #d9534f; }
 body .page .item .url-green a { color: #008B8B; }
 
@@ -42,7 +42,7 @@ body .ads { float: left; margin-top: 3.5em; }
 	body .page .item { border-bottom: 2px solid #e1e8ed; border-top: none; border-left: none; border-right: none; padding: 4% 2.5%; }
 	
 	body .page .item .url { font-size: 1.4em; padding-top: 1.5%; }
-	body .page .item .url a { float: left; }
+	body .page .item .url a { float: left; word-break: break-all; }
 	
 	body .page .item .search-tags { font-size: 1.2em; padding-top: 1.5%; }
 	

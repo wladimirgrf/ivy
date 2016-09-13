@@ -107,7 +107,7 @@ ivy.page = {
 					$('<a>').attr({
 						"href"  : data[i].url,
 						"target": "_blank"
-					}).html(data[i].url)	
+					}).text(data[i].url)	
 				),
 				
 				$('<div>').addClass("search-tags").append(
@@ -173,7 +173,9 @@ $(document).ready(function(){
 		var documentSize = $(document).height();
 		var sizeWindow   = $(window).height();
 		
-	 	if (scrollHeight + sizeWindow >= documentSize && !isUpdating) {
+	 	if (scrollHeight + sizeWindow >= documentSize 
+	 	&& !isUpdating 
+	 	&& scrollHeight > 0) {
 	 		isUpdating = true;
 	 		var result = ivy.target.list();
 	 		if(result && !$.isEmptyObject(result)){
