@@ -106,12 +106,15 @@ public class TargetAPI extends API {
 	protected Object requestObject() {	
 		Object result = null;
 		
-		if(action == null || action.isEmpty()){
+		if(action == null 
+		|| action.isEmpty()){
 			result = (id > 0 ? dao.get(id) : dao.list(page, pagesize, orderBy, order));
 		}else{
-			if (action.equals("search") && query != null && !query.isEmpty()) {	
-				result = dao.search(query, page, pagesize).getResult();
-			
+			if (action.equals("search")) {	
+				if(query != null 
+				&& !query.isEmpty()){
+					result = dao.search(query, page, pagesize).getResult();
+				}
 			}else if(host == null){
 				if(!reachable.isEmpty()) result = reachable;
 				
@@ -121,7 +124,8 @@ public class TargetAPI extends API {
 			}else if (action.equals("evaluate"))  { 
 				target = dao.getByHost(this.host.getHost());
 				
-				if(target != null && (getCurrentDate() - target.getLastScan()) < week){
+				if(target != null 
+				&& (getCurrentDate() - target.getLastScan()) < week){
 					result = target;
 				}
 			} else if (action.equals("save"))  { 
