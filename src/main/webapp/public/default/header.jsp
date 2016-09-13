@@ -33,8 +33,10 @@
 </div>
 
 <div class="container-mobile">
-	<input type="text" class="search-input" placeholder="Search for Domain">
-	
+	<div class="search-form">
+		<input type="text" class="search-input" placeholder="Search for Domain">
+		<img class="form-close" src="/public/img/icon-close-grey.png">
+	</div>
 	<div class="menu-top">
 		<img class="logo" alt="logo" src="/public/img/logo.png">
 			

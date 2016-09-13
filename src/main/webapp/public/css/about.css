@@ -30,3 +30,29 @@ div.content div.text article div.center img,
 div.content div.text article div.center div { display: table; margin: 0 auto; }
 
 div.content div.ads { float: right; margin: 20px 10px; }
+
+@media screen and (max-width: 800px){
+	
+	div.content div.text {  width: 97%; margin: 2% 1.5%; border: none; }
+	div.content div.text div.title { width: 100%; padding: 0; font-size: 2.5em; line-height: 1.3em; }
+	div.content div.text article { width: 100%; padding: 0; }
+	div.content div.text article p { width: 100%; min-width: 320px; font-size: 1.2em; line-height: 1.3em;  }
+	
+	div.content div.text article div.size420 { width: 100%; margin: 0 0 3% 0; }
+	div.content div.text article div.size420 img { width: 100%; margin: 0; }
+	div.content div.text article div.size420 > div { width: 97%; padding: 1.5%;  font-size: 1.1em; line-height: 1.3em; }
+	
+	div.content div.ads { display: none; }
+	
+	div.content .padding-left-15,
+	div.content .padding-bottom-7,
+	div.content .padding-bottom-15 { padding-bottom: 2%; }
+}
+
+@media screen and (max-width: 420px){
+	div.content div.text { margin: 5% 1.5%; }
+	div.content div.text div.title { font-size: 2.2em; line-height: 1.2em; } 
+	div.content div.text article p { font-size: 1em; } 
+	
+	div.content div.text article div.size420 > div { font-size: 0.85em; } 
+}

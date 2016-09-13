@@ -40,8 +40,18 @@ $(function() {
 	});
 	
 	$(".container-mobile span.search-icon").click(function(){
-		$(".container-mobile input.search-input").show();
+		$(".container-mobile .search-form").show();
 		$("div.content").css({"margin": "18% 0"});
+	});
+	
+	$(".container-mobile span.search-icon").click(function(){
+		$(".container-mobile .search-form").show();
+		$("div.content").css({"margin": "18% 0"});
+	});
+	
+	$(".container-mobile .search-form .form-close").click(function(){
+		$(".container-mobile .search-form").hide();
+		$("div.content").css({"margin": "8% 0"});
 	});
 	
 	$(".search-input").keypress(function(event){

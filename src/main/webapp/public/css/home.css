@@ -33,6 +33,7 @@ body .page .item .search-tags div a { text-decoration: none; color: #0084b4; mar
 body .ads { float: left; margin-top: 3.5em; }
 
 @media screen and (max-width: 800px){
+	body .header .container-mobile .search-form .form-close { top: 3%; width: 5%;  }
 	
 	body .ads,
 	body .topics, 
@@ -55,6 +56,8 @@ body .ads { float: left; margin-top: 3.5em; }
 }
 
 @media screen and (max-width: 420px){
+	body .header .container-mobile .search-form .form-close { top: 5%; width: 5.5%;  }
+	
 	body .page .item .url { font-size: 1.2em; }
 	
 	body .page .item .search-tags { font-size: 1.1em; }

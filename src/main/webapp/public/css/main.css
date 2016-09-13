@@ -124,7 +124,9 @@ body .header .container-mobile { display: none; }
 	body .header .container-mobile .menu-top .search-icon { float: right; width: 3.7%; margin: 0.2% 2%;  cursor: pointer; }
 	body .header .container-mobile .menu-top .search-icon img { width: 100%; }
 	
-	body .header .container-mobile .search-input { display: none; width: 94%; padding: 2% 3%; margin: 0 0 1.5%; font-size: 1em; background-color: #f5f8fa; border-bottom: 1px solid #e1e8ed; color: #0084b4; border-top: none; border-left: none; border-right: none; }
+	body .header .container-mobile .search-form { width: 100%; display: none; }
+	body .header .container-mobile .search-form .search-input { width: 87%; padding: 2% 10% 2% 3%; margin: 0 0 1.5%; font-size: 1em; background-color: #f5f8fa; border-bottom: 1px solid #e1e8ed; color: #0084b4; border-top: none; border-left: none; border-right: none; }
+	body .header .container-mobile .search-form .form-close { right: 2%; top:0.8%; width: 5%; position: absolute; z-index: 70; cursor: pointer;  }
 	
 	body .header .container-mobile .search-input::-moz-placeholder { color:#66757f; }
 	body .header .container-mobile .search-input:-moz-placeholder{ color:#66757f;  }
