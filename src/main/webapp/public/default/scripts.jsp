@@ -7,9 +7,9 @@
 <script src="/public/js/plugin-mp.js"></script>
 
 <c:if test="${model.equals('home')}">
-	<script src="/public/js/home.js?1"></script>
+	<script src="/public/js/home.js?3"></script>
 </c:if>
 
 <c:if test="${model.equals('about')}">
-	<script src="/public/js/about.js?1"></script>
+	<script src="/public/js/about.js?3"></script>
 </c:if>
