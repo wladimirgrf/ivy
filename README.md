@@ -13,9 +13,9 @@ The ivy is a Java implementation of web page scanning tool, vulnerability testin
 
 ### Technologies
 
-* Java 6 - for the core
+* Java 7 - at least
 * [Maven 3+](http://maven.apache.org) - for building the project
-* whois - for querying databases that store the registered users or assignees
+* whois - for querying databases that store the registered users
 
 ### Getting started
 
