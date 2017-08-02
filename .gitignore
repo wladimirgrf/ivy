@@ -1,5 +1,15 @@
-/target
+########## Common Use ##########
+**/target
+*/target/**
+*/target/*
+**/classes
 /index/
-/.settings/
-/.classpath
-/.project
+########## InteliJ IDEA ##########
+**.iml
+########## Eclipse IDEA ##########
+.settings
+.classpath
+.project
+.metadata
+########### MAC OS ###########
+**.DS_Store
