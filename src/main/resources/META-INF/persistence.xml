@@ -16,8 +16,12 @@
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<property name="hibernate.cache.use_query_cache"        value="true" />
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
-			<property name="hibernate.search.default.indexBase"     value="/Users/Wlad/Documents/git/ivy/index"/>
 			
+			<!-- ################################################################################ -->
+			<!-- #                         Application: Index Base                              # -->
+			<!-- ################################################################################ -->
+			<!-- # Change the value field, this way Lucene can generate the system index files. # -->
+			<property name="hibernate.search.default.indexBase"     value="/Users/Wlad/Documents/eclipse/ivy/index"/>
 		</properties>
 	</persistence-unit>
 </persistence>
