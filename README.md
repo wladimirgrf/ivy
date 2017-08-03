@@ -20,6 +20,22 @@ Getting started
 
 To get started, it is best to have the latest JDK and Maven installed. The HEAD of the `master` branch contains the latest development code and various production releases are provided on feature branches.
 
+Change indexBase property from [persistence.xml](https://github.com/wladimirgrf/ivy/blob/master/src/main/resources/META-INF/persistence.xml) for a local path
+
+```xml
+<property name="hibernate.search.default.indexBase" value="{index_path}"/>
+```
+
+Create a mysql database by following the [context.xml](https://github.com/wladimirgrf/ivy/blob/master/src/main/webapp/META-INF/context.xml).
+
+#### Building from the command line
+
+To perform a full build use
+```
+mvn clean compile war:exploded
+```
+The outputs are under the `target` directory.
+
 IDE Support
 -----------
 
