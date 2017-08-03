@@ -26,7 +26,7 @@ Change indexBase property from [persistence.xml](https://github.com/wladimirgrf/
 <property name="hibernate.search.default.indexBase" value="{index_path}"/>
 ```
 
-Create a mysql database by following the [context.xml](https://github.com/wladimirgrf/ivy/blob/master/src/main/webapp/META-INF/context.xml).
+Create a MySQL database by following the [context.xml](https://github.com/wladimirgrf/ivy/blob/master/src/main/webapp/META-INF/context.xml).
 
 #### Building from the command line
 
