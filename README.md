@@ -2,6 +2,7 @@
 Ivy vulnerability finder
 ========================
 
+[![Build Status](https://travis-ci.org/wladimirgrf/ivy.svg?branch=master)](https://travis-ci.org/wladimirgrf/ivy)
 
 What is Ivy?
 ------------
