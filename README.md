@@ -39,6 +39,6 @@ The outputs are under the `target` directory.
 IDE Support
 -----------
 
-If you would like to build and run from a Maven/Java Dynamic Web-project-capable IDE, such as Eclipse/IntelliJ Tool Suite, you may simply import "as a Maven Project" into your IDE, deploy the project to your IDE's embedded servlet container and define your application server following steps for [Eclipse](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.jst.server.ui.doc.user%2Ftopics%2Ftomcat.html) or [IntelliJ](https://www.jetbrains.com/help/idea/defining-application-servers-in-intellij-idea.html).
+If you would like to build and run from a Maven/Java Dynamic Web-project-capable IDE, such as Eclipse/IntelliJ, you may simply import "as a Maven Project" into your IDE, deploy the project to your IDE's embedded servlet container and define your application server following steps for [Eclipse](http://help.eclipse.org/kepler/index.jsp?topic=%2Forg.eclipse.jst.server.ui.doc.user%2Ftopics%2Ftomcat.html) or [IntelliJ](https://www.jetbrains.com/help/idea/defining-application-servers-in-intellij-idea.html).
 
 
