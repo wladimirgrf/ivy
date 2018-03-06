@@ -1,4 +1,4 @@
-Contributing to ivy
+Contributing to Ivy
 ===================
 
 The ivy project operates an open contributor model where anyone is
@@ -43,7 +43,7 @@ as this makes review difficult.
 Release Policy
 --------------
 
-The project leader is the release manager for each ivy release.
+The project leader is the release manager for each Ivy release.
 
 Copyright
 ---------
