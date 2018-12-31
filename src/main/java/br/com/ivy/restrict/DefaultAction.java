@@ -33,17 +33,15 @@ public abstract class DefaultAction<E,T> extends HttpServlet{
 		
 		if (action != null && !action.isEmpty()) {
 			request.setAttribute("action", action);
-			if (action.equals("list")) {
-				list();
-			} else if (action.equals("edit")) {
-				edit();
-			} else if (action.equals("save")) {			
-				save();
-			} else if (action.equals("delete")) {			
-				delete();
-			} else if (action.equals("index")) {
-				index();
+			
+			switch(action) {
+				case "list":   list();   break;
+				case "edit":   edit();   break;
+				case "save":   save();   break;
+				case "delete": delete(); break;
+				case "index":  index();  break;
 			}
+
 		}
 		
 		request.setAttribute("isAdmin", isAdmin());

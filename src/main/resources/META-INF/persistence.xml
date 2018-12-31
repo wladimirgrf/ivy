@@ -21,7 +21,7 @@
 			<!-- #                         Application: Index Base                              # -->
 			<!-- ################################################################################ -->
 			<!-- # Change the value field, this way Lucene can generate the system index files. # -->
-			<property name="hibernate.search.default.indexBase"     value="/Users/Wlad/Documents/eclipse/ivy/index"/>
+			<property name="hibernate.search.default.indexBase"     value="/Users/wladimir/Documents/ide/eclipse/project_ivy/ivy/index"/>
 		</properties>
 	</persistence-unit>
 </persistence>

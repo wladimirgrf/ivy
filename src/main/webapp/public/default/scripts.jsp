@@ -8,6 +8,7 @@
 
 <c:if test="${model.equals('home')}">
 	<script src="/public/js/home.js?5"></script>
+	<script async src="https://platform.twitter.com/widgets.js"></script>
 </c:if>
 
 <c:if test="${model.equals('about')}">

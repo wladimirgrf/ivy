@@ -11,7 +11,7 @@
 <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
 
 <c:if test="${model.equals('home')}">
-	<link href="/public/css/home.css?1" rel="stylesheet" type="text/css"/>
+	<link href="/public/css/home.css?3" rel="stylesheet" type="text/css"/>
 </c:if>
 
 <c:if test="${model.equals('about')}">
