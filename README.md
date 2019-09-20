@@ -37,7 +37,7 @@ Create a MySQL database by following the [context.xml](https://github.com/wladim
 
 To perform a full build use
 ```
-mvn clean compile war:exploded -X
+mvn clean compile war:exploded
 ```
 The outputs are under the `target` directory.
 
