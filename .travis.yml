@@ -5,4 +5,4 @@ dist: trusty
 
 
 script:
-  - mvn clean compile war:exploded -X
+  - mvn clean compile war:exploded
